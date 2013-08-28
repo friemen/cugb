@@ -1,4 +1,4 @@
-# forwarder
+# Clojure User Group Bonn
 
 Excercise and solution projects to support meetings of
 Clojure User Group Bonn
