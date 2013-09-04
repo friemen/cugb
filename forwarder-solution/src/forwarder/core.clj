@@ -49,6 +49,10 @@
 
 ;; forwarder functions
 
+; TODO due to Gerrit Hentschel there is a subtle bug in the following function:
+;      if queue is empty, and a last msg arrives after the let binding, this
+;      last msg is never forwarded
+
 (defn create-forwarder
   "Creates a forwarder that upon (forward fwd msg) invokes the function f with
    a single argument on a different thread.

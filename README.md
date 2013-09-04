@@ -1,6 +1,6 @@
 # Clojure User Group Bonn
 
-Excercise and solution projects to support meetings of
+Projects that contain material and solutions that support meetings of
 Clojure User Group Bonn
 
 ## License
