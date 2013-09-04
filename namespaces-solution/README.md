@@ -4,7 +4,7 @@ The solutions...
 
 ## Exercise 2
 
- * Create a map of name to function var for all functions with a suffix like "-page".
+Create a map of name to function var for all functions with a suffix like "-page".
  
 See [nsfns.clj](src/nsfns.clj).
 

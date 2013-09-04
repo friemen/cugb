@@ -33,6 +33,21 @@
  * Remove one mapping.
 
 
+## Exercise 2
+
+Create a map of name to function var for all functions with a suffix like "-page".
+ 
+```clojure
+(defn s-page
+  []
+  "S")
+
+
+(nsfns "-page" *ns*)
+;=> { "s" #'user/s-page }
+```
+
+
 ## The ns form
 
 An example
@@ -53,20 +68,6 @@ An example
 
 `(refresh)` destroys and reloads all namespaces that have changed since the last refresh.
 
-
-## Exercise 2
-
- * Create a map of name to function var for all functions with a suffix like "-page".
- 
-```clojure
-(defn s-page
-  []
-  "S")
-
-
-(nsfns "-page" *ns*)
-;=> { "s" #'user/s-page }
-```
 
 
 # License
