@@ -1,8 +1,8 @@
 (ns nsfns)
 
-(defn s-page
-  []
-  "S") 
+(defn s-page [] "S") 
+
+(defn t-page [] "T") 
 
 (defn- nsfn
   [suffix [sym var]]
@@ -15,6 +15,6 @@
   [suffix ns]
   (->> ns
        ns-publics
-       (map (partial nsfn "-page"))
+       (map (partial nsfn suffix))
        (remove nil?)
        (into {})))

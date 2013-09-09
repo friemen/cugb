@@ -26,7 +26,7 @@
 `ns-map` returns a map of all namespace mappings of the given ns.
 
 
-## Excercise 1
+## Exercise 1
 
  * Define some symbols in the current namespace.
  * List all symbols that the current namespace defines.
@@ -62,12 +62,48 @@ An example
 ```
 
 
+## Exercise 3
+
+Take the [solution of exercise 2](/namespaces-solution/src/nsfns.clj) and add it to the webapp.
+Add another function `render` and extend the webapp application handler `app` so 
+that a URL /pages/:page is generically dispatched to a function named <page>-page.
+
+For example, if you have two rendering functions defined
+```clojure
+(defn s-page [] "S") 
+
+(defn t-page [] "T")
+```
+
+and an application handler app
+
+```clojure
+(defroutes app
+  (GET "/page/:page" [page] (render page)))
+```
+
+then in a REPL you can enter
+```clojure
+(app {:uri "/page/s" :request-method :get})
+;=> {:status 200, :headers {"Content-Type" "text/html; charset=utf-8"}, :body "S"}
+```
+
+
 ## Refresh using clojure.tools.namespace
 
 `(use '[clojure.tools.namespace.repl :only (refresh)])` imports the refresh function.
 
 `(refresh)` destroys and reloads all namespaces that have changed since the last refresh.
 
+
+## Exercise 4
+
+ * Create two namespaces, foo and bar.
+ * Define one function per namespace, the function foofn calls a the function barfn.
+ * Execute foofn.
+ * Change barfn without reloading the namespace bar.
+ * Call `(refresh)`
+ * Execute foofn.
 
 
 # License
