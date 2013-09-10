@@ -88,8 +88,13 @@ then in a REPL you can enter
 ;=> {:status 200, :headers {"Content-Type" "text/html; charset=utf-8"}, :body "S"}
 ```
 
+This means the function `render` executes the renderer function that corresponds to
+the URL.
 
-## Refresh using clojure.tools.namespace
+
+## Refresh using org.clojure/tools.namespace
+
+Include in your project.clj `[org.clojure/tools.namespace "0.2.4"]` as dependency.
 
 `(use '[clojure.tools.namespace.repl :only (refresh)])` imports the refresh function.
 
@@ -98,11 +103,11 @@ then in a REPL you can enter
 
 ## Exercise 4
 
- * Create two namespaces, foo and bar.
- * Define one function per namespace, the function foofn calls a the function barfn.
- * Execute foofn.
- * Change barfn without reloading the namespace bar.
- * Call `(refresh)`
+ * Create two files, foo.clj and bar.clj, each declaring a corresponding ns.
+ * Define one function per file, the function foofn calls a the function barfn.
+ * Start a REPL, `(use 'foo)`, execute foofn.
+ * Change barfn in bar.clj without reloading the namespace bar.
+ * Use the clojure.tools.namespace ns as shown above and call `(refresh)`.
  * Execute foofn.
 
 
