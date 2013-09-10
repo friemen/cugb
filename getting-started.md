@@ -17,13 +17,13 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
  * clojure.core
    * ns - Switch to namespace.
    * ns-interns, ns-publics - Print internal or public symbols of namespace.
-   * ns-unmap
+   * ns-unmap - Unmap symbol from namespace.
    * macroexpand-1 - Expand one level of macro application.
  * clojure.repl
    * dir - Print sorted list of public vars of namespace.
    * doc - Print docstring of var referenced by given symbol.
    * pst - Print stack trace.
-   * source
+   * source - Print source.
  * clojure.pprint
    * pp - Pretty print last REPL output.
    * pprint - Pretty print given object.
@@ -45,7 +45,7 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
  * [4Clojure](http://www.4clojure.com/)
  * [Labrepl](https://github.com/relevance/labrepl)
  
-## Some fundamental Talks
+## Some fundamental talks
 
  * [Are We There Yet?](http://www.infoq.com/presentations/Are-We-There-Yet-Rich-Hickey), 2009
  * [Simple Made Easy](http://www.infoq.com/presentations/Simple-Made-Easy), 2011
