@@ -1,7 +1,11 @@
 # Clojure User Group Bonn
 
 Projects that contain material and solutions that support meetings of
-Clojure User Group Bonn
+Clojure User Group Bonn.
+
+* [Getting started](getting-started.md)
+* [Webapp](webapp)
+* [Namespaces](namespaces)
 
 
 ## License

@@ -1,6 +1,6 @@
 # Introduction to namespaces
 
-A namespace is a dynamic mapping from symbols to vars.
+A namespace is a dynamic mapping from symbols to vars and classes.
 
 ![Namespace](ns.png)
 
@@ -29,6 +29,8 @@ A namespace is a dynamic mapping from symbols to vars.
 `ns-imports` returns a map of symbol to class names that the given ns refers to.
 
 `ns-map` returns a map of all namespace mappings of the given ns.
+
+`dir` (from clojure.repl) prints sorted list of publics vars of given ns.
 
 
 ## Exercise 1
