@@ -1,5 +1,10 @@
 # Introduction to namespaces
 
+A namespace is a dynamic mapping from symbols to vars.
+
+![Namespace](ns.png)
+
+
 ## Simple commands in the REPL
 
 `(ns foo.bar)` switches to namespace foo.bar.
@@ -107,8 +112,8 @@ Include in your project.clj `[org.clojure/tools.namespace "0.2.4"]` as dependenc
  * Define one function per file, the function foofn calls a the function barfn.
  * Start a REPL, `(use 'foo)`, execute foofn.
  * Change barfn in bar.clj without reloading the namespace bar.
- * Use the clojure.tools.namespace ns as shown above and call `(refresh)`.
- * Execute foofn.
+ * Use the clojure.tools.namespace.repl ns as shown above and call `(refresh)`.
+ * Execute foofn again.
 
 
 # License
