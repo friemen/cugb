@@ -1,5 +1,5 @@
 (defproject rdbms "0.1.0-SNAPSHOT"
-  :description "Accessing relational databases"
+  :description "Solution project for relational database access"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}

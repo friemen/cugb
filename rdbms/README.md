@@ -1,6 +1,5 @@
-# rdbms
+# Introduction to relational database access
 
-Introduction to relational database access with Clojure.
 
 Content of the rdbms namespaces:
 * h2 - Start and stop H2 DB server.
@@ -205,11 +204,10 @@ This gives an application a different structure than in an OO / imperative world
 
 ## Korma
 
-[Korma](http://sqlkorma.com/)
- * Defining entities
- * Selecting data
- * Inserting / updating data
- * Extend the DSL
+[Korma](http://sqlkorma.com/) is a DSL to define table metadata and prepare queries and
+statements to make working with SQL easier.
+
+To give it a try enter in the REPL:
 
 ```clojure
 (use 'entities 'korma.core)
@@ -218,12 +216,14 @@ This gives an application a different structure than in an OO / imperative world
 ;= [{:NAME "Baz", :ID 1} {:NAME "FooBar", :ID 2}]
 ```
 
+A very helpful [introduction-by-examples](http://sqlkorma.com/docs) is available.
+
+
 ## Excercises
 1. Create simple schema to hold messages for webapp.
-2. Write function that adds a message to DB.
-3. Integrate this into a webapp with transaction handling.
+2. Write functions that add a message to DB and query all messages, you can use Korma or clojure.java.jdbc.
+3. Integrate this into your webapp.
  
-
 
 ## Discussion of typical JPA features
 

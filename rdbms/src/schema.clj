@@ -33,10 +33,15 @@
                            (fk-column :task :task_id true)]})
 
 
+(defn- missing?
+  [table column name]
+  (empty? (jdbc/query db-spec (sql/select * table (sql/where {column name})))))
+
+
 (defn create!
   [db-spec]
   (doseq [t (map (fn [[k v]] (cons k v)) schema)]
-      (jdbc/execute! db-spec [(apply ddl/create-table t)]))
+    (jdbc/execute! db-spec [(apply ddl/create-table t)]))
   (jdbc/execute! db-spec ["create sequence pkseq"]))
 
 
