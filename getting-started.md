@@ -45,20 +45,20 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
  * [4Clojure](http://www.4clojure.com/)
  * [Labrepl](https://github.com/relevance/labrepl)
  
-## Some fundamental talks
+## Some fundamental talks by Rich Hickey
 
  * [Are We There Yet?](http://www.infoq.com/presentations/Are-We-There-Yet-Rich-Hickey), 2009
  * [Simple Made Easy](http://www.infoq.com/presentations/Simple-Made-Easy), 2011
  * [The Value of Values](http://www.infoq.com/presentations/Value-Values), 2012
- * [The Language of the system](http://www.youtube.com/watch?v=ROor6_NGIWU), 2012 
+ * [The Language of the System](http://www.youtube.com/watch?v=ROor6_NGIWU), 2012
  * [Design, Composition and Performance](http://www.infoq.com/presentations/Design-Composition-Performance), 2013
 
- ## Books
+## Books
  
  * Emerick, Carper, Grand - Clojure Programming
  * Fogus, Houser - The Joy of Clojure
  * Halloway - Programming Clojure
  * Sierra, VanderHart - ClojureScript: Up and Running
  * VanderHart, Neufeld - Clojure Cookbook (upcoming)
- * Sotnikov, Web Development with Clojure (upcoming)
+ * Sotnikov - Web Development with Clojure (upcoming)
  
