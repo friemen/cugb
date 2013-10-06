@@ -178,6 +178,11 @@ Update and delete work like expected:
 ;= (1)
 ```
 
+All functions properly handle the DB connection:
+If db-spec contains a connection then this is reused. If it doesn't a
+new connection is obtained at the beginning and returned before the 
+function terminates.
+
 
 ### Using Transactions
 
@@ -190,14 +195,21 @@ accept the db connection as single argument.
 ;= ({:scope_identity() 2})
 ```
 
-It makes sense to use robert.hooke to augment those functions 
-that are the entry points to a system with cross-cutting solutions 
-like TX or error handling.
+It makes sense to use [robert.hooke](https://github.com/technomancy/robert-hooke/) 
+to augment those functions that are the entry points to a system with cross-cutting 
+solutions like TX or error handling.
 
 
-## Preserving purity
+## Be careful with Laziness
 
-In general we prefer pure functions that must not access db state (neither read nor write).
+To avoid realization of a lazy sequence at a point in time when a 
+transaction isn't available any more use `(doall ...)` to materialize
+all items of a collection before the TX is committed.
+
+
+## Preserve purity
+
+In general we prefer pure functions that must not access DB state (neither read nor write).
 But in addition there must be functions that are the glue between pure functions and the stateful world.
 This gives an application a different structure than in an OO / imperative world.
 
