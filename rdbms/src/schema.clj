@@ -1,7 +1,8 @@
 (ns schema
   "Schema declaration and database initialization (drop + create)."
   (:require [clojure.java.jdbc :as jdbc]
-            [clojure.java.jdbc.ddl :as ddl]))
+            [clojure.java.jdbc.ddl :as ddl]
+            [clojure.java.jdbc.sql :as sql]))
 
 
 (defn id-column
@@ -34,7 +35,7 @@
 
 
 (defn- missing?
-  [table column name]
+  [db-spec table column name]
   (empty? (jdbc/query db-spec (sql/select * table (sql/where {column name})))))
 
 
