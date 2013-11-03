@@ -33,6 +33,12 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
  * clojure.tools.namespace.repl [org.clojure/tools.namespace](https://github.com/clojure/tools.namespace)
    * refresh - Reload all namespaces from their files within a project.
 
+To redirect output from native threads enter in a REPL:
+
+```clojure
+(alter-var-root #'*out* (fn [_] *out*))
+```
+
 ## Links
 
  * [Clojure.org](http://clojure.org)

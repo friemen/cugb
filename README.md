@@ -1,9 +1,10 @@
 # Clojure User Group Bonn
 
-Projects that contain material and solutions that support meetings of
+We prepared a [getting started page](getting-started.md) to help you find your way quicker.
+
+Below are the projects that contain material and solutions that support meetings of
 Clojure User Group Bonn.
 
-* [Getting started](getting-started.md)
 * [Webapp](webapp)
 * [Namespaces](namespaces)
 * [Database access](rdbms)

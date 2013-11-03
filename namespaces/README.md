@@ -11,6 +11,8 @@ A namespace is a dynamic mapping from symbols to vars and classes.
 
 `(use 'foo.baz)` compiles and loads foo.baz namespace into the current namespace.
 
+`(require '[foo.baz :as fb])` compiles and loads and binds the prefix fb to foo.baz namespace.
+
 `*ns*` references the current namespace.
 
 `(def s (...))` interns a var in the current namespace that can be referenced by the symbol `s`.
