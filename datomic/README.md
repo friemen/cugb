@@ -13,6 +13,21 @@ Datomic has ACID properties including transactions. Every write goes through the
 
 The Datomic Console provides a web-interface for exploring/querying/traversing the persisted data.
 
+## Architecture
+
+[[http://www.datomic.com/uploads/3/5/9/7/3597326/6646785_orig.jpg]]
+
+Datomic separates several concepts into invidual building blocks.
+Writes happen in the transactor which creates Data Segments that are stored in
+a Storage Server/Service like DynamoDB, Riak or PostgreSQL.
+The client application uses a Peer to send transactions over to the transactor.
+Reads happen in the Peer which accesses the Storage Server or an intermediate
+memcached cluster to retrieve the data segments it needs to answer queries.
+Thus reads can scale independently from writes. By connecting an additional
+peer one can perform expensive analytics queries without risking an impact
+on the production system. Another option for a client application to
+access the database is via a REST server provided by Datomic.
+
 ## Getting started
 
 ### Datomic Installation & Setup
@@ -25,6 +40,8 @@ Set JAVA_HOME & PATH environment variables
     export PATH=$JAVA_HOME/bin:$PATH
 
 For Windows have a look at the [Getting Started](http://docs.datomic.com/getting-started.html) guide.
+
+*Note*: Datomic works for me without the JAVA_HOME env variable.
 
 Start the transactor from the Datomic folder
 
@@ -162,44 +179,73 @@ Now we have a means to connect to the DB and to create a schema.
 To add data or query existing data we can use `transact` and `q`
 from `datomic.api`.
 
-The data structure to pass to a `transact` call is a list
+The data structure to pass to a `transact` call is a list of lists
+and/or maps of which each is a statement in the transaction. A statement
+represents either the addition or retraction of a fact about an
+entity, an attribute and a value. A map contained in a transaction combines
+multiple additions of facts about the same entity.
 
 ```clojure
 (require '[datomic.api :refer [db q] :as d])
 ;= nil
-(jdbc/insert! ds/db-spec :project {:name "FooBar"})
-;= ({:scope_identity() 1})
+@(d/transact conn [[:db/add entity-id1 attribute1 value1]
+                   [:db/add entity-id1 attribute2 value2]
+                   [:db/retract entity-id2 attribute value]])
+;= #<promise$settable_future$reify__4426@6210d510: {:db-before ..., :db-after ..., :tx-data ..., :tempids ...}
+;; or equivalently
+@(d/transact conn [{:db/id entity-id1
+                    attribute1 value1
+                    attribute2 value2}
+                   [:db/retract entity-id2 attribute value]])
+;= #<promise$settable_future$reify__4426@6210d510: {:db-before ..., :db-after ..., :tx-data ..., :tempids ...}
 ```
 
-The data structure returned by query is a seq of maps:
+Queries in Datomic use [Datalog](http://docs.datomic.com/query.html) which is a simple, declarative & logic-based query system.
+A query consists of variables to return, a list of data sources and a set of clauses that describe the shape of the data to find:
 
 ```clojure
-(require '[clojure.java.jdbc.sql :as sql])
+(require '[datomic.api :refer [db q] :as d])
 ;= nil
-(jdbc/query ds/db-spec (sql/select * :project (sql/where {:name "FooBar"})))
-;= ({:name "FooBar", :id 1})
+(q '[:find ?e :in $ :where [?e :project/name "KillerApp"]] (db conn))
+;= #{[17592186045418]}
 ```
 
-Update and delete work like expected:
+The example above shows that the main sequence abstraction in Datomic is a set. The result
+set contains vectors of found variables. In this case we only asked for `?e` thus each vector
+contains a single internal entity-id. You can use the entity-id to lazily fetch the data
+associated with the entity and navigate its references.
 
 ```clojure
-(jdbc/update! ds/db-spec :project {:name "Baz"} (sql/where {:id 1}))
-;= (1)
-(jdbc/query ds/db-spec (sql/select * :project))
-;= ({:name "Baz", :id 1})
-(jdbc/delete! ds/db-spec :project (sql/where {:id 1}))
-;= (1)
+(d/touch (d/entity (db conn) 17592186045418))
+;= {:db/id 17592186045418}
+(d/touch *1)
+;= {:project/name "KillerApp", :project/release #{{:release/name "Alpha labeled RC1", :release/task #{{:task/summary "Make features", :db/id 17592186045420}}, :db/id 17592186045419}}, :db/id 17592186045418}
 ```
 
-All functions properly handle the DB connection:
-If db-spec contains a connection then this is reused. If it doesn't a
-new connection is obtained at the beginning and returned before the 
-function terminates.
+The example shows the [Component Entities](http://blog.datomic.com/2013/06/component-entities.html) feature which allows to specify components of entities directly as nested maps inside a transaction, adding the feel of a document-database:
+
+```clojure
+(d/transact conn
+            [{:project/name "KillerApp"
+              :db/id (tempid)
+              :project/release
+              [{:release/name "Alpha labeled RC1"
+                :release/task
+                [{:task/summary "Make features"}]}]}])
+;= #<promise$settable_future$reify__4426@6210d510: {:db-before ..., :db-after ..., :tx-data ..., :tempids ...}
+```
+
+The DB connection is explicit in Datomic, which requires you to pass
+the connection to database function. This might seem tedious, but
+circumvents problems that arise from ambient connections, i.e. global connections
+bound to some var: such as the required knowledge about the hidden dependency on the connection &
+the limitation to a single connection at any point in time.
 
 ## Excercises
 1. Create simple schema to hold messages for webapp.
 2. Write functions that add a message to the DB and query all messages, you can use datalog querys (`datomic.api/q`) or direct index access (`datomic.api/datoms`).
 3. Integrate this into your webapp.
+4. Visit www.learndatalogtoday.org and work through the exercises.
 
 ## License
 
