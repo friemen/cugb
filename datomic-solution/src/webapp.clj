@@ -26,7 +26,7 @@
   []
   (reset! conn (d/connect db-uri))
   (when (d/create-database db-uri)
-    (d/transact @conn messages-schema1)))
+    @(d/transact @conn messages-schema1)))
 
 (def tempid
   (partial d/tempid :db.part/user))
