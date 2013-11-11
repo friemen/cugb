@@ -48,7 +48,6 @@
        (sort-by first)
        (map second)))
 
-
 ;; rendering
 
 (defn layout [ & body]
@@ -80,4 +79,3 @@
   (init-db!)
   (httpkit/run-server (handler/site #'app) {:port 8080 :join? false})
   (println "Server started on http://localhost:8080"))
-

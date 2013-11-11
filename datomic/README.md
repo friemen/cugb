@@ -1,6 +1,18 @@
 
 # Introduction to the Datomic database system
 
+## Rationale
+
+Datomic is a functional database. Instead of having a global mutable variable, i.e. a traditional database system, that is shared by multiple processes, it separates the identity of the database, e.g. the "customer database hosted on this machine", from the value of the database. Each value is immutable which facilitates reasoning, reproducibility, caching, combining multiple databases etc...
+
+To have immutable database values it is required that you can only add data to the database, thus Datomic is accretive. This allows to perform queries over the history of the data, e.g., how often did the price for a product change and when, how many transactions happened across the last week, retrieve deltas necessary to transition from an old state to the current state, ...
+
+Datomic supports Datalog as query language which follows another design philosophy of Clojure: use data. Datalog querys are data which can be combined with more data into new data. The same holds for Datomic schemas which are also comprised of data.
+
+Datomic has ACID properties including transactions. Every write goes through the transactor that serializes all changes to the system to create a database-wide ordering.
+
+The Datomic Console provides a web-interface for exploring/querying/traversing the persisted data.
+
 ## Getting started
 
 ### Datomic Installation & Setup
@@ -70,77 +82,90 @@ datomic:free://[transactor-host:port]/[db-name]
 In-process Memory:
 datomic:mem://[db-name]
 ```
-The in-memory version does not require a running transactor. The free transactor uses a builtin H2 database for storage.
+The in-memory version does not require a running transactor. The free transactor uses a built-in H2 database for storage.
 
-Cognitect Inc recently released a free [Datomic Pro Starter Edition](https://my.datomic.com/starter) that supports all storage providers without any fee.
+Cognitect recently released a free [Datomic Pro Starter Edition](https://my.datomic.com/starter) that supports all storage providers without any fee.
 
 ### Setting up a schema
 
 Datomic DB schemas are expressed by pure Clojure data:
 
 ```clojure
-(def schema {:project     [(id-column)
-                           [:name "varchar(30)"]]
-             :release     [(id-column)
-                           (fk-column :project true)
-                           [:name "varchar(30)"]]
-             :member      [(id-column)
-                           [:name "varchar(30)"]
-                           (fk-column :project true)]
-             :task        [(id-column)
-                           [:summary "varchar(100)"]
-                           (fk-column :release true)
-                           (fk-column :member :owner_id false)]
-             :watchers    [(fk-column :member :member_id true)
-                           (fk-column :task :task_id true)]})
+[{:db/ident :project/name,
+  :db/cardinality :db.cardinality/one,
+  :db/valueType :db.type/string,
+  :db/id #db/id[:db.part/db],
+  :db.install/_attribute :db.part/db,}
+ {:db/ident :project/release,
+  :db/cardinality :db.cardinality/many,
+  :db/valueType :db.type/ref,
+  :db/id #db/id[:db.part/db],
+  :db/isComponent true,
+  :db.install/_attribute :db.part/db}
+  ...]
+```
+This schema can be stored in a plain EDN file.
+
+You can also define a schema in code:
+
+```clojure
+(def schema [(-> (attribute :project/name)
+                 (docstring "The name of the project")
+                 type-string
+                 cardinality-one)
+             (-> (attribute :project/release) type-ref cardinality-many component)
+             (-> (attribute :project/member) type-ref cardinality-many component)
+             (-> (attribute :release/name) type-string cardinality-one)
+             (-> (attribute :release/task) type-ref cardinality-many component)
+             (-> (attribute :release/member) type-ref cardinality-many)
+             (-> (attribute :task/summary) type-string cardinality-one)
+             (-> (attribute :member/name) type-string cardinality-one)
+             (-> (attribute :member/watched-task) type-ref cardinality-many component)])
 ```						   
 
-In the example above lengthy recurring declarations for
-primary or foreign key columns were replaced by calls to functions
-`id-column` and `fk-column`
-(see the schema namespace for the complete picture).
+In the example above the somewhat verbose schema declarations were replaced by calls to functions
+that work on maps (see the schema namespace for the complete picture). Additional helpers could
+reduce the repitition further, but this way it is easily extendable because all the
+functions just add values to a map, thus handle the schema definition as data.
 
-Two additional functions will actually perform the SQL DDL statements:
+The following helper functions simplify the creation and deletion of tables.
 
 ```clojure
 (defn create!
-  [db-spec]
-  (doseq [t (map (fn [[k v]] (cons k v)) schema)]
-      (jdbc/execute! db-spec [(apply ddl/create-table t)]))
-  (jdbc/execute! db-spec ["create sequence pkseq"]))
-
-
+  [uri schema]
+  (let [created? (d/create-database uri)
+        conn (d/connect uri)]
+    (when created? 
+      @(d/transact conn schema))
+    conn))
+    
 (defn drop!
-  [db-spec]
-  (doseq [t (keys schema)]
-    (jdbc/execute! db-spec [(ddl/drop-table t)]))
-  (jdbc/execute! db-spec ["drop sequence pkseq"]))
+  [uri]
+  (d/delete-database uri))
 ```
 
 With a schema definition and those functions you can create or drop 
 the complete schema very easily:
 
 ```clojure
-(require 'schema 'ds)
+(require 'schema)
 ;= nil
-(schema/create! ds/db-spec)
-;= (0)
-(schema/drop! ds/db-spec)
-;= (0)
+(def conn (schema/create! "datomic:mem://projects" schema/schema))
+;= #'user/conn
+(schema/drop! "datomic:mem://projects")
+;= true
 ```
-
 
 ### Working with the DB
 
 Now we have a means to connect to the DB and to create a schema.
-To add data or query existing data we can directly use `query`, 
-`insert!`, `update!` and `delete!` from clojure.java.jdbc.
+To add data or query existing data we can use `transact` and `q`
+from `datomic.api`.
 
-
-The data structure to pass to insert! or update! is usually a map.
+The data structure to pass to a `transact` call is a list
 
 ```clojure
-(require '[clojure.java.jdbc :as jdbc])
+(require '[datomic.api :refer [db q] :as d])
 ;= nil
 (jdbc/insert! ds/db-spec :project {:name "FooBar"})
 ;= ({:scope_identity() 1})
@@ -171,81 +196,13 @@ If db-spec contains a connection then this is reused. If it doesn't a
 new connection is obtained at the beginning and returned before the 
 function terminates.
 
-
-### Using Transactions
-
-To wrap function execution inside a DB transaction use 
-clojure.java.jdbc/db-transaction* function. The passed function must
-accept the db connection as single argument.
-
-```clojure
-(jdbc/db-transaction* ds/db-spec #(jdbc/insert! % :project {:name "FooBar"}))
-;= ({:scope_identity() 2})
-```
-
-It makes sense to use [robert.hooke](https://github.com/technomancy/robert-hooke/) 
-to augment those functions that are the entry points to a system with cross-cutting 
-solutions like TX or error handling.
-
-
-## Be careful with Laziness
-
-To avoid realization of a lazy sequence at a point in time when a 
-transaction isn't available any more use `(doall ...)` to materialize
-all items of a collection before the TX is committed.
-
-
-## Preserve purity
-
-In general we prefer pure functions that must not access DB state (neither read nor write).
-But in addition there must be functions that are the glue between pure functions and the stateful world.
-This gives an application a different structure than in an OO / imperative world.
-
-
-## Korma
-
-[Korma](http://sqlkorma.com/) is a DSL to define table metadata and prepare queries and
-statements to make working with SQL easier.
-
-To give it a try enter in the REPL:
-
-```clojure
-(use 'entities 'korma.core)
-;= nil
-(select project)
-;= [{:NAME "Baz", :ID 1} {:NAME "FooBar", :ID 2}]
-```
-
-A very helpful [introduction-by-examples](http://sqlkorma.com/docs) is available.
-
-
 ## Excercises
 1. Create simple schema to hold messages for webapp.
-2. Write functions that add a message to DB and query all messages, you can use Korma or clojure.java.jdbc.
+2. Write functions that add a message to the DB and query all messages, you can use datalog querys (`datomic.api/q`) or direct index access (`datomic.api/datoms`).
 3. Integrate this into your webapp.
- 
-
-## Discussion of typical JPA features
-
-* Unit of work / identity map
-* DDL generator
-* SQL/DML generator
-* Database dialect abstraction
-* Support for different locking strategies
-* Support for cursors
-* Mapping
-  * Type conversion
-  * Read/write column values from/to bean properties
-  * Association mapping: how are 1:1, 1:n, m:n associations mapped to relational tables with foreign keys?
-  * Inheritance mapping
-
-For Clojure a subset of these features would be nice:
- * How are type conversions (i.e. to/from java.sql.Date) handled?
- * How can loading / saving of nested data structures be supported?
- * What is the right approach to implement optimistic concurrency control?
 
 ## License
 
-Copyright © 2013 F.Riemenschneider
+Copyright © 2013 G. Hentschel, F.Riemenschneider
 
 Distributed under the Eclipse Public License, the same as Clojure.
