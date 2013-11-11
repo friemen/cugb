@@ -15,7 +15,7 @@ The Datomic Console provides a web-interface for exploring/querying/traversing t
 
 ## Architecture
 
-[[http://www.datomic.com/uploads/3/5/9/7/3597326/6646785_orig.jpg]]
+![Datomic architecture](http://www.datomic.com/uploads/3/5/9/7/3597326/6646785_orig.jpg)
 
 Datomic separates several concepts into invidual building blocks.
 Writes happen in the transactor which creates Data Segments that are stored in
@@ -241,11 +241,12 @@ circumvents problems that arise from ambient connections, i.e. global connection
 bound to some var: such as the required knowledge about the hidden dependency on the connection &
 the limitation to a single connection at any point in time.
 
-## Excercises
+## Exercises
 1. Create simple schema to hold messages for webapp.
-2. Write functions that add a message to the DB and query all messages, you can use datalog querys (`datomic.api/q`) or direct index access (`datomic.api/datoms`).
+2. Write functions that add a message to the transactor-backed DB and query all messages, you can use datalog querys (`datomic.api/q`) or direct index access (`datomic.api/datoms`).
 3. Integrate this into your webapp.
-4. Visit www.learndatalogtoday.org and work through the exercises.
+4. Observe the data you created in the Datomic console
+5. Visit www.learndatalogtoday.org and work through the exercises.
 
 ## License
 
