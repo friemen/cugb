@@ -7,7 +7,13 @@ Clojure User Group Bonn.
 
 * [Webapp](webapp)
 * [Namespaces](namespaces)
-* [Database access](rdbms)
+* [Relational Database Access](rdbms)
+* [Datomic](datomic)
+
+## Contributors
+
+* Falko Riemenschneider
+* Gerrit Hentschel
 
 ## License
 

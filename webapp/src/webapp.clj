@@ -15,9 +15,12 @@
           body]))
 
 
-(defroutes app
-  )
+(defn app
+  [request]
+  {:code 200 :body "Hello World"})
 
 
 (defn -main []
   (httpkit/run-server (handler/site #'app) {:port 8080 :join? false}))
+
+(-main)
