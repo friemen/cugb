@@ -1,0 +1,149 @@
+#+TITLE: ClojureScript
+#+AUTHOR: Adrian Bendel
+
+* ClojureScript                                                       :slide:
+#+BEGIN_HTML
+<center>
+<p>Clojure User Group Bonn
+<p>
+<p>10.12.2013
+<p>
+<p>Adrian Bendel
+</center>
+#+END_HTML
+* Introduction                                                        :slide:
+- ClojureScript is Clojure, compiled to JavaScript
+- Introduced 20.07.2011 by Rich Hickey
+- Now about 2100 commits by 66 contributors
+* Why ClojureScript?                                                  :slide:
+- Reach
+  - Browser
+  - Smartphones
+  - Also: Server
+-
+- [[http://www.hanselman.com/blog/JavaScriptIsAssemblyLanguageForTheWebSematicMarkupIsDeadCleanVsMachinecodedHTML.aspx][JavaScript is Assembly Language for the Web (Scott Hanselman)]]
+* Implementation                                                      :slide:
+- Compiler in Clojure
+- Macros in Clojure
+- Standard library in ClojureScript
+- Google Closure Compiler
+* Clojure in Clojure                                                  :slide:
+- Clojure compiler in Java
+- ClojureScript compiler in Clojure
+  - No Javascript source files
+  - Abstractions are protocols
+  - Data structures implemented with deftype
+* Google Closure Compiler                                             :slide:
+- Conventions on how JavaScript needs to be written
+- Code can be optimized
+- ClojureScript compiler emits Closure compatible code
+  - namespaces map to Closures dependency mechanism
+- Used for most of Googles JavaScript
+* Google Closure Compiler (whitespace)                                :slide:
+#+begin_src javascript
+  function alertSum(number1, number2) {
+    var sum = number1 + number2;
+    alert("The sum of " + number1 + " and " + number2 + " is " + sum);
+  }
+  alertSum(7,7);
+#+end_src
+Compiled:
+#+begin_src javascript
+function alertSum(number1,number2){var sum=number1+number2;alert("The sum of "+number1+" and "+number2+" is "+sum)}alertSum(7,7);
+#+end_src
+* Google Closure Compiler (simple)                                    :slide:
+#+begin_src javascript
+  function alertSum(number1, number2) {
+    var sum = number1 + number2;
+    alert("The sum of " + number1 + " and " + number2 + " is " + sum);
+  }
+  alertSum(7,7);
+#+end_src
+Compiled:
+#+begin_src javascript
+function alertSum(a,b){alert("The sum of "+a+" and "+b+" is "+(a+b))}alertSum(7,7);
+#+end_src
+* Google Closure Compiler (advanced)                                  :slide:
+#+begin_src javascript
+  function alertSum(number1, number2) {
+    var sum = number1 + number2;
+    alert("The sum of " + number1 + " and " + number2 + " is " + sum);
+  }
+  alertSum(7,7);
+#+end_src
+Compiled:
+#+begin_src javascript
+alert("The sum of 7 and 7 is 14");
+#+end_src
+* Google Closure Compiler & Ecosystem                                 :slide:
+- Benefits
+  - Code optimization & minification
+  - Dead code elimination
+  - Closure libraries are huge
+- [[http://lukevanderhart.com/2011/09/30/using-javascript-and-clojurescript.html][Needs some build configuration for unsupported libraries]]
+* Differences from Clojure (1)                                        :slide:
+- Global =js=-namespace
+- Macros
+  - Implement in =.clj=-Files, load with =:require-macros=
+- Reference Types: Only atom
+- No eval and runtime compilation
+* Differences from Clojure (2)                                        :slide:
+- No Vars, namespaces at runtime
+- =def= and =binding= as in Clojure, but on JS variables
+- Numbers (just JavaScript numbers)
+- [[https://github.com/clojure/clojurescript/wiki/Differences-from-Clojure][Some more]]
+* Build-Tools                                                         :slide:
+- [[https://github.com/technomancy/leiningen][leiningen]]
+  - ClojureScript libraries distributed as jars
+- [[https://github.com/emezeske/lein-cljsbuild][lein-cljsbuild]]
+- [[https://github.com/lynaghk/cljx][cljx]]
+* REPL                                                                :slide:
+- Browser-REPL
+  - https://github.com/cemerick/austin
+- Headless REPL on Rhino
+* Debugging                                                           :slide:
+- Source map support just added
+* Ecosystem                                                           :slide:
+- [[https://github.com/cemerick/clojurescript.test][clojurescript.test]]
+- [[https://github.com/clojure/core.async][core.async]]
+- [[https://github.com/levand/domina][domina]]
+- [[https://github.com/Prismatic/dommy][dommy]]
+- ...
+* Thanks!                                                             :slide:
+#+BEGIN_HTML
+<center>
+<p>Questions?
+<p>
+<p>Sources
+</center>
+#+END_HTML
+- [[https://github.com/clojure/clojurescript/wiki][ClojureScript Wiki]]
+- [[http://cloud.github.com/downloads/clojure/clojurescript/clojurescript%2520slides.pdf][Rich's slides]]
+- [[http://www.youtube.com/watch?v%3DEpcNDd8nuYY][Clojure/ClojureScript: One Language to Rule the Web]]
+- [[https://developers.google.com/closure/][Closure Tools]]
+#+BEGIN_HTML
+<center>
+<p>Slides built with:
+#+END_HTML
+[[http://www.gnu.org/software/emacs/][Emacs]] - [[https://github.com/overtone/emacs-live][emacs-live]] - [[http://orgmode.org/][org-mode]] - [[https://github.com/relevance/org-html-slideshow][org-html-slideshow]]
+#+BEGIN_HTML
+</center>
+#+END_HTML
+
+#+OPTIONS: num:nil tags:t
+
+#+TAGS: slide(s)
+
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="common.css" />
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="screen.css" media="screen" />
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="projection.css" media="projection" />
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="presenter.css" media="presenter" />
+
+#+BEGIN_HTML
+<script type="text/javascript" src="org-html-slideshow.js"></script>
+#+END_HTML
+
+# Local Variables:
+# org-html-head-include-default-style: nil
+# org-html-head-include-scripts: nil
+# End:
