@@ -9,11 +9,14 @@ Clojure User Group Bonn.
 * [Namespaces](namespaces)
 * [Relational Database Access](rdbms)
 * [Datomic](datomic)
+* [ClojureScript](cljsapp)
+* [Practicums](practicums)
 
 ## Contributors
 
 * Falko Riemenschneider
 * Gerrit Hentschel
+* Adrian Bendel
 
 ## License
 
