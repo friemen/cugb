@@ -60,7 +60,8 @@ To redirect output from native threads enter in a REPL:
  * [Design, Composition and Performance](http://www.infoq.com/presentations/Design-Composition-Performance), 2013
 
 ## Books
- 
+
+ * Higginbotham - [Clojure for the Brave and True](http://www.braveclojure.com/) (online)
  * Emerick, Carper, Grand - Clojure Programming
  * Fogus, Houser - The Joy of Clojure
  * Halloway - Programming Clojure
