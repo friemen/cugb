@@ -64,6 +64,8 @@ Think of the problem of assigning persons to training courses where
 each person opted for the courses he/she likes best in descending order.
 Each course has a limited number of places therefore not everyone
 will get into the course he/she likes best.
+Given such a constraint the goal is to assign everyone to a course that
+matches his/her personal preference as close as possible.
 
 An instance of this problem in Clojure data might look like this:
 ```clojure
