@@ -84,13 +84,14 @@ The preference index starts at 0, so for the first pass the best-liked course
 is chosen, in the second pass the second-best-liked and so on.
 
 Initially all persons are assigned to the special group "\<unassigned\>"
-which must not have any members is therefore over-booked.
+which must not have any members and is therefore over-booked.
 
 In each pass persons are moved from over-booked courses to those that
 have places left if their preference at the current index matches one
 of the available courses.
 
 See the following picture for an illustration:
+
 ![Assignment](assignment.png)
 
 
