@@ -6,6 +6,7 @@ The solutions:
  * [Square root calculation](src/practicums/sqrt.clj)
  * [Topological ordering](src/practicums/toporder.clj)
  * [Partition by Equality](src/practicums/partition.clj)
+ * [Course assignment](src/practicums/assignment.clj)
 
 ## License
 
