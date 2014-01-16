@@ -15,7 +15,7 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
 ## REPL cheatsheet
 
  * clojure.core
-   * `\*ns\*` denotes currrent namespace
+   * `*ns*` denotes currrent namespace
    * `(ns namespace)` - Create or switch to namespace.
    * `(ns-interns namespace)`, `(ns-publics namespace)` - Print internal or public symbols of namespace.
    * `(ns-unmap namespace sym)` - Unmap symbol from namespace.
@@ -35,7 +35,7 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
    * `(refresh)` - Reload all namespaces from their files within a project.
 
 ## More tricks in the REPL
-To redirect output from native threads enter in a REPL:
+To redirect output from native threads:
 
 ```clojure
 (alter-var-root #'*out* (fn [_] *out*))
@@ -46,11 +46,25 @@ To get complete macroexpansion:
 ```clojure
 (use 'clojure.walk)
 ;-> nil
-
 (macroexpand-all '(-> foo bar baz wat))
 ;->  (wat (baz (bar foo)))
 ```
 
+Get Clojure version:
+
+```clojure
+*clojure-version*
+;-> {:major 1, :minor 5, :incremental 1, :qualifier nil}
+```
+
+Limit length for output of sequences:
+
+```clojure
+(set! *print-length* 10)
+;-> 10
+(iterate inc 1)
+;-> (1 2 3 4 5 6 7 8 9 10 ...)
+```
 
 ## Links
 
@@ -74,10 +88,10 @@ To get complete macroexpansion:
 
 ## Books
 
- * Higginbotham - [Clojure for the Brave and True](http://www.braveclojure.com/) (online)
  * Emerick, Carper, Grand - Clojure Programming
  * Fogus, Houser - The Joy of Clojure
  * Halloway - Programming Clojure
+ * Higginbotham - [Clojure for the Brave and True](http://www.braveclojure.com/) (online)
  * Sierra, VanderHart - ClojureScript: Up and Running
  * VanderHart, Neufeld - Clojure Cookbook (upcoming)
  * Sotnikov - Web Development with Clojure (upcoming)
