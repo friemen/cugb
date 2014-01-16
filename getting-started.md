@@ -12,32 +12,45 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
  * [Leiningen](http://leiningen.org/)
  * [Lein-try](https://github.com/rkneufeld/lein-try)
 
-## In the REPL
+## REPL cheatsheet
 
  * clojure.core
-   * ns - Switch to namespace.
-   * ns-interns, ns-publics - Print internal or public symbols of namespace.
-   * ns-unmap - Unmap symbol from namespace.
-   * macroexpand-1 - Expand one level of macro application.
+   * `\*ns\*` denotes currrent namespace
+   * `(ns namespace)` - Create or switch to namespace.
+   * `(ns-interns namespace)`, `(ns-publics namespace)` - Print internal or public symbols of namespace.
+   * `(ns-unmap namespace sym)` - Unmap symbol from namespace.
+   * `(macroexpand-1 quoted-expr)` - Expand one level of macro application.
  * clojure.repl
-   * dir - Print sorted list of public vars of namespace.
-   * doc - Print docstring of var referenced by given symbol.
-   * pst - Print stack trace.
-   * source - Print source.
+   * `(dir ns)` - Print sorted list of public vars of namespace.
+   * `(doc sym)` - Print docstring of var referenced by given symbol.
+   * `(pst)` - Print stack trace.
+   * `(source sym)` - Print source.
  * clojure.pprint
-   * pp - Pretty print last REPL output.
-   * pprint - Pretty print given object.
+   * `(pp)` - Pretty print last REPL output.
+   * `(pprint expr)` - Pretty print given object.
  * clojure.tools.trace [org.clojure/tools.trace](https://github.com/clojure/tools.trace)
-   * trace-ns - Add tracing to all functions in a namespace.
-   * untrace-ns - Remove tracing to all functions in a namespace.
+   * `(trace-ns namespace)` - Add tracing to all functions in a namespace.
+   * `(untrace-ns namespace)` - Remove tracing to all functions in a namespace.
  * clojure.tools.namespace.repl [org.clojure/tools.namespace](https://github.com/clojure/tools.namespace)
-   * refresh - Reload all namespaces from their files within a project.
+   * `(refresh)` - Reload all namespaces from their files within a project.
 
+## More tricks in the REPL
 To redirect output from native threads enter in a REPL:
 
 ```clojure
 (alter-var-root #'*out* (fn [_] *out*))
 ```
+
+To get complete macroexpansion:
+
+```clojure
+(use 'clojure.walk)
+;-> nil
+
+(macroexpand-all '(-> foo bar baz wat))
+;->  (wat (baz (bar foo)))
+```
+
 
 ## Links
 
