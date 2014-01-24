@@ -28,20 +28,20 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
  * clojure.pprint
    * `(pp)` - Pretty print last REPL output.
    * `(pprint expr)` - Pretty print given object.
- * clojure.tools.trace [org.clojure/tools.trace](https://github.com/clojure/tools.trace)
+ * clojure.tools.trace, requires project dependency to [org.clojure/tools.trace](https://github.com/clojure/tools.trace)
    * `(trace-ns namespace)` - Add tracing to all functions in a namespace.
    * `(untrace-ns namespace)` - Remove tracing to all functions in a namespace.
- * clojure.tools.namespace.repl [org.clojure/tools.namespace](https://github.com/clojure/tools.namespace)
+ * clojure.tools.namespace.repl, requires project dependency to [org.clojure/tools.namespace](https://github.com/clojure/tools.namespace)
    * `(refresh)` - Reload all namespaces from their files within a project.
 
 ## More tricks in the REPL
-To redirect output from native threads:
+Redirect output from native threads:
 
 ```clojure
 (alter-var-root #'*out* (fn [_] *out*))
 ```
 
-To get complete macroexpansion:
+Do complete macroexpansion:
 
 ```clojure
 (use 'clojure.walk)
@@ -65,6 +65,17 @@ Limit length for output of sequences:
 (iterate inc 1)
 ;-> (1 2 3 4 5 6 7 8 9 10 ...)
 ```
+
+Open Javadoc in browser:
+
+```clojure
+(use 'clojure.java.javadoc)
+;-> nil
+(javadoc java.util.Set)
+;-> "http://java.sun.com/javase/6/docs/api/java/util/Set.html"
+```
+
+
 
 ## Links
 
