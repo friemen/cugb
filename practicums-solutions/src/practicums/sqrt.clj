@@ -19,10 +19,8 @@
 
 (defn sqrt
   [n]
-  (letfn [(error-too-big [g]
-            (not (good-enough? 0.01 n g)))]
-    (->> (iterate (partial next-guess n) 1)
-         (drop-while error-too-big)
-         first
-         float)))
+  (->> (iterate (partial next-guess n) 1)
+       (drop-while (complement (partial good-enough? 0.01 n)))
+       first
+       float))
 
