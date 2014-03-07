@@ -81,7 +81,7 @@ Identity is represented by one of the 4 ref-types (Var, Atom, Ref, Agent).
 
 ## Common functionality on ref-types
 
-The ref-types Atom, Ref and Agent hold a value and are updated by functions
+The ref-types Var, Atom, Ref and Agent hold a value and are updated by functions
 ```clojure
 (<changer> reference f & args)
 ```
@@ -206,7 +206,7 @@ Supports **synchronous**, **uncoordinated** changes per atom.
 
 ### Ref
 
-Supports **synchronous**, **coordinated** changes on a set of refs.
+Supports **synchronous**, **coordinated** changes on a set of refs through Software Transactional Memory (STM).
 
 `(dosync body)` the code of the body accesses refs in a transaction.
 Derefs outside of dosync are not coordinated and will lead to inconsistent results.
