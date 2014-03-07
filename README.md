@@ -11,6 +11,7 @@ Clojure User Group Bonn.
 * [Datomic](datomic)
 * [ClojureScript](cljsapp)
 * [Practicums](practicums)
+* [Concurrency intro](concurrency)
 
 ## Contributors
 
