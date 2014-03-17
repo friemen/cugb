@@ -12,6 +12,39 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
  * [Leiningen](http://leiningen.org/)
  * [Lein-try](https://github.com/rkneufeld/lein-try)
 
+## Links
+
+ * [Clojure.org](http://clojure.org)
+ * [Introduction](http://java.ociweb.com/mark/clojure/article.html)
+ * [Cheatsheet](http://clojure.org/cheatsheet)
+ * [Clojure Documentation](http://clojure-doc.org/)
+ * [Clojars](https://clojars.org/)
+ * [Toolbox](http://www.clojure-toolbox.com/)
+ * [Planet Clojure](http://planet.clojure.in/)
+ * [4Clojure](http://www.4clojure.com/)
+ * [Labrepl](https://github.com/relevance/labrepl)
+ * [German Clojure-de group](https://groups.google.com/forum/#!forum/clojure-de)
+
+## Some fundamental talks by Rich Hickey
+
+ * [Are We There Yet?](http://www.infoq.com/presentations/Are-We-There-Yet-Rich-Hickey), 2009
+ * [Simple Made Easy](http://www.infoq.com/presentations/Simple-Made-Easy), 2011
+ * [The Value of Values](http://www.infoq.com/presentations/Value-Values), 2012
+ * [The Language of the System](http://www.youtube.com/watch?v=ROor6_NGIWU), 2012
+ * [Design, Composition and Performance](http://www.infoq.com/presentations/Design-Composition-Performance), 2013
+
+## Books
+
+ * Emerick, Carper, Grand - Clojure Programming
+ * Fogus, Houser - The Joy of Clojure
+ * Halloway - Programming Clojure
+ * Higginbotham - [Clojure for the Brave and True](http://www.braveclojure.com/) (online)
+ * Sierra, VanderHart - ClojureScript: Up and Running
+ * VanderHart, Neufeld - Clojure Cookbook
+ * Sotnikov - Web Development with Clojure
+ 
+# Taming the REPL
+
 ## REPL cheatsheet
 
  * clojure.core
@@ -76,34 +109,3 @@ Open Javadoc in browser:
 ```
 
 
-
-## Links
-
- * [Clojure.org](http://clojure.org)
- * [Introduction](http://java.ociweb.com/mark/clojure/article.html)
- * [Cheatsheet](http://clojure.org/cheatsheet)
- * [Clojure Documentation](http://clojure-doc.org/)
- * [Clojars](https://clojars.org/)
- * [Toolbox](http://www.clojure-toolbox.com/)
- * [Planet Clojure](http://planet.clojure.in/)
- * [4Clojure](http://www.4clojure.com/)
- * [Labrepl](https://github.com/relevance/labrepl)
- 
-## Some fundamental talks by Rich Hickey
-
- * [Are We There Yet?](http://www.infoq.com/presentations/Are-We-There-Yet-Rich-Hickey), 2009
- * [Simple Made Easy](http://www.infoq.com/presentations/Simple-Made-Easy), 2011
- * [The Value of Values](http://www.infoq.com/presentations/Value-Values), 2012
- * [The Language of the System](http://www.youtube.com/watch?v=ROor6_NGIWU), 2012
- * [Design, Composition and Performance](http://www.infoq.com/presentations/Design-Composition-Performance), 2013
-
-## Books
-
- * Emerick, Carper, Grand - Clojure Programming
- * Fogus, Houser - The Joy of Clojure
- * Halloway - Programming Clojure
- * Higginbotham - [Clojure for the Brave and True](http://www.braveclojure.com/) (online)
- * Sierra, VanderHart - ClojureScript: Up and Running
- * VanderHart, Neufeld - Clojure Cookbook (upcoming)
- * Sotnikov - Web Development with Clojure (upcoming)
- 
