@@ -45,6 +45,9 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
  
 # Taming the REPL
 
+Read this awesome blog post [Pimp my REPL](http://dev.solita.fi/2014/03/18/pimp-my-repl.html)
+to learn about additional tooling for the REPL.
+
 ## REPL cheatsheet
 
  * clojure.core
