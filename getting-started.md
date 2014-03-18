@@ -67,7 +67,26 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
  * clojure.tools.namespace.repl, requires project dependency to [org.clojure/tools.namespace](https://github.com/clojure/tools.namespace)
    * `(refresh)` - Reload all namespaces from their files within a project.
 
+## Use your User Profile
+
+Use [vinyasa](https://github.com/zcaudate/vinyasa) to get more out of the REPL.
+
+Example of a simple ~/.lein/profiles.clj
+
+```clojure
+{:user  {:plugins [[cider/cider-nrepl "0.1.0-SNAPSHOT"]]
+         :dependencies [[leiningen "2.3.4"]
+                        [im.chit/vinyasa "0.1.8"]]
+         :repl-options {:port 9090 }
+         :injections [(require 'vinyasa.inject)
+                      (vinyasa.inject/inject 'clojure.core '>
+                                             '[[clojure.repl doc source]
+                                               [clojure.pprint pprint pp]])]}}
+```
+
+
 ## More tricks in the REPL
+
 Redirect output from native threads:
 
 ```clojure
