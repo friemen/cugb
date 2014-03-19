@@ -87,6 +87,9 @@ Example of a simple ~/.lein/profiles.clj
                                                [clojure.pprint pprint pp]])]}}
 ```
 
+The profile above will make symbols >doc, >source, >pprint and >pp
+available in every namespace.
+
 
 ## More tricks in the REPL
 
