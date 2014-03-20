@@ -14,17 +14,17 @@ But how do we add new functions to existing types? This gives birth to the
 [decorator pattern](http://en.wikipedia.org/wiki/Decorator_pattern). This requires us
 to have control over instance creation.
 
-Plain FP answer for new functions is easy: just add them. In order to add new types
+Plain FP answer for new functions is easy: just add them. In order to add new types,
 Scala and Haskell offer Type Classes, a
 [less powerful construct](http://debasishg.blogspot.de/2010/08/random-thoughts-on-clojure-protocols.html)
 (with regard to dispatching) are Clojure Protocols.
-Todo something similar in OO the [Adapter pattern](http://en.wikipedia.org/wiki/Adapter_pattern)
+To do something similar in OO the [Adapter pattern](http://en.wikipedia.org/wiki/Adapter_pattern)
 is used. Again, this pattern is only helpful if we can influence how instances are created.
 
 
 ## Protocols
 
-A first example
+A first example:
 
 ```clojure
 (defprotocol IHello
@@ -50,7 +50,7 @@ But if it suits our need better we can also extend a protocol to multiple types 
   java.lang.String
   (hello [s] (str "Hello " s))
   java.lang.Number
-  (hello [n] (str "Hello Number" n)))
+  (hello [n] (str "Hello Number " n)))
 ;= nil
 ```
 
@@ -73,6 +73,12 @@ User ```extenders``` on a protocol to get a sequence of supporting types.
 In order to make use of protocols you need to have types. Types either stem from Java, or
 you can create your own types using `defrecord`.
 
+This here:
+```clojure
+(defrecord Person [firstname lastname])
+```
+gives you a class, that supports Map-like access. Instances are immutable.
+
 **Be cautious**: using defrecord too early will hinder your work in the REPL. Whenever the
 defrecord expr is reevaluated a new class is created underneath. This can lead to
 incompatibilities with existing protocols or instances of the record. In consequence you
@@ -81,11 +87,6 @@ will face odd runtime errors.
 Fortunately records behave almost everywhere like maps. If possible start with maps.
 You should encapsulate the creation of instances in factory functions anyway.
 
-This here:
-```clojure
-(defrecord Person [firstname lastname])
-```
-gives you a class, that supports Map-like access. Instances are immutable.
 
 ```clojure
 (def p (Person. "Mickey" "Mouse"))
@@ -100,7 +101,7 @@ gives you a class, that supports Map-like access. Instances are immutable.
 ;= #user.Person{:firstname "Mickey", :lastname "Mouse", :city "Duckberg"}
 ```
 
-But, if you remove record defined keys from an instance you'll receive a map.
+But, if you remove record defined keys from an instance you'll receive a map:
 ```clojure
 (instance? Person p)
 ;= true
@@ -110,7 +111,13 @@ But, if you remove record defined keys from an instance you'll receive a map.
 ;= false
 ```
 
-Example with protocol extension:
+The macro `defrecord` also creates a factory function that accepts a map:
+```clojure
+(map->Person {:firstname "Donald"})
+:= #user.Person{:firstname "Donald", :lastname nil}
+```
+
+And no the record with an inline protocol extension:
 ```clojure
 (defrecord Person [firstname lastname]
   IHello
@@ -119,7 +126,8 @@ Example with protocol extension:
 (hello (Person. "Donald" "Duck"))
 ;= "Hello Donald Duck"
 ```
+Invocations execute faster, but it's less flexible.
 
-To use Clojure records to describe domain data you could choose an
-approach like [domaintypes](https://github.com/friemen/domaintypes) did.
+To use Clojure records for describing domain data you could choose an
+approach like [domaintypes](https://github.com/friemen/domaintypes) does.
 
