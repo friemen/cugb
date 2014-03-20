@@ -19,6 +19,8 @@ Clojure User Group Bonn.
 * [ClojureScript](cljsapp)
 * [Practicums](practicums)
 * [Concurrency intro](concurrency)
+* [Protocols and Records intro](protocolsrecords)
+
 
 ## Contributors
 
