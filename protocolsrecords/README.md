@@ -117,7 +117,7 @@ The macro `defrecord` also creates a factory function that accepts a map:
 := #user.Person{:firstname "Donald", :lastname nil}
 ```
 
-And no the record with an inline protocol extension:
+And now the record with an inline protocol extension:
 ```clojure
 (defrecord Person [firstname lastname]
   IHello
