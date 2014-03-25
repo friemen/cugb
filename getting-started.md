@@ -15,6 +15,7 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
 ## Links
 
  * [Clojure.org](http://clojure.org)
+ * [A Brief Beginner’s Guide](http://www.unexpected-vortices.com/clojure/brief-beginners-guide/index.html)
  * [Introduction](http://java.ociweb.com/mark/clojure/article.html)
  * [Cheatsheet](http://clojure.org/cheatsheet)
  * [Clojure Documentation](http://clojure-doc.org/)
