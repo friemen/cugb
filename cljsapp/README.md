@@ -2,6 +2,11 @@
 
 The `slides`-folder contains the presentation.
 
+Other tutorials:
+- [For LightTable](https://github.com/swannodette/lt-cljs-tutorial)
+- [For Emacs/Eclipse](https://github.com/magomimmo/modern-cljs/tree/master/cljs-tutorial)
+
+
 ## Workflow
 
 This project uses [lein-cljsbuild](https://github.com/emezeske/lein-cljsbuild) and [dommy](https://github.com/Prismatic/dommy).
