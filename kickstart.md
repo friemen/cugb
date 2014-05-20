@@ -12,8 +12,9 @@ The next step would be to have a toy project. It should do
 significantly more than print `Hello World`, and it must have a direct
 connection to everyday programming tasks.
 
-And finally, novices should get a well-chosen list of hints and
-links to continue learning on their own.
+And finally, novices should get a well-chosen list of
+[hints and links](https://github.com/friemen/cugb/blob/master/getting-started.md)
+to continue learning on their own.
 
 ## Welcome to the Kickstart workshop
 
