@@ -17,7 +17,7 @@ links to continue learning on their own.
 
 ## Welcome to the Kickstart workshop
 
-The three steps listed above are exactly what we try to accomplish in
+The three things listed above are exactly what we try to accomplish in
 a 4-hour workshop. Don't expect having mastered the language
 afterwards, but you can expect to be well-prepared for learning
 Clojure and deep-dive into it's ecosystem.
@@ -35,10 +35,10 @@ And this is how we get you started:
    and structural editing (a.k.a ParEdit)
  * Create your first web app.
  * Introduction to the syntax and some important functions.
- * Let you play around and ask questions.
+ * Let you play around and answer your questions.
 
-And if you want to continue learning Clojure you can also join one of
-the local user groups in
+And if you want to continue learning Clojure afterwards, you can also
+join one of the local user groups in
 [Bonn](https://groups.google.com/forum/#!forum/clojure-user-group-bonn)
 and [Cologne](http://www.meetup.com/clojure-cologne/).
 
@@ -46,13 +46,14 @@ and [Cologne](http://www.meetup.com/clojure-cologne/).
 
 Each participant should have an own notebook with
 [Java](http://docs.oracle.com/javase/8/) (version >= 6) installed.
+
 Prior amateur knowledge of at least one programming language (for
 example C++, Python, Ruby, Java, any Lisp, Scala) is very helpful.
 
 ## Organizational requirements
 
 * Max. number of participants: 10
-* A room with decent power supply.
+* A room with decent power supply
 * Internet access
 * Beamer (we can bring our own)
 
