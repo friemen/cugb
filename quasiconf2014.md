@@ -23,3 +23,11 @@ Clojure in Production | Gerrit Hentschel, doo
 **In the afternoon: Hands-on**
 
 [Clojure Kickstart Workshop](kickstart.md)
+
+
+# Supported by
+
+* [bevuta IT GmbH](http://www.bevuta.com)
+* [doctronic GmbH & Co. KG](http://www.doctronic.de/)
+* [doo GmbH](https://doo.net/)
+* [itemis AG](http://www.itemis.de/)
