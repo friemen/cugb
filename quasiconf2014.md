@@ -14,6 +14,7 @@ A collaboration of the Clojure User Groups
 
 **In the morning: Talks**
 
+Title | Speaker
 --- | ---
 Clojure in 90 Minutes | Ingo Küper, doctronic
 About Scheme | Moritz Heidkamp, bevuta
