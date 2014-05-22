@@ -5,8 +5,8 @@
             [hiccup.page :refer [html5]]
             [compojure.core :refer [defroutes GET POST]]
             [clojure.java.jdbc :as jdbc]
-            [clojure.java.jdbc.sql :as sql]
-            [clojure.java.jdbc.ddl :as ddl]
+            [java-jdbc.sql :as sql]
+            [java-jdbc.ddl :as ddl]
             [korma.core :as k]
             [korma.db :refer [defdb]]
             [korma.config :refer [set-delimiters]]))

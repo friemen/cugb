@@ -1,8 +1,8 @@
 (ns schema
   "Schema declaration and database initialization (drop + create)."
   (:require [clojure.java.jdbc :as jdbc]
-            [clojure.java.jdbc.ddl :as ddl]
-            [clojure.java.jdbc.sql :as sql]))
+            [java-jdbc.ddl :as ddl]
+            [java-jdbc.sql :as sql]))
 
 
 (defn id-column
@@ -19,7 +19,8 @@
                   (if owned? " on delete cascade on update cascade"))]))
 
 (def schema {:project     [(id-column)
-                           [:name "varchar(30)"]]
+                           [:name "varchar(30)"]
+                           [:begin "date"]]
              :release     [(id-column)
                            (fk-column :project true)
                            [:name "varchar(30)"]]
@@ -51,3 +52,15 @@
   (doseq [t (keys schema)]
     (jdbc/execute! db-spec [(ddl/drop-table t)]))
   (jdbc/execute! db-spec ["drop sequence pkseq"]))
+
+
+(defn insert-or-update!
+  [db-spec table & rows]
+  {:pre [(keyword? table)
+         (every? map? rows)]}
+  (doseq [row rows]
+      (if (:id row)
+        (jdbc/update! db-spec table row)
+        (jdbc/insert! db-spec table row))))
+
+
