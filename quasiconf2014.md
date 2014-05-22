@@ -22,7 +22,14 @@ Clojure in Production | Gerrit Hentschel, doo
 
 **In the afternoon: Hands-on**
 
-[Clojure Kickstart Workshop](kickstart.md)
+Most people with a background in static imperative OO programming face
+initial difficulties in getting started with a dynamic Lisp-style
+functional language like [Clojure](http://clojure.org/). Which is sad
+because programming in Clojure is a great experience.
+
+We can help!
+
+Read more about the [Clojure Kickstart Workshop](kickstart.md).
 
 
 # Supported by

@@ -53,7 +53,7 @@ example C++, Python, Ruby, Java, any Lisp, Scala) is very helpful.
 
 ## Organizational requirements
 
-* Max. number of participants: 10
+* Max. number of participants: 15
 * A room with decent power supply
 * Internet access
 * Beamer (we can bring our own)
