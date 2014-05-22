@@ -12,14 +12,13 @@ A collaboration of the Clojure User Groups
 
 # Programme
 
-**Morning**
+**In the morning: Talks**
 
-Talks
-
+--- | ---
 Clojure in 90 Minutes | Ingo Küper, doctronic
 About Scheme | Moritz Heidkamp, bevuta
 Clojure in Production | Gerrit Hentschel, doo
 
-**Afternoon**
+**In the afternoon: Hands-on**
 
 [Clojure Kickstart Workshop](kickstart.md)
