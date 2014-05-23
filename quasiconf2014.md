@@ -16,11 +16,15 @@ A collaboration of the Clojure User Groups
 
 Title | Speaker
 --- | ---
-Clojure in 90 Minutes | Ingo Küper, doctronic
 About Scheme | Moritz Heidkamp, bevuta
+Emacs Lisp | Vasilij Schneidermann
 Clojure in Production | Gerrit Hentschel, doo
 
 **In the afternoon: Hands-on**
+
+As a gentle introduction we begin with "Clojure in 90 Minutes" by Ingo Küper, doctronic
+
+We continue with a *Clojure Kickstart Workshop*:
 
 Most people with a background in static imperative OO programming face
 initial difficulties in getting started with a dynamic Lisp-style
