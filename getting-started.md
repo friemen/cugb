@@ -7,8 +7,9 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
 ## Development Environment
 
  * [Emacs Live](http://overtone.github.io/emacs-live/)
+ * [Cursive](https://cursiveclojure.com/)
  * [Eclipse Counterclockwise](http://code.google.com/p/counterclockwise/)
- * [Lighttable](http://www.lighttable.com/)
+ * [LightTable](http://www.lighttable.com/)
  * [Leiningen](http://leiningen.org/)
  * [Lein-try](https://github.com/rkneufeld/lein-try)
 
