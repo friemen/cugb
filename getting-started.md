@@ -76,28 +76,7 @@ to learn about additional tooling for the REPL.
 
 Use [vinyasa](https://github.com/zcaudate/vinyasa) to get more out of the REPL.
 
-Example of a ~/.lein/profiles.clj
-
-```clojure
-{:user  {:plugins [[cider/cider-nrepl "0.1.0-SNAPSHOT"]
-                   [lein-ancient "0.5.5"]
-                   [jonase/eastwood "0.1.2"]]
-         :dependencies [[im.chit/vinyasa "0.1.8"]
-                        [org.clojars.gjahad/debug-repl "0.3.3"]
-                        [alembic "0.2.1"]
-                        [criterium "0.4.3"]]
-         :repl-options {:port 9090 }
-         :injections [(require 'vinyasa.inject)
-                      (require 'alex-and-georges.debug-repl)
-                      (vinyasa.inject/inject
-                       'clojure.core '>
-                       '[[clojure.repl doc source]
-                         [clojure.pprint pprint pp]
-                         [vinyasa.pull pull]
-                         [alembic.still load-project]
-                         [criterium.core bench]
-                         [alex-and-georges.debug-repl debug-repl]])]}}
-```
+Example of a [~/.lein/profiles.clj](https://gist.github.com/friemen/5153156d765265fe5c13).
 
 The profile above will make symbols >doc, >source, >pprint and other functions
 available in every namespace. In addition it includes
