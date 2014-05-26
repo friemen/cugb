@@ -8,7 +8,7 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
 
  * [Emacs Live](http://overtone.github.io/emacs-live/)
  * [Cursive](https://cursiveclojure.com/)
- * [Eclipse Counterclockwise](http://code.google.com/p/counterclockwise/)
+ * [Eclipse Counterclockwise](http://ccw-ide.org)
  * [LightTable](http://www.lighttable.com/)
  * [Leiningen](http://leiningen.org/)
  * [Lein-try](https://github.com/rkneufeld/lein-try)
@@ -74,18 +74,17 @@ to learn about additional tooling for the REPL.
 
 ## Use your User Profile
 
-Use [vinyasa](https://github.com/zcaudate/vinyasa) to get more out of the REPL.
+You'll find an example of a ~/.lein/profiles.clj in this [Gist](https://gist.github.com/friemen/5153156d765265fe5c13).
 
-Example of a [~/.lein/profiles.clj](https://gist.github.com/friemen/5153156d765265fe5c13).
+It uses [vinyasa](https://github.com/zcaudate/vinyasa) to get more out of the REPL.
 
-The profile above will make symbols >doc, >source, >pprint and other functions
+The profile in the Gist above will make symbols >doc, >source, >pprint and other functions
 available in every namespace. In addition it includes
  * Lein plugin [Ancient](https://github.com/xsc/lein-ancient) for keeping dependencies up-to-date.
  * Lein plugin [Eastwood](https://github.com/jonase/eastwood) as code checker.
  * [Alembic](https://github.com/pallet/alembic) to add dependencies from project.clj to the REPL without having to restart it.
  * [Criterium](https://github.com/hugoduncan/criterium) to get an improved benchmark for expressions.
  * [Debug-REPL](https://github.com/georgejahad/debug-repl) to get a REPL at a certain point within a function execution.
-
 
 ## More tricks in the REPL
 
@@ -128,5 +127,14 @@ Open Javadoc in browser:
 (javadoc java.util.Set)
 ;-> "http://java.sun.com/javase/6/docs/api/java/util/Set.html"
 ```
+
+## Use Component
+
+In order to maintain a clean REPL in bigger, stateful applications
+Stuart Sierra created
+[component](https://github.com/stuartsierra/component), which allows
+you to reload changed namespaces and re-establish the initial state of
+the application.
+
 
 
