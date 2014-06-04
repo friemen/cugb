@@ -2,14 +2,16 @@
 
 An introduction to [clojure.core.typed](http://typedclojure.org/).
 
+Here's some background for the everlasting discussion around the gains and
+perils of using a type system:
 [What To Know Before Debating Type Systems](http://blogs.perl.org/users/ovid/2010/08/what-to-know-before-debating-type-systems.html).
 
-## Pros and Cons of a static type system
+## TL DR: pros and cons of a static type system
 
 Pros, most important first:
 
 * Only "correct" programs pass the check
-* Enables better tooling support for analysing and changing code
+* Enables better tooling support for analyzing and changing code
 * Documentation that cannot lie
 * Enables optimizations during compilation
 
@@ -20,19 +22,16 @@ Cons, no special order:
 * Increases verbosity (in some languages)
 
 A type system is a sophisticated tool. Certainly one can create good
-software without a type system. It is a tradeoff if it's benefit
-outweighs it's cost.
+software without a type system. In the end it boils down to the usual
+tradeoff "benefit vs. cost".
 
 
 ## Prepare your project
 
 * Add project dependency to
-  [clojure.core.typed](https://github.com/clojure/core.typed)
+  [clojure.core.typed](https://github.com/clojure/core.typed).
 * For Leiningen support add
-  [lein-typed plugin](https://github.com/typedclojure/lein-typed)
-* On Emacs you can also use
-  [typed-clojure-mode](https://github.com/typedclojure/typed-clojure-mode)
-  and use `C-c C-x n`
+  [lein-typed plugin](https://github.com/typedclojure/lein-typed).
 
 ## First steps in the REPL
 
@@ -52,7 +51,8 @@ outweighs it's cost.
 (cf bar)
 ;= java.lang.String
 (cf (+ bar 1))
-; Type Error (NO_SOURCE_PATH:1:5) Static method clojure.lang.Numbers/add could not be applied to arguments:
+; Type Error (NO_SOURCE_PATH:1:5) Static method
+; clojure.lang.Numbers/add could not be applied to arguments:
 ;
 ;
 ; Domains:
@@ -69,28 +69,36 @@ outweighs it's cost.
 ; in: (clojure.lang.Numbers/add bar 1)
 ```
 
-## Basic usage
+Note: sometimes `(cf ...)` has odd results when referring to new forms
+that have just been evaluated. This usually improves after a
+`(check-ns)`.
 
-* Require `[clojure.core.typed :as t :refer [ann Any cf check-ns defn> U]]`
+## Basic usage in a project
+
+* Require `[clojure.core.typed :as t :refer [ann Any cf check-ns defn> U]]` in namespaces
+  that offer type checking.
 * Annotate vars with `ann` or use forms `defn>` or `fn` from clojure.core.typed namespace.
 * Execute a type-check with `(check-ns)` in the REPL.
+* On Emacs you can also use
+  [typed-clojure-mode](https://github.com/typedclojure/typed-clojure-mode)
+  and use `C-c C-x n` to check the current namespace.
 * Use [lein-typed plugin](https://github.com/typedclojure/lein-typed)
   in project.clj or in your profile, add namespaces in project.clj to
   the `:core.typed {:check []}` vector and execute `lein typed check` in a shell.
 
 ## Types
 
-For an overview of the available types see the corresponding
+For an overview of the available types see the
 [Types wiki page](https://github.com/clojure/core.typed/wiki/Types).
 
 Some important types
 
 * Every type is a `Any`.
 * `nil` is nil. 
-* Java types (classes + interfaces) are admissable
+* Java types (classes + interfaces) are allowed and treated as expected.
 * Scalar types
   * Numeric: `Integer`, `Long`, `clojure.lang.Ratio`, `Double`, `Number` 
-  * Other: `String`, `Character`, `Boolean`, `Symbol`, `Keyword`
+  * Others: `String`, `Character`, `Boolean`, `Symbol`, `Keyword`
 * Complex types
   * Sequences: `Seqable`, `Seq`, 
   * Datastructures: `Vec`, `Map`, `Set`, `List`, `HVec`, `HMap`, `HList`
@@ -100,13 +108,13 @@ Some important types
 
 Curious about the details? Take a look at the
 [Types wiki page](https://github.com/clojure/core.typed/wiki/Types)
-and try cf expressions in the REPL. For example
+and try `cf` expressions in the REPL. For example
 
 ```clojure
 (cf (seq [:a :b :c]) (Seq Kw))
 ;= (NonEmptySeq (U (Value :c) (Value :b) (Value :a)))
 (cf [:a :b :c] (Seqable Kw))
-[(HVec [(Value :a) (Value :b) (Value :c)]) {:then tt, :else ff}]
+;= [(HVec [(Value :a) (Value :b) (Value :c)]) {:then tt, :else ff}]
 ```
 
 ## Some examples for function types
@@ -148,8 +156,6 @@ Multi-arity:
 ```
 
 
-## Define custom type names
-
 With the macro `defalias` we are able to refer to complex
 type definitions using a concise name.
 
@@ -167,12 +173,12 @@ Example:
 ```
 
 Please note: an alias is only available to
-(cf ...) after a (check-ns) run!
+`(cf ...)` after a `(check-ns)` run!
 
 
 ## Use other forms from clojure.core.typed
 
-Example for defn> usage:
+Example for `defn>` usage:
 
 ```clojure
 (defn> inc-or-nil
@@ -199,7 +205,7 @@ isn't it? We can help ourselves:
          (defrecord ~sym ~(vec fields)))))
 ```
 
-This allows us to define a record consisely:
+This allows us to define a record concisely:
 ```clojure
 (defrecord> Address [street :- String zipcode :- Integer])
 ```
@@ -207,10 +213,10 @@ This allows us to define a record consisely:
 
 ## Exercises
 
-Use in the REPL `(cf form expected-type)` to check your type def.
+Use in the REPL `(cf form expected-type)` to check your type definition for:
 
-1. Define a type for `(atom {:name "Foo" :age "42"})`.
-1. Define a type for the function `inc`.
-1. Define a type for the function `println`.
-1. Define a typed function `street-length` that takes an Address and
+1. A type for `(atom {:name "Foo" :age "42"})`.
+1. A type for the function `inc`.
+1. A type for the function `println`.
+1. A typed function `street-length` that takes an Address and
    returns the number of chars of the :street field.
