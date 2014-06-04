@@ -20,7 +20,7 @@ Clojure User Group Bonn.
 * [Practicums](practicums)
 * [Concurrency intro](concurrency)
 * [Protocols and Records intro](protocolsrecords)
-
+* [Typed Clojure intro](typed)
 
 ## Contributors
 
