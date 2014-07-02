@@ -158,7 +158,7 @@ For an Atom, Ref or Agent the validator function can be passed upon creation, fo
 
 ### Var
 
-Thread-bound global references to immutable data, other ref-types or functions.
+Thread-bound global references to either immutable data, other ref-types or functions.
 
 `(def symbol expr)` creates a new var in the current namespace.
 
@@ -226,7 +226,9 @@ To schedule an action use either `send` or `send-off`.
 
 `(send a f & args)` adds a function to the queue, assuming that it's execution time is only CPU-bound. Send uses a fixed size thread pool.
 
-`(send-off a f & args)` adds a function to the queue, assuming that it may wait for IO or other blocking resources. Send-off uses an unbound Thread pool (the same as `future` uses).
+`(send-off a f & args)` adds a function to the queue, assuming that it may wait for IO or other blocking resources. Send-off uses a thread from an unbounded thread pool (the same as `future` uses).
+
+`(send-via executor a f & args)` adds a function to the queue. The function is executed by the executor.
 
 Calculations for agents that are sent during a STM transaction will start only when transactions succeeds. Agents are therefore ideal for transaction bound side-effects.
 
