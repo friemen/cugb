@@ -7,8 +7,8 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
 ## Development Environment
 
  * [Emacs Live](http://overtone.github.io/emacs-live/)
- * [Cursive](https://cursiveclojure.com/)
- * [Eclipse Counterclockwise](http://ccw-ide.org)
+ * [IntelliJ / Cursive](https://cursiveclojure.com/)
+ * [Eclipse / Counterclockwise](http://ccw-ide.org)
  * [LightTable](http://www.lighttable.com/)
  * [Leiningen](http://leiningen.org/)
  * [Lein-try](https://github.com/rkneufeld/lein-try)
@@ -17,13 +17,15 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
 
  * [Clojure.org](http://clojure.org)
  * [A Brief Beginner’s Guide](http://www.unexpected-vortices.com/clojure/brief-beginners-guide/index.html)
- * [Introduction](http://java.ociweb.com/mark/clojure/article.html)
- * [Cheatsheet](http://clojure.org/cheatsheet)
+ * [Language overview](http://java.ociweb.com/mark/clojure/article.html)
+ * [Cheatsheet](http://clojure.org/cheatsheet) / a more [interactive cheatsheet](http://grimoire.arrdem.com/)
  * [Clojure Documentation](http://clojure-doc.org/)
  * [Clojars](https://clojars.org/)
- * [Toolbox](http://www.clojure-toolbox.com/)
+ * [Ecosystem cross references](http://crossclj.info/)
+ * [Typed Clojure](http://typedclojure.org)
+ * [Library catalog](http://www.clojure-toolbox.com/)
  * [Planet Clojure](http://planet.clojure.in/)
- * [4Clojure](http://www.4clojure.com/)
+ * [Practicing with 4Clojure](http://www.4clojure.com/)
  * [Labrepl](https://github.com/relevance/labrepl)
  * [German Clojure-de group](https://groups.google.com/forum/#!forum/clojure-de)
 
@@ -44,10 +46,11 @@ First User Group Meeting 2013 featured some [introductory slides](webapp/Clojure
  * Sierra, VanderHart - ClojureScript: Up and Running
  * VanderHart, Neufeld - Clojure Cookbook
  * Sotnikov - Web Development with Clojure
- 
+ * ... (and many more publications, actually too many to keep track of them)
+
 # Taming the REPL
 
-Read this awesome blog post [Pimp my REPL](http://dev.solita.fi/2014/03/18/pimp-my-repl.html)
+Read this blog post [Pimp my REPL](http://dev.solita.fi/2014/03/18/pimp-my-repl.html)
 to learn about additional tooling for the REPL.
 
 ## REPL cheatsheet
