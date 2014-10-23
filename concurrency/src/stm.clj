@@ -24,3 +24,4 @@
 
 #_(do (def f1 (future (dotimes [_ 1e7] (rand-transfer))))
       (def f2 (future (dotimes [_ 1e7] (rand-transfer)))))
+

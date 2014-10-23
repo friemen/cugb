@@ -14,8 +14,7 @@
 
 (defn good-enough?
   [max-error n g]
-  (<= (Math/abs (double (- n (* g g))))
-      max-error))
+  (<= (Math/abs (double (- n (* g g)))) max-error))
 
 (defn sqrt
   [n]
@@ -23,4 +22,3 @@
        (drop-while (complement (partial good-enough? 0.01 n)))
        first
        float))
-
