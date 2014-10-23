@@ -181,9 +181,8 @@ Please note: an alias is only available to
 Example for `defn>` usage:
 
 ```clojure
-(defn> inc-or-nil
-  :- (t/Option Number)
-  [x :- Any]
+(defn inc-or-nil
+  [x :- Any] :- (t/Option Number)
   (if (number? x) (inc x) nil))
 ```
 
