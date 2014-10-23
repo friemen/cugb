@@ -75,9 +75,10 @@ that have just been evaluated. This usually improves after a
 
 ## Basic usage in a project
 
-* Require `[clojure.core.typed :as t :refer [ann Any cf check-ns defn> U]]` in namespaces
+* Exclude clojure.core `defn` in your namespace declaration using `(:refer-clojure :exclude [defn])`.
+* Require `[clojure.core.typed :as t :refer [ann Any cf check-ns defn U IFn]]` in namespaces
   that offer type checking.
-* Annotate vars with `ann` or use forms `defn>` or `fn` from clojure.core.typed namespace.
+* Annotate vars with `ann` or use forms `defn` or `fn` from clojure.core.typed namespace.
 * Execute a type-check with `(check-ns)` in the REPL.
 * On Emacs you can also use
   [typed-clojure-mode](https://github.com/typedclojure/typed-clojure-mode)
@@ -97,8 +98,8 @@ Some important types
 * `nil` is nil. 
 * Java types (classes + interfaces) are allowed and treated as expected.
 * Scalar types
-  * Numeric: `Integer`, `Long`, `clojure.lang.Ratio`, `Double`, `Number` 
-  * Others: `String`, `Character`, `Boolean`, `Symbol`, `Keyword`
+  * Numeric: `Integer`, `Long`, `clojure.lang.Ratio`, `Double`, `Num` 
+  * Others: `Str`, `Character`, `Bool`, `Sym`, `Kw`
 * Complex types
   * Sequences: `Seqable`, `Seq`, 
   * Datastructures: `Vec`, `Map`, `Set`, `List`, `HVec`, `HMap`, `HList`
@@ -135,8 +136,8 @@ Variadic:
 
 Multi-arity:
 ```clojure
-(ann add-many-numbers (Fn [Number Number -> Number]
-                          [Number Number Number Number * -> Number]))
+(ann add-many-numbers (IFn [Number Number -> Number]
+                           [Number Number Number Number * -> Number]))
 (defn add-many-numbers
   ([x y]
      (add-many-numbers x y 0))
@@ -178,7 +179,7 @@ Please note: an alias is only available to
 
 ## Use other forms from clojure.core.typed
 
-Example for `defn>` usage:
+Example for `defn` with type declarations:
 
 ```clojure
 (defn inc-or-nil
