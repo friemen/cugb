@@ -72,7 +72,7 @@ tree. To maintain locality, component functions receive a cursor into
 this state which is transferred via React props. The cursor is passed
 as `state` parameter via call of component function. Modifications to
 the state that the cursor points to can be made via `om/transact!`
-(like core libs `swap!`) and `om/update!` (like core libs `reset!`).
+(akin to `swap!`) and `om/update!` (akin to `reset!`).
 
 
 Om components can still have local mutable state (`IInitState`, `om/get-state`,
@@ -83,7 +83,7 @@ is accessible by all components (`om/get-shared`).
 
 [Om API overview](https://github.com/swannodette/om/wiki/Documentation)
 
-## User interaction
+## User Interaction
 
 Let's modify the example to support user interaction:
 
@@ -134,7 +134,7 @@ This example covers three aspects we didn't encounter so far:
   state to what click-counter should be able to act upon.
 
 
-## Improvments
+## Some Improvements
 
 In the prior example we can also spot a few weaknesses:
 * The button press is handled using a callback. While this looks harmless
@@ -263,7 +263,9 @@ We change only the click-counter component:
 ```
 
 Apparently we made the component much more complex, so what sounded compelling in
-theory turns out to look awkward when actually implemented.
+theory turns out to look awkward when actually implemented...
+
+### Separation of Concerns
 
 Perhaps the idea to give *every* component its own channel is wrong.
 What happens if we create a reusable component that delegates rendering to a
@@ -366,7 +368,250 @@ currently exploring these and other problems in
 
 ## Reagent
 
+[GitHub](https://github.com/reagent-project/reagent)
+
+[Intro](http://holmsand.github.io/reagent/)
+
+At a glance, Reagent seems to be more approachable than Om. The most striking differences are
+* Hiccup style markup instead of React API.
+* State management is more based on local (possibly hidden) atoms than global state.
+* The direct implementation of lifecycle methods is possible, but seldom needed.
+
+Reagent promotes inter-component communication via shared mutable state.
+
+To start you can create your own helloreagent project and take this
+[project.clj contents](https://github.com/friemen/cugb/blob/master/react/helloreagent/project.clj).
+
+Here's an example quite similar to what we started with in Om.
+
+```clojure
+(ns helloreagent.core
+  (:require [reagent.core :as r]))
+
+(enable-console-print!)
+
+(def app-state (r/atom {:text "Hello Reagent World!"}))
+
+(defn header
+  []
+  [:h1 (:text @app-state)])
+
+(r/render-component
+ [header]
+ (. js/document (getElementById "app")))
+```
+
+The state is kept inside an Reagent atom, which tracks where it was
+deref'd to trigger re-rendering of exactly those components that
+depend on it. This feature is already a strong indication to
+NOT use only one(!) atom to keep global state, as any change would cause
+re-rendering of all mounted components.
+
+Since a few days there exists a library bringing
+[cursors to Reagent](https://github.com/reagent-project/reagent-cursor)
+but I didn't try it yet.
+
+At the moment Reagent promotes to keep state more component-local. Adapting
+the example to follow that rule yields
+
+```clojure
+(defn header
+  []
+  (let [state (r/atom {:text "Hello Reagent World!"})]
+    (fn []
+      [:h1 (:text @state)])))
+```
+
+and the `app-state` var is gone. As can be seen, a Reagent component
+function is allowed to return a closure instead of Hiccup-style
+data. It can take the same parameters as the enclosing function. The
+closure is then used for rendering.
+
+### Again: User Interaction
+
+Let's create the click-counter.
+
+```clojure
+(defn click-counter
+  []
+  (let [clicks (r/atom 0)]
+    (fn []
+      [:div
+       [:input {:type "button"
+                :value "Hit me!"
+                :on-click #(swap! clicks inc)}]
+       [:span "Hits " @clicks]])))
+
+
+(defn header
+  []
+  (let [state (r/atom {:text "Hello Reagent World!"})]
+    (fn []
+      [:h1 (:text @state)])))
+
+
+(defn page
+  []
+  [:div
+   [header]
+   [click-counter]])
+
+
+(r/render-component
+ [page]
+ (. js/document (getElementById "app")))
+```
+
+We can see that usage of existing components happens by just wrapping
+the function names in a vector. This vector also allows for an
+arbitrary number of parameters which can then be declared within the
+component function.
+
+
+### Again: core.async
+
+Let's see what happens when we bring channels into the game.
+
+```clojure
+(ns helloreagent.core
+  (:require-macros [cljs.core.async.macros :refer [go go-loop]])
+  (:require [reagent.core :as r]
+            [cljs.core.async :refer [put! chan <!]]))
+```
+
+We have to change the click-counter component to start a process
+before it returns the rendering closure.
+
+```clojure
+(defn click-counter
+  []
+  (let [clicks (r/atom 0)
+        ch     (chan)]
+    (go-loop []
+      (let [evt (<! ch)]
+        (swap! clicks inc))
+      (recur))
+    (fn []
+      [:div
+       [:input {:type "button"
+                :value "Hit me!"
+                :on-click #(put! ch {:action :click})}]
+       [:span "Hits " @clicks]])))
+```
+
+Looks good so far, but unfortunately it's hard to tell where in Reacts
+life-cycle the channel is created. (Remember: in Om we put channel
+creation to `init-state` and the process start into
+`will-mount`.) Reagent allows us to use `r/create-class` to specify a
+map with functions that correspond to the React life-cycle.
+
+Rewriting click-counter for more fine-grained control yields:
+
+```clojure
+(defn click-counter
+  []
+  (r/create-class
+   {:get-initial-state
+    (fn [_]
+      {:ch (chan)
+       :clicks (r/atom 0)})
+    :component-will-mount
+    (fn [this]
+      (let [{:keys [ch clicks]} (r/state this)]
+        (go-loop []
+          (let [evt (<! ch)]
+            (swap! clicks inc))
+          (recur))))
+    :render
+    (fn [this]
+      (let [{:keys [ch clicks]} (r/state this)]
+        [:div
+         [:input {:type "button"
+                  :value "Hit me!"
+                  :on-click #(put! ch {:action :click})}]
+         [:span "Hits " @clicks]]))}))
+```
+
+Ok, this starts again to become awkward.
+
+
+### Again: Separation of Concerns
+
+To separate the technical plumbing from the presentation logic we can
+apply the same idea as before:
+
+```clojure
+;; ---------------------------------------------------------------------------
+;; Generic component with a dispatching controller
+
+(defn view-with-controller
+  [initial-state-fn actions render-fn]
+  (r/create-class
+   {:get-initial-state
+    (fn [_]
+      {:ch (chan)
+       :state (r/atom (initial-state-fn))})
+    :component-will-mount
+    (fn [this]
+      (let [{:keys [state ch]} (r/state this)]
+        (go-loop []
+          (let [evt (<! ch)
+                action-fn (get actions (:action evt))]
+            (if action-fn
+              (swap! state action-fn evt)
+              (prn (str "WARNING: " (:action evt) " is unknown"))))
+          (recur))))
+    :render
+    (fn [this]
+      (let [{:keys [state ch]} (r/state this)]
+        (render-fn @state ch)))}))
+```
+
+What remains is again easy to grasp:
+
+```clojure
+;; ---------------------------------------------------------------------------
+;; App specific code
+
+(defn render-click-counter
+  [state ch]
+  [:div
+   [:input {:type "button"
+            :value "Hit me!"
+            :on-click #(put! ch {:action :click})}]
+   [:span "Hits " (:clicks state)]])
+
+
+(defn inc-clicks
+  [state evt]
+  (update-in state [:clicks] inc))
+
+
+(defn header
+  []
+  (let [state (r/atom {:text "Hello Reagent World!"})]
+    (fn []
+      [:h1 (:text @state)])))
+
+
+(defn page
+  []
+  [:div
+   [header]
+   [view-with-controller (constantly {:clicks 0})
+    {:click inc-clicks}
+    render-click-counter]])
+
+
+(r/render-component
+ [page]
+ (. js/document (getElementById "app")))
+```
+
+
 
 ## References
 
-[Local state is harmful](http://scattered-thoughts.net/blog/2014/02/17/local-state-is-harmful/)
+* [Local state is harmful](http://scattered-thoughts.net/blog/2014/02/17/local-state-is-harmful/)
+* [Quiescent](https://github.com/levand/quiescent) - Another ClojureScript lib for React
+* [Reacl](https://github.com/active-group/reacl) - Another ClojureScript lib for React

@@ -12,7 +12,6 @@
 
 ;; ---------------------------------------------------------------------------
 ;; Generic component with a dispatching controller
-;; Takes an actions map and a render function
 
 (defcomponent view-with-controller
   [state owner {:keys [actions render-fn] :as options}]
@@ -25,7 +24,7 @@
                         action-fn (get actions (:action evt))]
                     (if action-fn
                       (om/transact! state #(action-fn % evt))
-                      (prn (str "WARNING" (:action evt) " is unknown"))))
+                      (prn (str "WARNING: " (:action evt) " is unknown"))))
                   (recur))))
   (render-state [_ {:keys [ch]}]
    (render-fn state ch)))
