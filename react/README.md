@@ -43,7 +43,7 @@ Whenever you save this file it will be recompiled.
 Open helloom/index.html in a browser.
 Refresh the browser to reload the latest compiled JavaScript.
 
-### Om explained on a trivial example
+### Om explained with a trivial example
 
 Here's the result of a first modification of the default core.cljs:
 
@@ -125,10 +125,10 @@ Let's modify the example to support user interaction:
   {:target (. js/document (getElementById "app"))})
 ```
 
-This example covers three aspects absent from the starting point:
+This example covers three aspects we didn't encounter so far:
 * Instead of `reify` we use the `om/component` macro that helps when
   writing components that only need to implement `IRender`.
-* We attach a callback to the button that uses `om/transact`.
+* We attach a callback to the button that uses `om/transact!`.
 * To reuse an existing component `om/build` is used. We pass a cursor
   `(:counter state)` to click-counter that narrows the global app
   state to what click-counter should be able to act upon.
@@ -136,7 +136,7 @@ This example covers three aspects absent from the starting point:
 
 ## Improvments
 
-We also see three weaknesses:
+In the prior example we can also spot a few weaknesses:
 * The button press is handled using a callback. While this looks harmless
   in this example the general approach is too low-level.
   * It mixes up presentation logic with rendering code.
@@ -265,8 +265,8 @@ We change only the click-counter component:
 Apparently we made the component much more complex, so what sounded compelling in
 theory turns out to look awkward when actually implemented.
 
-Perhaps the idea to give *every* component it's own channel is wrong,
-what happens if we create a reusable component that delegates rendering to a
+Perhaps the idea to give *every* component its own channel is wrong.
+What happens if we create a reusable component that delegates rendering to a
 function and takes a map for dispatching events to actions?
 
 This component could look like this:
@@ -293,14 +293,34 @@ This component could look like this:
    (render-fn state ch)))
 ```
 
-And finally here's the remaining code:
+The original click-counter component will need some refactoring. In
+order to keep Schemas validation in our code base we have to directly
+require it:
 
 ```clojure
+(ns helloom.core
+  (:require-macros [cljs.core.async.macros :refer [go go-loop]]
+                   [schema.macros :as sm])
+  (:require [om.core :as om :include-macros true]
+            [om-tools.dom :as dom :include-macros true]
+            [om-tools.core :refer-macros [defcomponent]]
+            [cljs.core.async :refer [put! chan <!]]
+            [schema.core :as s :include-macros true]))
+```
+
+
+And finally here's the refactored code of the rest of our example:
+
+```clojure
+(def Counter {:clicks js/Number})
+
+
 (def app-state (atom {:text "Hello Om World!"
                       :counter {:clicks 0}}))
 
-(defn render-click-counter
-  [state ch]
+
+(sm/defn ^:always-validate render-click-counter
+  [state :- Counter ch]
   (dom/div
     (dom/input {:type "button"
                 :value "Hit me!"
@@ -308,8 +328,8 @@ And finally here's the remaining code:
     "Hits " (:clicks state)))
 
 
-(defn inc-clicks
-  [state evt]
+(sm/defn ^:always-validate inc-clicks
+  [state :- Counter evt]
   (update-in state [:clicks] inc))
 
 
@@ -329,19 +349,18 @@ And finally here's the remaining code:
                      {:opts {:actions {:click inc-clicks}
                              :render-fn render-click-counter}}))))
 
-
 (om/root
   page
   app-state
   {:target (. js/document (getElementById "app"))})
 ```
 
-This is better. This approach cleanly separates actions from
-rendering, and it can be extended to also support handling results of
-async server calls.
+Better. This approach cleanly separates actions from rendering, and it
+can be extended to also support handling results of async server
+calls.
 
 What we didn't cover so far is inter-component communication...  I'm
-currently exploring these and other ideas in
+currently exploring these and other problems in
 [zackzack](https://github.com/friemen/zackzack).
 
 

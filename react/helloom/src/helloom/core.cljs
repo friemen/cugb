@@ -1,9 +1,11 @@
 (ns helloom.core
-  (:require-macros [cljs.core.async.macros :refer [go go-loop]])
+  (:require-macros [cljs.core.async.macros :refer [go go-loop]]
+                   [schema.macros :as sm])
   (:require [om.core :as om :include-macros true]
             [om-tools.dom :as dom :include-macros true]
             [om-tools.core :refer-macros [defcomponent]]
-            [cljs.core.async :refer [put! chan <!]]))
+            [cljs.core.async :refer [put! chan <!]]
+            [schema.core :as s :include-macros true]))
 
 (enable-console-print!)
 
@@ -33,13 +35,15 @@
 ;; ---------------------------------------------------------------------------
 ;; App specific code
 
+(def Counter {:clicks js/Number})
+
 
 (def app-state (atom {:text "Hello Om World!"
                       :counter {:clicks 0}}))
 
 
-(defn render-click-counter
-  [state ch]
+(sm/defn ^:always-validate render-click-counter
+  [state :- Counter ch]
   (dom/div
     (dom/input {:type "button"
                 :value "Hit me!"
@@ -47,8 +51,8 @@
     "Hits " (:clicks state)))
 
 
-(defn inc-clicks
-  [state evt]
+(sm/defn ^:always-validate inc-clicks
+  [state :- Counter evt]
   (update-in state [:clicks] inc))
 
 
