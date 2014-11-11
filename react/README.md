@@ -276,7 +276,6 @@ This component could look like this:
 ```clojure
 ;; ---------------------------------------------------------------------------
 ;; Generic component with a dispatching controller
-;; Takes an actions map and a render function
 
 (defcomponent view-with-controller
   [state owner {:keys [actions render-fn] :as options}]
@@ -314,6 +313,9 @@ require it:
 And finally here's the refactored code of the rest of our example:
 
 ```clojure
+;; ---------------------------------------------------------------------------
+;; App specific code
+
 (def Counter {:clicks js/Number})
 
 
@@ -623,8 +625,10 @@ What remains is again easy to grasp:
 
 ## References
 
+* [React demystified](http://blog.reverberate.org/2014/02/react-demystified.html)
 * [Why React is awesome](http://jlongster.com/Removing-User-Interface-Complexity,-or-Why-React-is-Awesome)
 * [Local state is harmful](http://scattered-thoughts.net/blog/2014/02/17/local-state-is-harmful/)
+* [React tutorial rewritten in Om](https://github.com/jalehman/react-tutorial-om)
 * [Quiescent](https://github.com/levand/quiescent) - Another ClojureScript lib for React
 * [Reacl](https://github.com/active-group/reacl) - Another ClojureScript lib for React
 * [Zackzack](https://github.com/friemen/zackzack) - Exploring Om for creating Enterprise style UIs
