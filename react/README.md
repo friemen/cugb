@@ -289,7 +289,7 @@ This component could look like this:
                         action-fn (get actions (:action evt))]
                     (if action-fn
                       (om/transact! state #(action-fn % evt))
-                      (prn (str "WARNING" (:action evt) " is unknown"))))
+                      (prn (str "WARNING: " (:action evt) " is unknown"))))
                   (recur))))
   (render-state [_ {:keys [ch]}]
    (render-fn state ch)))
@@ -609,9 +609,22 @@ What remains is again easy to grasp:
 ```
 
 
+## Wrap up
+
+* I see as most substantial difference between Reagent and Om the way
+  state is handled.
+* Using channels makes the whole setup more complex and may pay off
+  only when inter-component or async remote communication happens
+  often. The rules to find a suitable "topology" of channels to enable
+  inter-component communication are not clear to me.
+* It's possible to centralize technical plumbing code to get a clearer
+  separation between rendering, presentation logic and access to technical APIs.
+
 
 ## References
 
+* [Why React is awesome](http://jlongster.com/Removing-User-Interface-Complexity,-or-Why-React-is-Awesome)
 * [Local state is harmful](http://scattered-thoughts.net/blog/2014/02/17/local-state-is-harmful/)
 * [Quiescent](https://github.com/levand/quiescent) - Another ClojureScript lib for React
 * [Reacl](https://github.com/active-group/reacl) - Another ClojureScript lib for React
+* [Zackzack](https://github.com/friemen/zackzack) - Exploring Om for creating Enterprise style UIs
