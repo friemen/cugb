@@ -16,11 +16,12 @@ Clojure User Group Bonn.
 * [Namespaces](namespaces)
 * [Relational Database Access](rdbms)
 * [Datomic](datomic)
-* [ClojureScript](cljsapp)
+* [ClojureScript intro](cljsapp)
 * [Practicums](practicums)
 * [Concurrency intro](concurrency)
 * [Protocols and Records intro](protocolsrecords)
 * [Typed Clojure intro](typed)
+* [React with Om and Reagent](react)
 
 ## Contributors
 
