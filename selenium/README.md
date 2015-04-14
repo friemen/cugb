@@ -34,18 +34,19 @@ Use the following resources to find out about the Webdriver API.
 
 In the REPL try with an open browser:
 
-```
+```clojure
 (.get d "http://www.falkoriemenschneider.de/zackzack/index.html")
 ; nil
 
 (.findElement d (By/id "playground"))
-; #<RemoteWebElement [[FirefoxDriver: firefox on LINUX (a07da5fd-8391-4b63-919a-87793fd33cb8)] -> id: playground]>
+; #<RemoteWebElement [[FirefoxDriver: firefox on LINUX (a07da5fd-8391-4b63-919a-87793fd33cb8)]
+;                     -> id: playground]>
 
 (.click (.findElement d (By/id "playground")))
 ; nil
 ```
 
-That's it! You're ready to remote control your Firefox from a Clojure REPL.
+That's it! You're ready to control your browser remotely from a Clojure REPL.
 
 
 ## Creating utility functions and using them in your tests
