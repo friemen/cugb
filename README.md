@@ -22,6 +22,7 @@ Clojure User Group Bonn.
 * [Protocols and Records intro](protocolsrecords)
 * [Typed Clojure intro](typed)
 * [React with Om and Reagent](react)
+* [Selenium Webdriver](selenium)
 
 ## Contributors
 
