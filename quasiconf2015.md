@@ -13,7 +13,7 @@ A collaboration of the Clojure User Groups
 Talks planned so far (subject to change):
 
 * Game development with Clojure, Ingo Küper, doctronic
-* Frameworkless web development with Clojure, Andreas Klein, demandflow
+* Frameworkless web development with Clojure, Andreas Klein, DemandFlow
 * Introduction to ClojureScript, Falko Riemenschneider, doctronic
 * ...
 

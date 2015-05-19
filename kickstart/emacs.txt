@@ -1,0 +1,52 @@
+
+Installation
+============
+
+Unpack Emacs archive 
+
+or install a version from PPA
+https://launchpad.net/%7Ecassou/+archive/emacs
+with command
+sudo apt-get install emacs24 emacs24-el emacs24-common-non-dfsg
+
+To customize Emacs to support Clojure development use
+you can use software/emacsd.zip and unpack it to your home dir.
+
+Start Emacs.
+
+
+Open helloweb
+=============
+(==> helloweb project is created using lein new helloweb)
+
+Open helloweb/src/helloweb/core.clj
+
+Hit C-c M-j to start a REPL.
+
+
+Editor: Most important keyboard shortcuts
+==========================================
+C-Tab       Switch window
+C-c M-j     Start REPL
+C-c C-k     Compile and load complete buffer
+C-c C-c     Compile and load current toplevel sexp
+C-c M-n     Switch REPL namespace to buffer
+
+C-Right     Forward slurp (closing bracket to the right)
+C-Left      Forward barf (closing bracket to the left)
+ESC C-Right Backward slurp (opening bracket to the left)
+ESC C-Left  Backward barf (opening bracket to the right)
+M-S         Split S-exprs
+M-J         Join S-exprs
+M-r         Raise S-expr
+C-k         Kill S-expr or rest until S-expr ends
+C-i         Reindent selected sexp
+
+
+REPL: Most important keyboard shortcuts
+=======================================
+C-Up        Back through REPL history
+C-Down      Forward through REPL history
+Enter       Eval expression
+C-j         Insert line break
+

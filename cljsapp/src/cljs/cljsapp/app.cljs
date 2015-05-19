@@ -9,11 +9,14 @@
 
 ;; TODO retrieve message from textfield and add to atom
 (defn add-message! []
-  )
+  (swap! messages conj (dommy/value (sel1 :#txt-message))))
+
 
 ;; TODO render vector of messages
 (deftemplate render-messages [messages]
-  )
+  [:ul {:id "messages"}
+          (map #(vector :li %) messages)])
+
 
 (defn replace-messages-list! [messages-el]
   (dommy/replace! (sel1 :#messages) messages-el))

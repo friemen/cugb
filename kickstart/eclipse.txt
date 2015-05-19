@@ -1,0 +1,60 @@
+
+Installation
+============
+
+Install Eclipse (OS specific)
+Start eclipse
+
+Go to Help / Install new software, add update site
+http://updatesite.ccw-ide.org/stable
+
+Then install CCW from the update site. Restart.
+
+
+Open helloweb
+=============
+(==> helloweb project is created using lein new helloweb)
+
+CCW doesn't offer a Clojure project import.
+To use the project created by Leiningen we cd 
+into helloweb and produce a pom.xml:
+
+lein pom
+
+In Eclipse right-click in Package Explorer,
+select Import... / Import from existing Maven project
+
+After import, right-click helloweb project and select
+Configure / Convert to Leiningen project. This adds
+Clojure support.
+
+Again right-click project and select 
+Run As / Clojure Application. This starts a REPL.
+Draw the REPL view to the right.
+
+
+Editor: Most important keyboard shortcuts
+==========================================
+Ctrl/Cmd-F7               Change active view
+Alt+Shift+X C/Alt+Cmd+C   Start REPL
+Ctrl+Alt+S/Alt+Cmd+S      Load whole editor contents
+Ctrl+Enter/Cmd+Enter      Eval (toplevel or selected) sexp
+Ctrl+Alt+N/Alt+Cmd+N      Switch REPL to files namespace
+
+Ctrl/Cmd+0 S              Forward slurp
+Ctrl/Cmd-0 B              Forward barf
+Ctrl/Cmd-9 S              Backward slurp
+Ctrl/Cmd-9 B              Backward barf
+Alt-R                     Raise selected expr
+Alt-S                     Split expr
+Alt-J                     Join exprs
+Ctrl/Cmd-I                Reindent selected exprs
+
+
+REPL: Most important keyboard shortcuts
+=======================================
+Ctrl/Cmd+Enter            Eval sexp
+Ctrl-Up/Ctrl-P            Back through REPL history
+Ctrl-Down/Ctrl-N          Forward through REPL history
+
+

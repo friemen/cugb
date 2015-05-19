@@ -23,6 +23,7 @@ Clojure User Group Bonn.
 * [Typed Clojure intro](typed)
 * [React with Om and Reagent](react)
 * [Selenium Webdriver](selenium)
+* [core.logic Primer](core-logic-primer)
 
 ## Contributors
 

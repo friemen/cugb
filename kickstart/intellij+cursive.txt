@@ -1,0 +1,53 @@
+
+Installation
+============
+as taken from https://cursiveclojure.com/userguide/
+
+Install Intellij IDEA (OS specific)
+Start bin/idea
+
+In Settings, Plugins uninstall La Clojure (if present)
+
+In Settings, Plugins, Browse Repositories, Manage Repositories
+add a repository http://cursiveclojure.com/plugins-13.1.xml
+
+In Settings, Plugins, Browse Repositories select the new repo
+and install cursiveclojure using the install button. Restart.
+
+
+Open helloweb
+=============
+(==> helloweb project is created using lein new helloweb)
+
+In start screen select Open project, then select helloweb
+
+Right-click project, select "Create REPL for helloweb".
+Confirm with OK.
+
+Run "REPL for helloweb".
+
+
+   
+Editor: Most important keyboard shortcuts
+==========================================
+Alt+Shift+R               Switch focus to the REPL
+Ctrl/Cmd+Shift Enter      Compile and load the whole namespace
+Ctrl/Cmd+Enter            Compile and load only the current toplevel s-expr
+
+Ctrl/Cmd+Right            Slurp forward (move closing paren right)
+Ctrl/Cmd+Left             Barf forward (move closing paren left)
+Ctrl/Cmd+Shift+Right      Slurp backward (move opening paren right)
+Ctrl/Cmd+Shift+Left       Barf backward (move opening paren left)
+Ctrl/Cmd+K                Kill
+Alt+J                     Join two exprs
+Alt+S                     Split expr
+Alt+R                     Raise expr
+Ctrl/Cmd+W                Structural select
+
+
+REPL: Most important keyboard shortcuts
+=======================================
+ESC                       Go back to the editor
+Ctrl/Cmd+Enter            Compile and execute expression
+Up                        Back through REPL history
+Down                      Forward through REPL history

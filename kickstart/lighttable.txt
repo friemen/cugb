@@ -1,0 +1,29 @@
+
+Installation
+============
+
+Unpack LightTable archive.
+Start LightTable executable in installation directory.
+
+Open helloweb
+=============
+(==> helloweb project is created using lein new helloweb)
+
+Select View / Workspace, right clock and add project folder to workspace.
+
+Open helloweb/src/helloweb/core.clj
+
+Hit Ctrl/Cmd+Shift+Enter to create an InstaREPL.
+
+
+Editor: Most important keyboard shortcuts
+==========================================
+
+Ctrl/Cmd+Space            Access command list
+Ctrl/Cmd+Shift+Enter      Compile and load the whole namespace
+Ctrl/Cmd+Enter            Compile and load only the current toplevel s-expr
+
+Ctrl/Cmd+Right            Slurp forward (move closing paren right)
+Ctrl/Cmd+Left             Barf forward (move closing paren left)
+Ctrl/Cmd+Shift+Right      Slurp backward (move opening paren right)
+Ctrl/Cmd+Shift+Left       Barf backward (move opening paren left)
