@@ -24,6 +24,8 @@ Clojure User Group Bonn.
 * [React with Om and Reagent](react)
 * [Selenium Webdriver](selenium)
 * [core.logic Primer](core-logic-primer)
+* [Lazy sequence for PDF text extraction](pdftext)
+
 
 ## Contributors
 
