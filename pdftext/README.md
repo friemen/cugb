@@ -1,11 +1,11 @@
 # pdftext
 
-Demo of PDF text extraction with Clojure (based on [PDFBox](https://pdfbox.apache.org/).
+Demo of PDF text extraction with Clojure (based on [PDFBox](https://pdfbox.apache.org/)).
 
 
-Problem: PDFBox provides a
+**Problem**: PDFBox provides a
 [PDFTextStripper](https://pdfbox.apache.org/apidocs/org/apache/pdfbox/util/PDFTextStripper.html)
-class that we need to use a base class to override the
+class that requires us to use a base class to override the
 `processTextPosition()` method. This is essentially a *push* or
 *callback-based* API, because PDFTextStripper provides one character
 after the other to our overridden method. Thus we're no more in control!
