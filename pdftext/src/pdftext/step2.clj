@@ -54,7 +54,7 @@
   "A lazy sequence reading from channel ch."
   [ch]
   (lazy-seq (if-let [tp (<!! ch)]
-              (cons tp (lazy-ch ch)))))
+              (cons tp (ch->lazy-seq ch)))))
 
 
 (defn text-positions

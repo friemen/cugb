@@ -91,7 +91,7 @@
   "A lazy sequence reading from channel ch."
   [ch]
   (lazy-seq (if-let [tp (<!! ch)]
-              (cons tp (lazy-ch ch)))))
+              (cons tp (ch->lazy-seq ch)))))
 
 
 (defn- enqueue-text-positions!
@@ -120,7 +120,7 @@
 
 ;;; API changes a tiny bit
 
-#_ (with-open [tps (-> "large.pdf" io/resource io/file PDDocument/load text-positions)]
+#_(with-open [tps (-> "large.pdf" io/resource io/file PDDocument/load text-positions)]
                  (time (->> tps
                             (map :text)
                             (take 5000)
