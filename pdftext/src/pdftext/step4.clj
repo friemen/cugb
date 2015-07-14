@@ -113,7 +113,7 @@
 
 ;;; API changes a tiny bit
 
-#_ (with-open [tps (-> "brandschutzatlas.pdf" io/resource io/file PDDocument/load text-positions)]
+#_ (with-open [tps (-> "large.pdf" io/resource io/file PDDocument/load text-positions)]
                  (time (->> tps
                             (map :text)
                             (take 5000)

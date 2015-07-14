@@ -44,4 +44,5 @@ We solve this problem 4 times:
    be used with
    [`with-open`](http://conj.io/store/v1/org.clojure/clojure/latest/clj/clojure.core/with-open/). This
    changes the API a bit but is much simpler (see
-   [code](https://github.com/friemen/cugb/blob/master/pdftext/src/pdftext/step4.clj)).
+   [code](https://github.com/friemen/cugb/blob/master/pdftext/src/pdftext/step4.clj),
+   contributed by Minh Hemmer).
