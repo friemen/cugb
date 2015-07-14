@@ -75,6 +75,13 @@
   (cons [this o]
     (CloseableSeq. (cons o coll) close-fn))
 
+  clojure.lang.Indexed
+  (nth [this index]
+    (nth coll index))
+  
+  (nth [this index not-found]
+    (nth coll index not-found))
+
   java.io.Closeable
   (close [_]
     (close-fn)))
