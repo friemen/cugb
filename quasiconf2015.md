@@ -17,11 +17,15 @@ A collaboration of the Clojure User Groups
 
 Talks planned so far (subject to change):
 
-* Game development with Clojure, Ingo Küper, doctronic
-* Frameworkless web development with Clojure, Andreas Klein, DemandFlow
-* Unknown Title, Moritz Heidkamp, bevuta IT
-* Unknown Title, Vasily Schneidermann,
-* Introduction to ClojureScript, Falko Riemenschneider, doctronic
+
+Timeslot | Title | Speaker
+--- | --- | ---
+10:00-11:00 | Game development with Clojure | Ingo Küper, doctronic
+11:15-12:15 | Unknown Title | Moritz Heidkamp, bevuta IT
+14:00-15:00 | Frameworkless web development with Clojure | Andreas Klein, DemandFlow
+15:15-16:15 | Unknown Title | Vasily Schneidermann
+16:30-18:45 | Introduction to ClojureScript | Falko Riemenschneider, doctronic
+
 
 
 # Supported by
