@@ -2,7 +2,7 @@
 
 **The pan-Lisp day at FrOSCon 10**
 
-**St. Augustin (Germany), Sunday, August 23rd, 2015**
+**Sankt Augustin (Germany), Sunday, August 23rd, 2015**
 
 __Room C219__
 
