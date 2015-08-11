@@ -25,7 +25,7 @@ Clojure User Group Bonn.
 * [Selenium Webdriver](selenium)
 * [core.logic Primer](core-logic-primer)
 * [Lazy sequence for PDF text extraction](pdftext)
-
+* [Component](component)
 
 ## Contributors
 

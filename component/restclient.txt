@@ -1,0 +1,6 @@
+#
+GET http://localhost:1337/students
+#
+GET http://localhost:1337/students/1
+#
+GET http://localhost:1337/students/2
