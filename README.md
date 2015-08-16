@@ -26,6 +26,7 @@ Clojure User Group Bonn.
 * [core.logic Primer](core-logic-primer)
 * [Lazy sequence for PDF text extraction](pdftext)
 * [Component](component)
+* [ClojureScript Introduction](cljsintro)
 
 ## Contributors
 
@@ -33,4 +34,4 @@ Clojure User Group Bonn.
 * Gerrit Hentschel
 * Adrian Bendel
 * Ingo Küper
-
+* Minh Hemmer
