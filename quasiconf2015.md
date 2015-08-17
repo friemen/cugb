@@ -17,17 +17,14 @@ A collaboration of the Clojure User Groups
 
 # Programme
 
-Talks planned:
-
 
 Timeslot | Title | Speaker
 --- | --- | ---
-10:00-11:00 | Game development with Clojure | Ingo Küper, doctronic
-11:15-12:15 | Unknown Title | Moritz Heidkamp, bevuta IT
-14:00-15:00 | Frameworkless web development with Clojure | Andreas Klein, DemandFlow
-15:15-16:15 | Emacs as my Canvas | Vasily Schneidermann
-16:30-18:00 | Introduction to ClojureScript | Falko Riemenschneider, doctronic
-
+10:00-11:30 | [Game development with Clojure](http://programm.froscon.de/2015/events/1634.html) | Ingo Küper, doctronic
+11:45-12:15 | [Our favorite Clojure libraries](http://programm.froscon.de/2015/events/1683.html) | Falko Riemenschneider, doctronic
+14:00-15:00 | [Frameworkless web development with Clojure](http://programm.froscon.de/2015/events/1635.html) | Andreas Klein, DemandFlow
+15:15-16:15 | [Emacs as my Canvas](http://programm.froscon.de/2015/events/1667.html) | Vasilij Schneidermann
+16:30-18:00 | [Introduction to ClojureScript](http://programm.froscon.de/2015/events/1636.html) | Falko Riemenschneider, doctronic
 
 
 # Supported by
