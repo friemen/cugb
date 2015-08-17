@@ -22,17 +22,6 @@
  '[pandeiro.boot-http    :refer [serve]]
  '[infracanophile.boot-cljs-test :refer [cljs-test-runner run-cljs-test]])
 
-(deftask build []
-  (comp (speak)
-        (cljs)))
-
-(deftask run []
-  (comp (serve)
-        (watch)
-        (cljs-repl)
-        (reload)
-        (build)))
-
 (deftask production []
   (task-options! cljs {:optimizations :advanced})
   identity)
@@ -52,6 +41,19 @@
         (cljs-test-runner)
         (cljs)
         (run-cljs-test :cmd "phantomjs")))
+
+
+(deftask build []
+  (comp (speak)
+        (cljs)))
+
+
+(deftask run []
+  (comp (serve)
+        (watch)
+        (cljs-repl)
+        (reload)
+        (build)))
 
 
 (deftask dev

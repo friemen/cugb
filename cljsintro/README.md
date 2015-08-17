@@ -20,17 +20,28 @@ If you just want to stick your toe in as illustrated in this [guide](https://git
 * [Google Closure API](https://google.github.io/closure-library/api/)
 * [Clojure vs. ClojureScript](https://github.com/clojure/clojurescript/wiki/Differences-from-Clojure)
 * [Compiler options](https://github.com/clojure/clojurescript/wiki/Compiler-Options)
+* [Online Tutorial](https://www.niwi.nz/cljs-workshop)
+* [Popular JS libraries, packed for Cljs](http://cljsjs.github.io/)
 
 ### Leiningen related
 * [lein-cljsbuild Plugin](https://github.com/emezeske/lein-cljsbuild)
 * [Chestnut Project Template](https://github.com/plexus/chestnut)
 
 ### Boot related
+* [boot-cljs](https://github.com/adzerk-oss/boot-cljs)
+* [boot-cljs-test](https://github.com/infracanophile/boot-cljs-test)
 * [Tenzing Project Template](https://github.com/martinklepsch/tenzing)
 * [Project example](https://github.com/adzerk-oss/boot-cljs-example)
 
 ### Some important libraries
 * [Om](https://github.com/omcljs/om)
+* [core.async](https://github.com/clojure/core.async)
+* [sablono](https://github.com/r0man/sablono)
+* [cljs-http](https://github.com/r0man/cljs-http)
+* [prismatic/schema](https://github.com/Prismatic/schema)
+* [transit-cljs](https://github.com/cognitect/transit-cljs)
+* [cljs-time](https://github.com/andrewmcveigh/cljs-time)
 
 ### Play around
 * [Cljs REPL as-a-Service](http://himera.herokuapp.com/index.html)
+* [Quil](http://quil.info/)
