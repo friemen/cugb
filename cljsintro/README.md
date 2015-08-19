@@ -8,7 +8,11 @@
 * For compiling + dependency resolution: [Leiningen](http://leiningen.org/) or [Boot](http://boot-clj.com/)
 * IDE with integrated REPL: [Emacs/CIDER](https://github.com/clojure-emacs/cider), [IntelliJ/Cursive](https://cursiveclojure.com/), [Eclipse/Counterclockwise](http://doc.ccw-ide.org/documentation.html)
 
-If you just want to stick your toe in as illustrated in this [guide](https://github.com/clojure/clojurescript/wiki/Quick-Start) a JDK and the [cljs.jar](https://github.com/clojure/clojurescript/releases) suffices.
+If you just want to stick your toe in as illustrated in this
+[guide](https://github.com/clojure/clojurescript/wiki/Quick-Start), a
+JDK and the
+[cljs.jar](https://github.com/clojure/clojurescript/releases)
+suffices.
 
 
 ## Example projects
@@ -17,7 +21,7 @@ If you just want to stick your toe in as illustrated in this [guide](https://git
 * [Boot](https://github.com/friemen/cugb/tree/master/cljsintro/2-boot)
 * [Boot with Om + core.async](https://github.com/friemen/cugb/tree/master/cljsintro/3-boot-om-core-async)
 * [Leiningen with Om + core.async](https://github.com/friemen/zackzack)
-
+* [Leiningen with Quil](http://www.falkoriemenschneider.de/snowyforest/)
 
 ## Resources
 
@@ -36,6 +40,7 @@ If you just want to stick your toe in as illustrated in this [guide](https://git
 ### Leiningen related
 * [lein-cljsbuild Plugin](https://github.com/emezeske/lein-cljsbuild)
 * [Chestnut Project Template](https://github.com/plexus/chestnut)
+* [Luminus](http://www.luminusweb.net/docs/clojurescript.md)
 
 ### Boot related
 * [boot-cljs](https://github.com/adzerk-oss/boot-cljs)
@@ -44,13 +49,21 @@ If you just want to stick your toe in as illustrated in this [guide](https://git
 * [Project example](https://github.com/adzerk-oss/boot-cljs-example)
 
 ### Some important libraries
-* [Om](https://github.com/omcljs/om)
-* [core.async](https://github.com/clojure/core.async)
-* [sablono](https://github.com/r0man/sablono)
-* [cljs-http](https://github.com/r0man/cljs-http)
-* [prismatic/schema](https://github.com/Prismatic/schema)
-* [transit-cljs](https://github.com/cognitect/transit-cljs)
-* [cljs-time](https://github.com/andrewmcveigh/cljs-time)
+* [bidi](https://github.com/juxt/bidi) - Request Routing (browser and backend)
+* [cljs-http](https://github.com/r0man/cljs-http) - HTTP client
+* [cljs-time](https://github.com/andrewmcveigh/cljs-time) - Date/Time related functions in ClojureScript
+* [core.async](https://github.com/clojure/core.async) - CSP as a library for Clojure and ClojureScript
+* [datascript](https://github.com/tonsky/datascript) - Datalog in the browser
+* [enfocus](https://github.com/ckirkendall/enfocus) - Client-side HTML templating
+* [jayq](http://github.com/ibdknox/jayq) - JQuery wrapper
+* [om](https://github.com/omcljs/om) - React wrapper with global state
+* [prismatic/schema](https://github.com/Prismatic/schema) - Data type specification
+* [prismatic/om-tools](https://github.com/Prismatic/om-tools) - Schema and Om
+* [quil](http://quil.info/) - [Processing](https://processing.org/) wrapper for Clojure and ClojureScript
+* [reagent](https://reagent-project.github.io/) - React wrapper
+* [sablono](https://github.com/r0man/sablono) - Create React DOM objects from Hiccup-style data
+* [secretary](https://github.com/gf3/secretary) - Request Routing (browser)
+* [transit-cljs](https://github.com/cognitect/transit-cljs) - Remote communication serialization
 
 ### Play around
 * [Cljs REPL as-a-Service](http://himera.herokuapp.com/index.html)
