@@ -1,0 +1,2 @@
+{:require  [helloworld.app]
+ :init-fns [helloworld.app/init]}

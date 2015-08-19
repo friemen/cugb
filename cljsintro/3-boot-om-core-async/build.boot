@@ -1,33 +1,65 @@
 (set-env!
-  :source-paths   #{"src"}
-  :resource-paths #{"html"}
-  :dependencies '[
-    [org.clojure/clojure       "1.7.0"]
-    [org.clojure/clojurescript "1.7.107"]
-    [org.clojure/tools.nrepl   "0.2.10"]  
-    [adzerk/boot-cljs          "0.0-3308-0"      :scope "test"]
-    [adzerk/boot-cljs-repl     "0.1.10-SNAPSHOT" :scope "test"]
-    [adzerk/boot-reload        "0.3.1"           :scope "test"]
-    [pandeiro/boot-http        "0.6.3"           :scope "test"]
-    
-    [org.omcljs/om "0.9.0"]
-    [sablono "0.3.5"]])
+ :source-paths    #{"src/cljs"}
+ :resource-paths  #{"resources"}
+ :asset-paths     #{"target"}
+ :dependencies '[[org.clojure/clojure "1.7.0"]
+                 [org.clojure/clojurescript "1.7.107"]
+                 [org.clojure/tools.nrepl "0.2.10"]
+                 
+                 [org.omcljs/om "0.9.0"]
+                 [sablono "0.3.5"]
+                 [org.clojure/core.async "0.1.346.0-17112a-alpha"]
+                 
+                 ;; boot related
+                 [adzerk/boot-cljs "0.0-3308-0" :scope "test"]
+                 [adzerk/boot-cljs-repl "0.1.10-SNAPSHOT" :scope "test"]
+                 [adzerk/boot-reload "0.3.1" :scope "test"]
+                 [pandeiro/boot-http "0.6.3-SNAPSHOT" :scope "test"]
+                 [infracanophile/boot-cljs-test "0.3.2" :scope "test"]])
 
 (require
-  '[adzerk.boot-cljs      :refer [cljs]]
-  '[adzerk.boot-cljs-repl :refer [cljs-repl start-repl]]
-  '[adzerk.boot-reload    :refer [reload]]
-  '[pandeiro.boot-http    :refer [serve]])
+ '[adzerk.boot-cljs      :refer [cljs]]
+ '[adzerk.boot-cljs-repl :refer [cljs-repl start-repl]]
+ '[adzerk.boot-reload    :refer [reload]]
+ '[pandeiro.boot-http    :refer [serve]]
+ '[infracanophile.boot-cljs-test :refer [cljs-test-runner run-cljs-test]])
 
-(deftask dev []
-  (set-env! :source-paths #{"src" "test"})
-  (comp (serve :dir "target/")
-        (watch)
-        (speak)
-        (reload :on-jsload 'app.core/refresh)
-        (cljs-repl)
-        (cljs :source-map true :optimizations :none)))
+(deftask production []
+  (task-options! cljs {:optimizations :advanced})
+  identity)
+
+
+(deftask development []
+  (task-options! cljs {:optimizations :none
+                       :unified-mode true
+                       :source-map true}
+                 reload {:on-jsload 'helloworld.app/init})
+  identity)
+
+
+(deftask cljs-test []
+  (set-env! :source-paths #(conj % "test/cljs"))
+  (comp (development)
+        (cljs-test-runner)
+        (cljs)
+        (run-cljs-test :cmd "phantomjs")))
+
 
 (deftask build []
-  (set-env! :source-paths #{"src"})
-  (comp (cljs :optimizations :advanced)))
+  (comp (speak)
+        (cljs)))
+
+
+(deftask run []
+  (comp (serve)
+        (watch)
+        (cljs-repl)
+        (reload)
+        (build)))
+
+
+(deftask dev
+  "Simple alias to run application in development mode"
+  []
+  (comp (development)
+        (run)))

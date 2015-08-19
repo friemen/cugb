@@ -36,9 +36,6 @@
 
 
 
-(def app-state (atom {:todos [{:id 1 :desc "Foo"}
-                              {:id 2 :desc "Bar"}]}))
-
 ;; functions on state
 
 (defn new-todo
@@ -100,6 +97,9 @@
         (fn [evt]
           (f (.. evt -target -value)))))
 
+
+(def app-state (atom {:todos [{:id 1 :desc "Foo"}
+                              {:id 2 :desc "Bar"}]}))
 
 (defn attach-listeners!
   [state]
