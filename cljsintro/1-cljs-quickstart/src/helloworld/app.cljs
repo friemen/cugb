@@ -2,7 +2,8 @@
 
 (enable-console-print!)
 
-(println "Hello ClojureScript World")
 
 (set! (.. js/document (getElementById "app") -innerHTML)
-      "<h1>Hello World</h1>")
+      "<h1>Hello ClojureScript World</h1>")
+
+(println "Logging to a console works as well")
