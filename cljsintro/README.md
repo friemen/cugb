@@ -1,5 +1,7 @@
 # Introduction to ClojureScript
 
+![ClojureScript](https://github.com/friemen/cugb/blob/master/cljsintro/cljs-logo.png)
+
 ## Prerequisites
 * [JavaSE 7, better 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html)
 * For headless unit test execution: [PhantomJS](http://phantomjs.org/)
@@ -7,6 +9,14 @@
 * IDE with integrated REPL: [Emacs/CIDER](https://github.com/clojure-emacs/cider), [IntelliJ/Cursive](https://cursiveclojure.com/), [Eclipse/Counterclockwise](http://doc.ccw-ide.org/documentation.html)
 
 If you just want to stick your toe in as illustrated in this [guide](https://github.com/clojure/clojurescript/wiki/Quick-Start) a JDK and the [cljs.jar](https://github.com/clojure/clojurescript/releases) suffices.
+
+
+## Example projects
+
+* [Quick-Start](https://github.com/friemen/cugb/tree/master/cljsintro/1-cljs-quickstart)
+* [Boot](https://github.com/friemen/cugb/tree/master/cljsintro/2-boot)
+* [Boot with Om + core.async](https://github.com/friemen/cugb/tree/master/cljsintro/3-boot-om-core-async)
+* [Leiningen with Om + core.async](https://github.com/friemen/zackzack)
 
 
 ## Resources

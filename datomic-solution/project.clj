@@ -4,16 +4,16 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :main webapp
-  :dependencies [[org.clojure/clojure "1.5.1"]
+  :dependencies [[org.clojure/clojure "1.6.0"]
                  ; webapp related
-                 [http-kit "2.1.6"]
-                 [ring "1.2.0"]
-                 [compojure "1.1.5"]
+                 [http-kit "2.1.19"]
+                 [ring "1.3.2"]
+                 [compojure "1.3.4"]
                  ; database related
-                 [com.datomic/datomic-free "0.8.4260"]
+                 [com.datomic/datomic-free "0.9.5173"]
                  ; logging support
-                 [org.clojure/tools.logging "0.2.6"]
-                 [log4j "1.2.16"
+                 [org.clojure/tools.logging "0.3.1"]
+                 [log4j "1.2.17"
                   :exclusions [javax.mail/mail
                                javax.jms/jms
                                com.sun.jdmk/jmxtools

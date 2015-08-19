@@ -3,11 +3,9 @@
             [cljs.test :refer-macros [deftest is testing run-tests]]))
 
 
-;; for unit test demonstration add this to helloworld.app
-#_ (defn adder
-  [a b]
-  (+ a b))
-
-
-#_(deftest first-test
-  (is (= 7 (app/adder 3 4))))
+;; Enable test when delete-todo is implemented in app ns
+#_(deftest new-todo-test
+  (let [state {:todos [{:id 1 :desc "Foo"}
+                       {:id 2 :desc "Bar"}]}]
+    (is (= {:todos [{:id 1 :desc "Foo"}]}
+           (app/delete-todo state 2)))))

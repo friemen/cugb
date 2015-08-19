@@ -17,10 +17,17 @@
 
 ;; Now we need to understand the language a bit better!!!
 
+;; - Namespaces
+;; - JS interop forms
+;; - def, fn, defn, defn-
+;; - Data (Strings, Numbers, Vectors, Maps, Sets)
+;; - Identity vs. State
+;; - Sequences, map, filter, take, drop, reduce, into
+;; - let and destructuring
+;; - Threading Macros
 
 
-
-;; Steps
+;; Steps to evolve this example
 ;; - Introduce Hiccup-style data markup
 ;; - Introduce app-state atom and how to define global state
 ;; - Implement rendering of Todos

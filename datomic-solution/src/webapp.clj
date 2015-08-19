@@ -8,15 +8,26 @@
 
 ;; Datomic related
 
+
+(defn attr
+  ([id type desc]
+   (attr id :db.cardinality/one type desc))
+  ([id card type desc]
+   {:db/ident id
+    :db/id (d/tempid :db.part/db) ;;code should use code for datum definition. use #db/id[:db.part/db] in EDN.
+    :db/valueType type
+    :db/cardinality card
+    :db/doc desc
+    :db.install/_attribute :db.part/db}))
+
+(def ONE :db.cardinality/one)
+(def MANY :db.cardinality/many)
+(def STRING :db.type/string)
+
 (def messages-schema1
-  [{:db/ident :message/text
-    ;;code should use code for datum definition. use #db/id[:db.part/db] in EDN.
-    :db/id (d/tempid :db.part/db)
-    :db/valueType :db.type/string
-    :db/fulltext true
-    :db/cardinality :db.cardinality/one
-    :db/doc "A message."
-    :db.install/_attribute :db.part/db}])
+  [(attr :message/text STRING "A message.")
+   (attr :message/author STRING "The author that issued the message.")
+   (attr :message/recipients MANY STRING "Names of who will receive the message.")])
 
 (def db-uri "datomic:free://localhost:4334/webapp")
 
@@ -24,9 +35,14 @@
 
 (defn init-db!
   []
-  (reset! conn (d/connect db-uri))
-  (when (d/create-database db-uri)
-    @(d/transact @conn messages-schema1)))
+  (if (d/create-database db-uri)
+    (do
+      (println "created new db" db-uri)
+      (reset! conn (d/connect db-uri))
+      (println "creating schema")
+      (d/transact @conn messages-schema1))
+    (reset! conn (d/connect db-uri)))
+  @conn)
 
 (def tempid
   (partial d/tempid :db.part/user))
