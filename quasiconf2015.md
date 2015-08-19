@@ -1,6 +1,6 @@
 # '(quasiconf 2015)
 
-**The pan-Lisp day at FrOSCon 10**
+**The pan-Lisp day at [FrOSCon](https://www.froscon.de/) 10**
 
 **Sankt Augustin (Germany), Sunday, August 23rd, 2015**
 
