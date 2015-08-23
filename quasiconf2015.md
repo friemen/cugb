@@ -27,7 +27,7 @@ Timeslot | Title | Speaker
 16:30-18:00 | [Introduction to ClojureScript](http://programm.froscon.de/2015/events/1636.html) | Falko Riemenschneider, doctronic
 
 
-# Supported by
+Supported by
 
 * [bevuta IT GmbH](http://www.bevuta.com)
 * [doctronic GmbH & Co. KG](http://www.doctronic.de/)
