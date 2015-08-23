@@ -14,7 +14,6 @@ A collaboration of the Clojure User Groups
 ![LISP](http://www.lisperati.com/lisplogo_flag2_256.png)
 ![Clojure](https://github.com/friemen/cugb/blob/master/clojure.png)
 ![Emacs](https://github.com/friemen/cugb/blob/master/emacs.png)
-![Chicken Scheme](https://github.com/friemen/cugb/blob/master/scheme.png)
 
 
 # Programme
