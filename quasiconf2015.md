@@ -11,8 +11,8 @@ A collaboration of the Clojure User Groups
 [Bonn](https://groups.google.com/forum/#!forum/clojure-user-group-bonn).
 
 
-![LISP](http://www.lisperati.com/lisplogo_flag2_256.png)
 ![Clojure](https://github.com/friemen/cugb/blob/master/clojure.png)
+![LISP](http://www.lisperati.com/lisplogo_flag2_256.png)
 ![Emacs](https://github.com/friemen/cugb/blob/master/emacs.png)
 
 
