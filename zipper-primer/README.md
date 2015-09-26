@@ -23,7 +23,7 @@ A node _may_ have a value.
 For now, let's assume that there will be exactly one path between two nodes.
 And we call it a tree.
 The-node-where-it-all-starts is called "root".
-But under these circumstances the root is simply a point of view:
+But under these circumstances, the root is simply a point of view:
 ![Hierarchy viewpoint](hierarchy_viewpoint.png)
 ![Hierarchy yet another point of view](hierarchy_another_point_of_view.png)
 
@@ -218,7 +218,7 @@ Or a XML representation:
        </root>")
 ```
 
-***And the only thing you need to change is the creation of the zipper!***
+**And the only thing you need to change is the creation of the zipper!**
 
 Use
 
@@ -232,7 +232,7 @@ for sequences and
     (zip/xml-zip (parse-xml-string data))
 ```
 
-for XML data (given as a string and parsed by a simple function like
+for XML data, given as a string and parsed by a simple function like
 
 ```clojure
     (defn parse-xml-string
@@ -242,8 +242,10 @@ for XML data (given as a string and parsed by a simple function like
 
 Use
 
-(xml/emit (replace-leaf-nodes
-           (zip/xml-zip (parse-xml-string data))))
+```clojure
+    (xml/emit (replace-leaf-nodes
+                (zip/xml-zip (parse-xml-string data))))
+```
 
 at the REPL to get
 
