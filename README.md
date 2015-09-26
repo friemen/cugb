@@ -27,6 +27,7 @@ Clojure User Group Bonn.
 * [Lazy sequence for PDF text extraction](pdftext)
 * [Component](component)
 * [ClojureScript Introduction](cljsintro)
+* [Zipper Primer](zipper-primer)
 
 ## Contributors
 
