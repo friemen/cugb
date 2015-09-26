@@ -27,7 +27,7 @@ And we call it a tree.
 The-node-where-it-all-starts is called "root".
 But under these circumstances, the root is simply a point of view:
 
-![Hierarchy viewpoint](hierarchy_viewpoint.png =)
+![Hierarchy viewpoint](hierarchy_viewpoint.png)
 ![Hierarchy yet another point of view](hierarchy_another_point_of_view.png)
 
 ## Data modelling
