@@ -28,16 +28,16 @@ followed by:
 
 but at these points in time, the program is already written.
 So we are working directly on the code.
-An all this re-sharpening feels like _the normal way to debug_.
+And all this re-sharpening feels like _the normal way to debug_.
 
 ### An alternate route exists
 
 * Analyse the initial situation thoroughly  
-  You will have to do it anyhow.  
+  You will have to do it anyway.
   But do it now. Not while _debugging_.  
   _(Where am I exactly?)_
 * Define the destination to reach thoroughly **and** use a formal way to write it down  
-  You will have to do it anyhow.  
+  You will have to do it anyway.  
   But do it now and be as precise as possible.  
   _(Where do I want to go precisely?)_
 * Use _something_ to process your formal definition of the desired destination.  
