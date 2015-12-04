@@ -67,6 +67,8 @@
           [["/" :id]
            student]]]
 
+        ["app" (fn [request] (text-response 200 "Please request /students"))]
+
         [true
          not-found]]])
 

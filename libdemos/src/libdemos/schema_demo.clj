@@ -4,12 +4,12 @@
 
 
 (def Age (s/both s/Int
-                 (s/pred #(and (<= 0 %) (<= % 140)) 'reasonable-human-age)))
+                 (s/pred #(<= 0 % 140) 'reasonable-human-age)))
 
 (def User {:firstname (s/maybe s/Str)
            :lastname (s/both s/Str
                              (s/pred (comp not string/blank?)))
-           (s/optional-key :age) s/Int})
+           (s/optional-key :age) Age})
 
 
 

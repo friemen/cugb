@@ -14,7 +14,7 @@ Clojure User Group Bonn.
 
 * [Webapp](webapp)
 * [Namespaces](namespaces)
-* [Relational Database Access](rdbms)
+* [Relational Database Access](rdbms-intro)
 * [Datomic](datomic)
 * [ClojureScript intro](cljsapp)
 * [Practicums](practicums)

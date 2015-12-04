@@ -13,13 +13,15 @@
   [:table
    [:tr [:th "First name"] [:th "Last name"]
     (for [{:keys [firstname lastname]} users]
-      [:tr [:td firstname] [:td lastname]])]])
+      (if (= firstname "John")
+        [:tr [:td firstname] [:td lastname]]))]])
 
-
-(page/html4 [:head]
-            [:body
-             [:div {:class "mui-container"}
-              [:h1 "Hello Hiccup"]
-              (render-users users)]])
+(comment
+  (page/html4 [:head]
+              [:body
+               [:div {:class "mui-container"}
+                [:h1 "Hello Hiccup"]
+                (render-users users)]])
+,,,)
 
 ;; see also https://github.com/weavejester/hiccup/wiki/Syntax

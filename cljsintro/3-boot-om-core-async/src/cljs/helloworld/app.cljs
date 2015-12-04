@@ -6,36 +6,6 @@
 
 (enable-console-print!)
 
-#_(defn render [state]
-  (html [:h1 "What has to be done?"]
-        (for [{:keys [id desc]} (:todos state)]
-          [:div {:class "mui-row"}
-           [:div {:class "mui-col-md-1"}
-            id]
-           [:div {:class "mui-col-md-4"}
-            [:input {:id (str "todo-desc-" id)
-                     :type "text"
-                     :class "mui-form-control"
-                     :value desc}]]
-           [:div {:class "mui-col-md-1"}
-            [:button {:id (str "delete-todo-" id)
-                      :class "mui-btn mui-btn-raised"}
-             "Delete"]]])
-        [:button {:id "add-todo"
-                  :class "mui-btn mui-btn-raised"}
-         "Add Item"]))
-
-
-#_(def app-state (atom {:todos [{:id 1 :desc "Foo"}
-                                {:id 2 :desc "Bar"}]}))
-
-
-#_(defn refresh
-    [state]
-    (let [app (.. js/document (getElementById "app"))]
-      (set! (.. app -innerHTML) (render state))))
-
-
 ;; Steps
 ;; - Explain separation of rendering state from event processing
 ;; - Introduce React
