@@ -1,0 +1,279 @@
+* Prerequisites [0/4]
+** TODO map, filter, et al.
+
+| Clojure's Seq abstraction!
+
+map: (a -> b) -> [a] -> [b]
+
+filter: (a -> Bool) -> [a] -> [a]
+
+** TODO reduce
+
+| Successively combine inputs
+| via binary function
+
+reduce: (a -> b -> a) -> a -> [b] -> a
+
+- clojure.lang.Reduced
+  - reduced, ensure-reduced,
+    unreduced, unreduced?
+
+** TODO Function Composition
+
+| Functional programming 101
+
+comp: (y -> z) ->
+      (x -> y) ->
+        ...    ->
+      (a -> b) ->
+      (a -> z)
+
+** TODO Atomic Reference Types
+
+Mutable references (CAS semantics)
+
+clojure.lang.Atom
+| Constructor | transact | set     |
+|-------------+----------+---------|
+| atom        | swap!    | reset!  |
+| volatile    | vswap!   | vreset! |
+
+clojure.lang.Volatile
+| Constructor | transact | set     |
+|-------------+----------+---------|
+| atom        | swap!    | reset!  |
+| volatile    | vswap!   | vreset! |
+
+clojure.lang.IDeref
+| Fn    | Reader macro |
+|-------+--------------|
+| deref | @            |
+
+** TODO Ring Middleware
+
+| HTTP Abstraction
+
+- [[https://github.com/mmcgrana/ring/blob/master/SPEC][Ring SPEC]]
+  - Pure functions!
+
+- Handler: Req -> Resp
+
+- Middleware: (Req -> Resp) -> (Req -> Resp)
+  - Composability!
+
+*** *I did it for the Lulz..*
+
+Middleware
+| Endofunctor in the category of Handlers
+
+Middlewares
+| Monoid in terms of comp
+
+* Transducers
+** Terminology: "Process"
+
+Transformations on a stream of data
+
+** Problem Statement
+*** Example
+#+begin_src clojure
+
+(->> (range)
+     (filter even?)
+     (map vector)
+     (take 3))
+
+#+end_src
+*** Example (Cont'd)
+#+begin_src clojure
+
+;;  :-|
+(->> (range)
+     (filter even?)
+     (map vector)
+     (take 3))
+
+
+;;  :-/
+(take 3
+      (map vector
+           (filter even? (range))))
+
+
+;;  :-(
+(->> (range)
+     ((comp (partial take 3)
+            (partial map vector)
+            (partial filter even?))))
+
+ #+end_src
+*** Concerns
+**** Composability?
+
+*Process* isn't really a first-class
+concept in and of itself
+
+**** Performance?
+
+Laziness overhead, interim seqs
+
+**** Reusability: Data sources and sinks
+
+Coupling / Specificity!
+
+- Clojure's Seq abstraction
+  | It is better to have 100 functions
+  | operate on *one* data structure than
+  | 10 functions on 10 data structures.
+    ~ Alan Perlis
+
+- Transducers
+  | It is even better to have 100 functions
+  | operate on *no* data structure
+    ~ Rich Hickey
+
+** From zero to hero [0/9]
+
+- Building Transducers from scratch
+  - somewhat naive
+  - for educational purposes only
+
+*** TODO (1) Common abstraction
+
+- Express sequence functions in terms of *reduce*
+
+*** TODO (2) Factor out the actual reduction
+
+- Distill sequence functions down to their essence
+
+((comp vector str) 42)
+*** TODO (3) Generic Process
+
+- Have a generic process context hosting the reductions
+
+*** TODO (4) Data abstraction and Composability
+
+*Reusability*
+| Be agnostic to data sources and sinks
+
+*Composability*
+| Ring Handler    | Req -> Resp                    |
+| Reduction       | a -> b -> a                    |
+|-----------------+--------------------------------|
+| Ring Middleware | (Req -> Resp) -> (Req -> Resp) |
+| Transducer      | (a -> b -> a) -> (a -> b -> a) |
+
+*** TODO (5) Stateful transduction
+
+- Example: ttake
+
+*** TODO (6) Completion
+
+- Example: tpartition
+
+*** TODO (7) Restore the "regular" collection arity
+
+- Accept a collection as the last argument
+
+*** TODO (8) Transducible context for RxJava
+
+- [[https://github.com/ReactiveX/RxJava][RxJava]]
+  - Netflix' Reactive Extensions for Java
+
+  - Extending the Observer-Pattern to
+    async data/event-streams
+
+  - Stream compostion
+
+*** TODO (9) Quick recap
+
+| So what's a Transducer, anyway?
+
+- *Informal*
+  - Reusable, composable, and efficient
+    manipulation of data streams
+
+- *Technical*
+  - Reduction function transformation
+  - Interim data structures vs. callstack
+
+** Clojure 1.7
+*** Timeline
+
+| Aug 01, 2014 | [[https://github.com/clojure/clojure/commit/2a09172e0c3285ccdf79d1dc4d399d190678b670][clojure.core: Initial wip]]              |
+| Aug 06, 2014 | [[http://blog.cognitect.com/blog/2014/8/6/transducers-are-coming][blog.cognitect: Transducers are coming]] |
+| Aug 07, 2014 | [[https://github.com/clojure/clojurescript/commit/d15e73637beeac101c24228b09aec1039264984b][cljs.core: Initial wip]]                 |
+| Aug 12, 2014 | [[https://github.com/clojure/core.async/commit/ad0ca8657645cfffed3af428772095ae08f86394][core.async: Initial wip]]                |
+| Sep 18, 2014 | [[http://www.thestrangeloop.com/2014/transducers.html][Strangeloop Keynote]]                    |
+| Nov 20, 2014 | [[http://blog.cognitect.com/blog/2014/6/11/clojureconj-2014-save-the-date][Clojure/Conj 2014 Keynote]]              |
+| Jan 01, 2015 | [[https://github.com/clojure/core.async/commit/1b6e106fbb0b59269238da24b884a771fa878782][core.async: Deprecation]]                |
+| ,,,          | [[https://github.com/MastodonC/kixi.stats][MastodonC: kixi.stats]]                  |
+
+*** Transducible Contexts
+
+|----------------------+--------------------|
+| {clojure, cljs}.core |                    |
+|----------------------+--------------------|
+| into                 | eager collection   |
+| sequence             | lazy seq           |
+| transduce            | reduce + xform     |
+| eduction             | reducible/iterable |
+|                      |                    |
+|----------------------+--------------------|
+| core.async           |                    |
+|----------------------+--------------------|
+| chan                 | channel + xform    |
+| promise-chan         | ,,,                |
+
+*** Laziness à la carte
+
+| A Transducer in and of itself is neither eager nor lazy
+
+- Laziness is an orthogonal concern
+- decomplected ;-)
+
+**** Example
+
+Execution strategy chosen is
+chosen by the transducible context
+
+#+begin_src clojure
+
+(def xform
+  (comp (filter even?)
+        (map vector)
+        (take 3)))
+
+(into [] xform (range))
+
+(sequence xform (range))
+
+#+end_src
+*** Transduction semantics
+
+| One-to-One | n = m | map, map-indexed             |
+| Expansive  | n < m | cat, mapcat, interpose       |
+| Reductive  | n > m | filter, partition-*, group-* |
+| Abortive   | n > m | take, *-while                |
+
+*** Laziness vs. Laziness
+
+LazySeq is *pull*, Transduction is *push*
+
+- Transducible context actively "drives" the transduction
+
+- How does sequence still achieve laziness?
+  |                              | laziness      |
+  |------------------------------+---------------|
+  | Ordinary map, filter, et al. | *consumption* |
+  | sequence + xform             | *production*  |
+
+- [[file:~/cugb/transducers-intro/src/transducers_intro/laziness.clj][Laziness Example]]
+
+- [[https://github.com/clojure/core.async/commit/aaf52d9cff99516d6be8a3105d3b0caf4aba8910][core.async: Buffer semantics for expanding transducers]]
+
+**** * TL;DR
+Be extremly cautious with *expansive* transducers
+whenever *laziness* might be a concern !!!
+
+** Discussion
