@@ -2,7 +2,7 @@
 
 **Der Clojure/Lisp/Emacs Tag auf der [FrOSCon](https://www.froscon.de/) 11**
 
-**Sankt Augustin, Sunday, 20/21 August 2016**
+**Sankt Augustin, Sonntag, 20/21 August 2016**
 
 __Raum TBD__
 
@@ -23,7 +23,7 @@ Timeslot | Titel | Vortragender
 10:00-11:30 | TBD | TBD
 
 
-## Vasilij Schneidermann: MAL - Making a Lisp
+### Vasilij Schneidermann: MAL - Making a Lisp
 
 Zusammenfassung: MAL ist ein minimaler, Clojure-inspirierter Lisp-Dialekt.
 Ziel des Projektes ist es, dem geneigten Programmierer zu vermitteln
@@ -33,20 +33,20 @@ Implementierungsschritte präsentiert.
 
 
 
-## Andreas Klein: Emacs für Einsteiger
+### Andreas Klein: Emacs für Einsteiger
 
 Zusammenfassung: Emacs ist für viele Lisp/Clojure Programmierer das
 natürlichste Entwicklungswerkzeug, verlangt von Einsteigern aber eine
 steile Lernkurve, bis die Wohlfühlzone erreicht ist.
 Der Workshop wendet sich an komplette Einsteiger und liefert am Ende
-ein genug Wissen um die Doku lesen zu können und selbst am Emacs
+genug Wissen, um die Doku zu verstehen und selbst am Emacs
 weiter zu konfigurieren.
 
 
 ... weitere folgen ...
 
 
-## Unterstützt von
+# Unterstützt von
 
 * [doctronic GmbH & Co. KG](http://www.doctronic.de/)
 * [bevuta IT GmbH](http://www.bevuta.com)
