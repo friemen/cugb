@@ -1,8 +1,8 @@
-# Clojure / pan-Lisp
+# :clojureD, a Clojure / pan-Lisp / Emacs day
 
 **Der Clojure/Lisp/Emacs Tag auf der [FrOSCon](https://www.froscon.de/) 11**
 
-**Sankt Augustin, Sonntag, 20/21 August 2016**
+**Sankt Augustin, Sonntag, 21. August 2016**
 
 __Raum TBD__
 
@@ -21,6 +21,18 @@ und Köln.
 Timeslot | Titel | Vortragender
 --- | --- | ---
 10:00-11:30 | TBD | TBD
+
+
+### n.n.: Ist die OO Party vorbei? Ein Katerfrühstück mit funktionalen Zutaten
+
+Zusammenfassung: Wo steht die Objektorientierte Programmierung heute?
+Aus welchen Gründen erleben funktionale Programmiersprachen seit
+einigen Jahren eine Renaissance?  Und was macht funktionale Ansätze so
+attraktiv, dass sie nach und nach auch in OO-Sprachen Einzug erhalten?
+Lasst uns diese und weitere Fragen bei einer schönen Tasse Kaffee und
+einem kleinen Snack in entspannter Atmospähre diskutieren und
+beleuchten.
+
 
 
 ### Vasilij Schneidermann: MAL - Making a Lisp
