@@ -1,4 +1,4 @@
-# :clojureD, a Clojure / pan-Lisp / Emacs day
+# :clojureD/bonn, a Clojure / pan-Lisp / Emacs day
 
 **Der Clojure/Lisp/Emacs Tag auf der [FrOSCon](https://www.froscon.de/) 11**
 
