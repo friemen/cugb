@@ -28,9 +28,9 @@ Timeslot | Titel | Vortragender
 Zusammenfassung: Wo steht die Objektorientierte Programmierung heute?
 Aus welchen Gründen erleben funktionale Programmiersprachen seit
 einigen Jahren eine Renaissance?  Und was macht funktionale Ansätze so
-attraktiv, dass sie nach und nach auch in OO-Sprachen Einzug erhalten?
+attraktiv, dass sie nach und nach auch in OO-Sprachen Einzug halten?
 Lasst uns diese und weitere Fragen bei einer schönen Tasse Kaffee und
-einem kleinen Snack in entspannter Atmospähre diskutieren und
+einem kleinen Snack in entspannter Atmosphäre diskutieren und
 beleuchten.
 
 
@@ -53,6 +53,21 @@ steile Lernkurve, bis die Wohlfühlzone erreicht ist.
 Der Workshop wendet sich an komplette Einsteiger und liefert am Ende
 genug Wissen, um die Doku zu verstehen und selbst am Emacs
 weiter zu konfigurieren.
+
+
+### Thomas Neuhalfen: GeoRepl - Konstruktive Geometrie mit Clojure ###
+
+GeoRepl ist eine freie, quelloffene Geometrie-Software. Man kann damit
+(zweidimensionale) geometrische Objekte zeichnen und
+bearbeiten. GeoRepl unterstützt den Benutzer dabei durch Merkmale, die
+man von CAD-Systemen kennt, wie Snap-Points, orthogonale Linienzüge
+oder Erkennung von Freihandsymbolen. Man kann sich mit Hilfe eines
+nRepl-Clients mit GeoRepl verbinden und GeoRepl synchronisiert die
+algebraische mit der geometrischen Repräsentation.  GeoRepl ist
+gedacht als geometrische Erweiterung einer REPL und als
+Visualisierungs-Werkzeug beim Umgang mit dem mathematischen Teil des
+Clojure-Ökosystems.
+
 
 
 ... weitere folgen ...
