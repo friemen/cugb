@@ -2,7 +2,7 @@
 
 The User Group meets every 2nd Tuesday in a month, the first meet-up was July 9th 2013.
 
-We usually meet at doctronic GmbH & Co.KG, Windgassenstr. 24, 53229 Bonn.
+We usually meet at doctronic GmbH & Co.KG, Fränkische Str. 6-8, 53229 Bonn.
 
 Follow the group on Twitter [@Clojure_UG_Bonn](https://twitter.com/Clojure_UG_Bonn).
 The group maintains a [forum on Google](https://groups.google.com/forum/#!forum/clojure-user-group-bonn).
