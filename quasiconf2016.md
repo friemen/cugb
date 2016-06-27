@@ -10,10 +10,7 @@ Eine Zusammenarbeit der Clojure Communities
 [Bonn](https://groups.google.com/forum/#!forum/clojure-user-group-bonn)
 und Köln.
 
-
-![Clojure](https://github.com/friemen/cugb/blob/master/clojure.png)
-![LISP](http://www.lisperati.com/lisplogo_flag2_256.png)
-![Emacs](https://github.com/friemen/cugb/blob/master/emacs.png)
+![:clojureD/bonn](https://github.com/friemen/cugb/blob/master/clojureD.png)
 
 
 # Programm
