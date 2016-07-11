@@ -4,7 +4,7 @@
 
 **Sankt Augustin, Sonntag, 21. August 2016**
 
-__Raum TBD__
+__Raum C119__
 
 Eine Zusammenarbeit der Clojure Communities
 [Bonn](https://groups.google.com/forum/#!forum/clojure-user-group-bonn)
@@ -17,10 +17,14 @@ und Köln.
 
 Timeslot | Titel | Vortragender
 --- | --- | ---
-10:00-11:30 | TBD | TBD
+10:00-11:00 | Ist die OO Party vorbei? Ein Katerfrühstück mit funktionalen Zutaten | Ingo Küper, Falko Riemenschneider
+11:15-12:15 | MAL - Making a Lisp | Vasilij Schneidermann
+14:00-15:00 | Emacs für Einsteiger | Andreas Klein
+15:15-16:15 | GeoRepl - Konstruktive Geometrie mit Clojure | Thomas Neuhalfen
+16:30-... | <offen> |
 
 
-### n.n.: Ist die OO Party vorbei? Ein Katerfrühstück mit funktionalen Zutaten
+### Ingo Küper, Falko Riemenschneider: Ist die OO Party vorbei? Ein Katerfrühstück mit funktionalen Zutaten
 
 Zusammenfassung: Wo steht die Objektorientierte Programmierung heute?
 Aus welchen Gründen erleben funktionale Programmiersprachen seit
@@ -52,6 +56,7 @@ genug Wissen, um die Doku zu verstehen und selbst am Emacs
 weiter zu konfigurieren.
 
 
+
 ### Thomas Neuhalfen: GeoRepl - Konstruktive Geometrie mit Clojure ###
 
 GeoRepl ist eine freie, quelloffene Geometrie-Software. Man kann damit
@@ -66,8 +71,6 @@ Visualisierungs-Werkzeug beim Umgang mit dem mathematischen Teil des
 Clojure-Ökosystems.
 
 
-
-... weitere folgen ...
 
 
 # Unterstützt von
