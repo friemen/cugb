@@ -1,0 +1,59 @@
+body {
+    font-family: helvetica,arial;
+    margin: 0;
+}
+
+.cugb__page {
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 0.5em;
+    width: 800px;
+}
+
+.cugb__banner {
+    overflow: hidden;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.cugb__content {
+    margin-top: 1em;
+    position: relative;
+}
+
+.cugb__join {
+    position: absolute;
+    top: 0.5em;
+    right: 0em;
+}
+
+.cugb__location {
+    position: absolute;
+    top: 6.5em;
+    right: 0em;
+}
+
+.cugb__sponsors {
+    position: absolute;
+    bottom: -14em;
+}
+
+.cugb__buttonlink {
+    border-radius: 4px;
+    background: green;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cugb__link {
+    color: inherit;
+}
+
+.cugb__link:visited {
+    color: inherit;
+}
