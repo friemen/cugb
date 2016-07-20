@@ -21,12 +21,12 @@ Timeslot | Titel | Vortragender
 11:15-12:15 | MAL - Making a Lisp | Vasilij Schneidermann
 14:00-15:00 | Emacs für Einsteiger | Andreas Klein
 15:15-16:15 | GeoRepl - Konstruktive Geometrie mit Clojure | Thomas Neuhalfen
-16:30-... | <offen> |
+16:30-17:30 | Emacs org-mode für Einsteiger | Florian Over
 
 
 ### Ingo Küper, Falko Riemenschneider: Ist die OO Party vorbei? Ein Katerfrühstück mit funktionalen Zutaten
 
-Zusammenfassung: Wo steht die Objektorientierte Programmierung heute?
+Wo steht die Objektorientierte Programmierung heute?
 Aus welchen Gründen erleben funktionale Programmiersprachen seit
 einigen Jahren eine Renaissance?  Und was macht funktionale Ansätze so
 attraktiv, dass sie nach und nach auch in OO-Sprachen Einzug halten?
@@ -38,7 +38,7 @@ beleuchten.
 
 ### Vasilij Schneidermann: MAL - Making a Lisp
 
-Zusammenfassung: MAL ist ein minimaler, Clojure-inspirierter Lisp-Dialekt.
+MAL ist ein minimaler, Clojure-inspirierter Lisp-Dialekt.
 Ziel des Projektes ist es, dem geneigten Programmierer zu vermitteln
 wie man einen eigenen Interpreter konstruiert.  In diesem Vortrag
 werden sowohl die Sprache als auch der Weg durch die einzelnen
@@ -48,7 +48,7 @@ Implementierungsschritte präsentiert.
 
 ### Andreas Klein: Emacs für Einsteiger
 
-Zusammenfassung: Emacs ist für viele Lisp/Clojure Programmierer das
+Emacs ist für viele Lisp/Clojure Programmierer das
 natürlichste Entwicklungswerkzeug, verlangt von Einsteigern aber eine
 steile Lernkurve, bis die Wohlfühlzone erreicht ist.
 Der Workshop wendet sich an komplette Einsteiger und liefert am Ende
@@ -57,7 +57,7 @@ weiter zu konfigurieren.
 
 
 
-### Thomas Neuhalfen: GeoRepl - Konstruktive Geometrie mit Clojure ###
+### Thomas Neuhalfen: GeoRepl - Konstruktive Geometrie mit Clojure
 
 GeoRepl ist eine freie, quelloffene Geometrie-Software. Man kann damit
 (zweidimensionale) geometrische Objekte zeichnen und
@@ -71,9 +71,17 @@ Visualisierungs-Werkzeug beim Umgang mit dem mathematischen Teil des
 Clojure-Ökosystems.
 
 
+### Florian Over: Emacs org-mode für Einsteiger
+
+Emacs ist weit mehr als ein Editor, in seinem Ökosystem haben sich
+mittlerweile zahlreiche nützliche Werkzeuge etabliert, wovon das
+bekannteste vermutlich der [org-mode](http://orgmode.org/) ist.
+org-mode hilft bei der Organisation der täglichen Notizen und Todos,
+und sind die Keybindings einmal im Muskelgedächtnis verankert
+geschieht dies rasend schnell. Florian Over von axxessio zeigt uns
+die ersten Schritte mit org-mode.
 
 
 # Unterstützt von
 
 * [doctronic GmbH & Co. KG](http://www.doctronic.de/)
-* [bevuta IT GmbH](http://www.bevuta.com)
