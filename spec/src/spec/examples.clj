@@ -93,10 +93,18 @@
 (s/def ::lastname ::non-empty-string)
 (s/def ::person (s/keys :req [::firstname ::lastname]))
 
+(s/describe ::person)
+
 (def person {::firstname "oha"
              ::lastname  "bar"})
+
 (s/valid? ::person person)
 (s/explain ::person person)
+
+
+(defrecord Person [firstname lastname])
+(s/def ::unqualified-person (s/keys :req-un [::firstname ::lastname]))
+(s/valid? ::unqualified-person (Person. "foo" "bar"))
 
 ;; s/multi-spec
 

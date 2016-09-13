@@ -72,8 +72,40 @@ Prime-time for namespaced keywords in maps:
 ;= true
 ```
 
+Another map spec example
 
-Checking (recursive) sequences
+```clojure
+(s/def ::non-empty-string (s/and string? #(-> % str/trim count (> 1))))
+(s/def ::firstname ::non-empty-string)
+(s/def ::lastname ::non-empty-string)
+(s/def ::person (s/keys :req [::firstname ::lastname]))
+
+(s/describe ::person)
+;= (keys :req [:spec.examples/firstname :spec.examples/lastname])
+
+
+;; now some data
+(def person {::firstname "oha"
+             ::lastname  "bar"})
+
+;; and use the spec
+(s/valid? ::person person)
+```
+
+But interchangeability of records and maps suffers
+
+```clojure
+(defrecord Person [firstname lastname])
+
+(s/valid? ::person (Person. "foo" "bar"))
+;= false
+
+(s/def ::unqualified-person (s/keys :req-un [::firstname ::lastname]))
+(s/valid? ::unqualified-person (Person. "foo" "bar"))
+;= true
+```
+
+Example for checking (recursive) sequences
 
 ```clojure
 (s/def ::tag   #{:body :p :h1})
