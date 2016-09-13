@@ -123,17 +123,24 @@
 
 ;; s/fdef
 
+(defn divisible?
+  [n d]
+  (-> n (mod d) (zero?)))
+
 (defn fizzbuzz
   [n]
-  (str (if (-> n (mod 3) (zero?)) "fizz")
-       (if (-> n (mod 5) (zero?)) "buzz")))
+  (str (if (divisible? n 3) "fizz")
+       (if (divisible? n 5) "buzz")))
 
 
 (s/fdef fizzbuzz
         :args (s/cat :n (s/and int? pos?))
         :ret string?)
+
+
 (clojure.spec.test/instrument `fizzbuzz)
 
+(s/exercise-fn `fizzbuzz)
 
 ;; Generators
 
@@ -141,11 +148,12 @@
 
 
 
+
 (comment
   ;; find out what clojure.spec stores
 
   (->> @@#'s/registry-ref
-       (filter #(-> % first namespace (= "spec.core")))
+       (filter #(-> % first namespace (= "spec.examples")))
        (map (fn [[k spec]]
               (cond
                 (satisfies? s/Spec spec) (s/describe* spec)
