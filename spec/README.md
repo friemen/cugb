@@ -15,7 +15,7 @@
 * No type system!
 * Tight integration with [test.check](https://github.com/clojure/test.check)
 * More or less enforces use of global, namespaced keywords
-
+* Separates structure specs from scalar specs
 
 ## First steps for defining specs
 
