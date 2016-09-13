@@ -92,7 +92,8 @@ Another map spec example
 (s/valid? ::person person)
 ```
 
-But interchangeability of records and maps suffers
+But interchangeability of records and maps suffers, and
+[not everybody likes this](http://dev.clojure.org/jira/browse/CLJ-1938)
 
 ```clojure
 (defrecord Person [firstname lastname])
@@ -101,11 +102,23 @@ But interchangeability of records and maps suffers
 ;= false
 
 (s/def ::unqualified-person (s/keys :req-un [::firstname ::lastname]))
-(s/valid? ::unqualified-person (Person. "foo" "bar"))
+(s/valid? ::unqualified-person (Person. "foo" "bar")) ;= true
+```
+
+`coll-of` and `map-of` seem very useful for defining homogeneous
+collections:
+
+```clojure
+(s/valid? (s/coll-of int? :count 3) [1 2 3])
+;= true
+
+(s/valid? (s/map-of keyword? number?) {:foo 3.141
+                                       :bar 2.7})
 ;= true
 ```
 
-Example for checking (recursive) sequences
+`s/cat` is king for checking heterogeneous (possibly recursive)
+sequences:
 
 ```clojure
 (s/def ::tag   #{:body :p :h1})
@@ -123,6 +136,8 @@ Example for checking (recursive) sequences
 (s/conform ::html [:p "Hello World"])
 ;= {:tag :p, :children [[:s "Hello World"]]}
 ```
+
+
 
 Spec'ing functions
 
@@ -157,7 +172,7 @@ An invocation of `fizzbuzz` is checked only when the function has been instrumen
 * `s/describe` - Inspect an existing spec
 * `s/assert` - Return input or throw an exception
 * `clojure.spec.test/instrument` - Enables auto-checking with fdef spec on function invocation
-* `s/gen` - Create a test data generator to be used tih test.check
+* `s/gen` - Create a test data generator to be used with test.check
 
 
 ## Test data generators
