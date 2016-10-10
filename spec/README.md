@@ -177,8 +177,8 @@ An invocation of `fizzbuzz` is checked only when the function has been instrumen
 
 ## Test data generators
 
-Needs an additional library as dev-dependency
-Add in your project.clj
+Needs an additional library as dev-dependency,
+add in your project.clj
 
 ```clojure
 :profiles {:dev {:dependencies [[org.clojure/test.check "0.9.0"]]}}

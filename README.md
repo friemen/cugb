@@ -28,6 +28,7 @@ Clojure User Group Bonn.
 * [Component](component)
 * [ClojureScript Introduction](cljsintro)
 * [Zipper Primer](zipper-primer)
+* [clojure.spec intro](spec)
 
 ## Contributors
 

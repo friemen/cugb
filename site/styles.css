@@ -21,6 +21,10 @@ body {
     position: relative;
 }
 
+.cugb__text {
+    padding-right: 15em;
+}
+
 .cugb__join {
     position: absolute;
     top: 0.5em;
@@ -56,4 +60,13 @@ body {
 
 .cugb__link:visited {
     color: inherit;
+}
+
+.cugb__clojured { 
+  position: absolute;
+  bottom: -2em;
+  right: 0em;
+  z-index: 5;
+  width:195px; 
+  text-align:center;  
 }
