@@ -27,8 +27,8 @@ Every function `p` conforming to the signature `[input] -> [result remaining-inp
 					+-------------+
 ```
 which returns two values:
-* `:invalid` if it does not recognize `input`, or otherwise a prefix
-  of `input`, possibly transformed to `result`.
+* `:invalid` if it does not recognize `input`, or otherwise a possibly
+  transformed prefix of `input` as `result`.
 * the `remaining-input` that it did not consume.
 
 A parser eventually succeeds on an input if it returns nil (or an
