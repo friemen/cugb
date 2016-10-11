@@ -2,6 +2,15 @@
 
 A demonstration how simple and powerful parser combinators are.
 
+## Motivation
+
+Converting Word HTM documents to semantically structured XML includes
+building up hierarchical structures from flat h1 and p elements.
+
+The problem of transforming flat input to some tree-ish structure
+smells like a parser is somehow useful.
+
+
 ## What is a parser?
 
 Informal answer: Something that consumes a sequence of values and builds up some data structure.
@@ -60,7 +69,7 @@ Every function `p` conforming to the signature `[input] -> [result remaining-inp
 (def content-parser
   (pc/many+ (pc/alt section-parser paragraph-parser (pc/descend table-parser))))
 
-;; invoke one an input sequence
+;; invoke one on an input sequence
 
 (content-parser [:p :p :h1 :p [:table [:tr :td :td] [:tr :td]]])
 ;= [[:p :p [:h1 :p] [:table [:tr :td :td] [:tr :td]]]
