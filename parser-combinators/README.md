@@ -94,5 +94,5 @@ empty list) as remaining input.
 * Basically everything that a
   [recursive descent parser](https://en.wikipedia.org/wiki/Recursive_descent_parser)
   can recognize. AFAIK it's an [LL(1) parser](https://en.wikipedia.org/wiki/LL_parser).
-* Beware non-termination when combining `alt` with `optional`!
+* Beware non-termination when combining `many` with `optional`!
 * If ambiguities exist in the grammar it is hard to predict the results.
