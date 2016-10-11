@@ -60,6 +60,7 @@ Every function `p` conforming to the signature `[input] -> [result remaining-inp
 (def content-parser
   (pc/many+ (pc/alt section-parser paragraph-parser (pc/descend table-parser))))
 
+;; invoke one an input sequence
 
 (content-parser [:p :p :h1 :p [:table [:tr :td :td] [:tr :td]]])
 ;= [[:p :p [:h1 :p] [:table [:tr :td :td] [:tr :td]]]
