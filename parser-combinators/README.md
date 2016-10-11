@@ -50,6 +50,12 @@ empty list) as remaining input.
 ## How does an example application look like?
 
 ```clojure
+;; a helper transformation
+
+(defn into-first
+  [[x xs]]
+  (into [x] xs))
+
 ;; define some parsers
 
 (def paragraph-parser
