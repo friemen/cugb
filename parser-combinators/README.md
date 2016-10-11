@@ -26,6 +26,13 @@ Every function `p` conforming to the signature `[input] -> [result remaining-inp
                     |             |--> remaining-input
 					+-------------+
 ```
+which returns two values:
+* `:invalid` if it does not recognize `input`, or otherwise a prefix
+  of `input`, possibly transformed to `result`.
+* the `remaining-input` that it did not consume.
+
+A parser eventually succeeds on an input if it returns nil (or an
+empty list) as remaining input.
 
 
 ## Let's add higher-order functions that produce parsers
