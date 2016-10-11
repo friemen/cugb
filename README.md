@@ -26,9 +26,10 @@ Clojure User Group Bonn.
 * [core.logic Primer](core-logic-primer)
 * [Lazy sequence for PDF text extraction](pdftext)
 * [Component](component)
-* [ClojureScript Introduction](cljsintro)
+* [ClojureScript intro](cljsintro)
 * [Zipper Primer](zipper-primer)
 * [clojure.spec intro](spec)
+* [Parser Combinators](parser-combinators)
 
 ## Contributors
 
