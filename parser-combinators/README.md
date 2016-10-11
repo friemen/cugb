@@ -29,10 +29,47 @@ Every function `p` conforming to the signature `[input] -> [result remaining-inp
 * `sequence`: Apply given parsers in order, fail if not all parsers succeed
 * `transform`: Apply function to result of given parser
 * `descend`: Regard first value of input als sub-input and apply given parser to it
-...
 
-## What kind grammars can we encode with this?
 
-* Basically everything that a recursive descent parser can recognize.
+## How does an example application look like?
+
+```clojure
+;; define some parsers
+
+(def paragraph-parser
+  (pc/pred->parser #{:p}))
+
+(def section-parser
+  (pc/transform
+           into-first
+           (pc/sequence (pc/pred->parser #{:h1})
+                        (pc/many* paragraph-parser))))
+
+(def tr-parser
+  (pc/transform into-first
+                (pc/sequence
+                 (pc/pred->parser #{:tr})
+                 (pc/many+ (pc/pred->parser #{:td})))))
+
+(def table-parser
+  (pc/transform into-first
+                (pc/sequence
+                 (pc/pred->parser #{:table})
+                 (pc/many+ (pc/descend tr-parser)))))
+
+(def content-parser
+  (pc/many+ (pc/alt section-parser paragraph-parser (pc/descend table-parser))))
+
+
+(content-parser [:p :p :h1 :p [:table [:tr :td :td] [:tr :td]]])
+;= [[:p :p [:h1 :p] [:table [:tr :td :td] [:tr :td]]]
+    nil]
+```
+
+## What kind of grammars can we encode with this?
+
+* Basically everything that a
+  [recursive descent parser](https://en.wikipedia.org/wiki/Recursive_descent_parser)
+  can recognize. AFAIK it's an [LL(1) parser](https://en.wikipedia.org/wiki/LL_parser).
 * Beware non-termination when combining `alt` with `optional`!
-* If ambiguities exist in the grammar, it is hard to predict the results.
+* If ambiguities exist in the grammar it is hard to predict the results.

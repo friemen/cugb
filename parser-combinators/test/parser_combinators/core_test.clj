@@ -144,7 +144,6 @@
                  (pc/pred->parser #{:table})
                  (pc/many+ (pc/descend tr-parser)))))
 
-
 (def content-parser
   (pc/many+ (pc/alt section-parser paragraph-parser (pc/descend table-parser))))
 
