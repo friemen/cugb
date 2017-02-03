@@ -1,6 +1,12 @@
 body {
-    font-family: helvetica,arial;
+    font-family: sans-serif;
+    color: #444;
+    font-size: 16px;
     margin: 0;
+}
+
+h1 {
+    color: #448;
 }
 
 .cugb__page {
@@ -54,19 +60,38 @@ body {
     font-weight: bold;
 }
 
-.cugb__link {
-    color: inherit;
+a.cugb__buttonlink:visited {
+    color: white;
 }
 
-.cugb__link:visited {
-    color: inherit;
+a.cugb__buttonlink:link {
+    color: white;
 }
 
-.cugb__clojured { 
+a.cugb__link {
+    text-decoration: none;
+    color: #844;
+}
+
+a.cugb__link:hover {
+    color: red;
+}
+
+a.cugb__link:active {
+    text-decoration: none;
+    color: red;
+}
+
+a.cugb__link:visited {
+    text-decoration: none;
+    color: #844;
+}
+
+.cugb__clojured {
   position: absolute;
   bottom: -2em;
   right: 0em;
   z-index: 5;
-  width:195px; 
-  text-align:center;  
+  width:195px;
+  text-align:center;
 }
