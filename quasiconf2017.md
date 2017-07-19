@@ -23,8 +23,8 @@ Timeslot | Titel | Vortragender
 10:00-11:00 | Eine Einführung in die funktionale Programmierung für (erfahrene) Programmierer | Thomas Neuhalfen
 11:15-12:15 | Developing and testing ClojureScript UIs with devcards | Andreas Klein
 14:00-15:00 | Clojure's test.check: Property-based Software Testing | Florian Over
-15:15-16:00 | UX, Agile und Clojure: ein Dream-Team!? | Anke Schnepel, Kevin Kaiser
-16:15-17:15 | Clojure - Why does it matter? | Falko Riemenschneider
+15:15-16:15 | UX, Agile und Clojure: ein Dream-Team!? | Anke Schnepel, Kevin Kaiser
+16:30-17:30 | Clojure - Why does it matter? | Falko Riemenschneider
 
 # Unterstützt von
 
