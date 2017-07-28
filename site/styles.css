@@ -9,6 +9,20 @@ h1 {
     color: #448;
 }
 
+table {
+    border-collapse: collapse;
+}
+
+
+th {
+    background: #ddd;
+}
+
+th, td {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
 .cugb__page {
     height: 100%;
     margin: 0 auto;
@@ -89,7 +103,7 @@ a.cugb__link:visited {
 
 .cugb__clojured {
   position: absolute;
-  bottom: -2em;
+  top: 24.2em;
   right: 0em;
   z-index: 5;
   width:195px;
