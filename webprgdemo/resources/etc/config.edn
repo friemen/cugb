@@ -1,0 +1,11 @@
+{:server
+ {:port 1337}
+
+ :logging
+ {:rotor-appender
+  {:path     "logs/app.log"
+   :max-size 10485760 ;; 10 MB
+   :backlog  50}}
+
+ :app
+ {}}
