@@ -8,7 +8,6 @@
 
 (defn new-system
   [config]
-  (println "CONFIG" (:server config))
   (c/system-map
     :app
     (c/using
