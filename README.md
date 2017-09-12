@@ -30,6 +30,7 @@ Clojure User Group Bonn.
 * [Zipper Primer](zipper-primer)
 * [clojure.spec intro](spec)
 * [Parser Combinators](parser-combinators)
+* [Post-Redirect-Get Demo](webprgdemo)
 
 ## Contributors
 

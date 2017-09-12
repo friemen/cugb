@@ -31,7 +31,7 @@
 
 
 (defn- handle-action!
-  "Processes the the action and sends a redirect response."
+  "Processes the action and sends a redirect response."
   [context action-params]
   (log/debug "Execute action" action-params)
   (let [{:keys [view-id view-params]}
