@@ -109,7 +109,7 @@ There are some notable facts about this way of using brackets:
 
 * Excessive nesting of expressions and overloading in meaning of
   parentheses are typical drawbacks of Lisps, but Clojure mitigates
-  them but _threading_ macros and the use of `[]` and `{}`
+  them with _threading_ macros and the use of `[]` and `{}`
   brackets. You'll not have more brackets in your Clojure code than in
   code written in your favorite C-style language.
 
