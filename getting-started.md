@@ -10,19 +10,20 @@ ecosystem.pdf), thanks to Gerrit Hentschel.
 
 ## Development Environment
 
-* [Emacs Live](http://overtone.github.io/emacs-live/)
-* [Vim](http://www.neo.com/2014/02/25/getting-started-with-clojure-in-vim)
+* [Emacs Live](https://overtone.github.io/emacs-live/) with [CIDER](https://cider.readthedocs.io)
+* [Vim](https://github.com/tpope/vim-fireplace)
 * [IntelliJ / Cursive](https://cursiveclojure.com/)
-* [Eclipse / Counterclockwise](http://ccw-ide.org)
-* [LightTable](http://www.lighttable.com/)
-* [Leiningen](http://leiningen.org/)
+* [Eclipse / Counterclockwise](https://ccw-ide.org)
+* [VS Code](https://marketplace.visualstudio.com/items?itemName=avli.clojure)
+* [Nightcode](https://sekao.net/nightcode/)
+* [Leiningen](https://leiningen.org/)
 * [Lein-try](https://github.com/rkneufeld/lein-try)
 
 ## Links
 
 * [Official Getting Started](http://clojure.org/getting_started)
 * [Language overview](http://java.ociweb.com/mark/clojure/article.html)
-* [Cheatsheet](http://clojure.org/cheatsheet), a more [interactive cheatsheet](http://conj.io/)
+* [Cheatsheet](http://clojure.org/cheatsheet), a more [interactive cheatsheet](https://conj.io/)
 * [Clojure Documentation](http://clojure-doc.org/)
 * [Library catalog](http://www.clojure-toolbox.com/)
 * [Clojars](https://clojars.org/)
@@ -32,7 +33,8 @@ ecosystem.pdf), thanks to Gerrit Hentschel.
 * [Practise with 4Clojure](http://www.4clojure.com/)
 * [Labrepl](https://github.com/relevance/labrepl)
 * [German Clojure-de group](https://groups.google.com/forum/#!forum/clojure-de)
-
+* [Maria - A Learning Environment](https://www.maria.cloud/)
+* [Omnia - A REPL for experimentation](https://github.com/AvramRobert/omnia)
 
 ## Some fundamental talks by Rich Hickey
 
@@ -143,6 +145,3 @@ Stuart Sierra created
 [component](https://github.com/stuartsierra/component), which allows
 you to reload changed namespaces and re-establish the initial state of
 the application.
-
-
-

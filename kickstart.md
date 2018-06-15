@@ -16,46 +16,143 @@ And finally, novices should get a well-chosen list of
 [hints and links](https://github.com/friemen/cugb/blob/master/getting-started.md)
 to continue learning on their own.
 
-## Welcome to the Kickstart workshop
+# Scope of the workshop
 
 The three things listed above are exactly what we try to accomplish in
-a 4-hour workshop. Don't expect having mastered the language
+a 3-hour workshop. Don't expect having mastered the language
 afterwards, but you can expect to be well-prepared for learning
 Clojure and deep-dive into it's ecosystem.
 
 And this is how we get you started:
- * Setup a development environment. We can support you with
-   [LightTable](http://www.lighttable.com/),
-   [Cursive](https://cursiveclojure.com/) (IntelliJ),
-   [Counterclockwise](http://doc.ccw-ide.org/documentation.html)
-   (Eclipse) or [CIDER](https://github.com/clojure-emacs/cider)
-   (Emacs).
+ * Setup a development environment. We decided to
+   offer [VS Code with a Clojure extension](https://marketplace.visualstudio.com/items?itemName=avli.clojure)
+   as out-of-the-box-copy-deployment-package.
  * Create your own Clojure project with [Leiningen](http://leiningen.org/).
- * Learn to deal with a
+ * Learn to work with a
    [REPL](http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)
-   and structural editing (a.k.a ParEdit)
- * Create your first web app.
+   and structural editing (a.k.a Paredit)
  * Introduction to the syntax and some important functions.
- * Let you play around and answer your questions.
+ * Jump right into a ready-made webapp based on Clojure and ClojureScript.
 
 And if you want to continue learning Clojure afterwards, you can also
-join one of the local user groups in
-[Bonn](https://groups.google.com/forum/#!forum/clojure-user-group-bonn)
-and [Cologne](http://www.meetup.com/clojure-cologne/).
+join local [user group for Cologne/Bonn area on Meetup](https://www.meetup.com/Clojure-User-Group-Bonn/).
 
 ## Prerequisites for participation
 
-Each participant should have an own notebook with
-[Java](http://docs.oracle.com/javase/8/) (version >= 6) installed.
+Each participant should have an own notebook with at least 8 GB RAM,
+ready to run a [Java](http://docs.oracle.com/javase/8/) (version >=
+8).
 
 Prior amateur knowledge of at least one programming language (for
-example C++, Python, Ruby, Java, any Lisp, Scala) is very helpful.
+example C++, Python, Ruby, Java, any Lisp, Scala) is required.
 
 ## Organizational requirements
 
-* Max. number of participants: 15
+* Max. number of participants: 20
 * A room with decent power supply
 * Internet access
 * Beamer (we can bring our own)
 
 
+# Curriculum
+
+Create a new project called practising: 'lein new practising'.
+Then start a REPL and connect to it.
+
+
+
+## The S-expression
+
+Clojure is a Lisp. Almost every code is organised in possibly nested
+expressions of the form:
+
+```
+(operator arg1 arg2 arg3 ...)
+```
+
+The `operator` is something we can invoke, usually a _function_. There
+are also _special forms_ and _macros_.
+
+Every `arg` is itself either an expression or a symbol.
+
+Now write your first hello world example: `(println "Hello World")`
+
+
+There are some notable facts about this way of using brackets:
+
+* Code is not structured as a sequence of text lines, but a tree of
+  expressions. This changes the way we can navigate and manipulate our
+  code. Lisp leverages _Paredit_, which is elsewhere known as
+  structural editing. Paredit manages the balancing of brackets for
+  you. This gives you more power, after you learned to use these new
+  tools.
+
+* Code organization is very uniform: It's always prefix
+  notation. There is no need for operator precedence rules. Arithemtic
+  operators can be handled just if they were functions. On the other
+  hand, arithmetic expressions in prefix notation look unusual and this
+  takes some practise.
+
+* The syntactic basis of expressions are in effect lists, in other
+  words: the code of Clojure is expressed in terms of Clojure's data
+  representation. This idea is called "code-is-data", or
+  "homoiconicity" for those who want to sound very smart. Since a Lisp
+  is best at manipulating lists it can easily be used to create
+  code. _Macros_ look just like functions but are in effect embedded
+  code generators, written in plain Clojure, executed at compile
+  time. All of this means: You can morph your language in almost any
+  direction that helps you better describe solutions for your problem
+  domain.
+
+* Excessive nesting of expressions and overloading in meaning of
+  parentheses are typical drawbacks of Lisps, but Clojure mitigates
+  them but _threading_ macros and the use of `[]` and `{}`
+  brackets. You'll not have more brackets in your Clojure code than in
+  code written in your favorite C-style language.
+
+
+## Using comments
+
+* The `;;` form is for one line comments, whole line or rest of line.
+
+* The `#_` reader macro helps you let the reader skip the following expression, very
+  useful inside expressions.
+
+* The `(comment ...)` must still be a well-formed S-expression and is
+  used to encapsulate blocks of code that is used only for
+  experimentation in development time.
+
+
+## Working with data
+
+### Scalar types
+
+* _Numbers_ map to Java and JS number types
+
+** Automatic coercion
+
+** Rational numbers
+
+* _Strings_ are Java or JS strings
+
+* _Boolean_ values are `true` and `false`. Non-nil values are considered 'truthy'.
+
+* _nil_ is null, it's the only 'falsey' value beside `false`.
+
+* _Symbols_ are used for identifiers in code
+
+* _Keywords_ are similar to Strings or Symbols, but can be namespaced.
+
+
+### Collection types
+
+As part of the core, Clojure offers a small variety of _immutable_
+datastructure types:
+
+* Vector `[1 "foo" :bar]`
+
+* Map {:one 1, :two "Two"}
+
+* Set `#{1 'Two 3.0}`
+
+* List `'(1 "Two" :three)`
