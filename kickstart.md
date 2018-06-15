@@ -231,9 +231,10 @@ would return the same as `(ns-interns 'practising.core)`.
 To use public definitions located in other namespaces a namespace must
 require them first. The typical way is like this:
 
-```(ns my.beautiful.ns
-     "Contains my best code ever"
-	 (require [clojure.string :as str]))```
+```
+(ns my.beautiful.ns
+  "Contains my best code ever"
+  (require [clojure.string :as str]))```
 
 (defn first-funny-function
   [s]
