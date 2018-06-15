@@ -208,7 +208,7 @@ about namespaces, see the upcoming section.
 
 
 
-### Namespaces
+## Namespaces
 
 Clojure data and function definitions are organized in
 _namespaces_. Imagine a namespace as a dynamic map of symbols to
