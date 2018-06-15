@@ -56,15 +56,16 @@ example C++, Python, Ruby, Java, any Lisp, Scala) is required.
 
 # Curriculum
 
-Create a new project called practising: 'lein new practising'.
-Then start a REPL and connect to it.
+Create a new project called practising: `lein new practising`. Change
+directory into the new folder. Then start a REPL using `lein repl` and
+connect to it with your editor.
 
-
+Open the file `src/practising/core.clj`.
 
 ## The S-expression
 
-Clojure is a Lisp. Almost every code is organised in possibly nested
-expressions of the form:
+Clojure is a Lisp. Code is organised in possibly nested expressions of
+the form:
 
 ```
 (operator arg1 arg2 arg3 ...)
@@ -75,7 +76,7 @@ are also _special forms_ and _macros_.
 
 Every `arg` is itself either an expression or a symbol.
 
-Now write your first hello world example: `(println "Hello World")`
+Now, open file  write your first hello world example: `(println "Hello World")`
 
 
 There are some notable facts about this way of using brackets:
@@ -84,7 +85,7 @@ There are some notable facts about this way of using brackets:
   expressions. This changes the way we can navigate and manipulate our
   code. Lisp leverages _Paredit_, which is elsewhere known as
   structural editing. Paredit manages the balancing of brackets for
-  you. This gives you more power, after you learned to use these new
+  you. This gives you more power after you learned to use these new
   tools.
 
 * Code organization is very uniform: It's always prefix
@@ -113,7 +114,8 @@ There are some notable facts about this way of using brackets:
 
 ## Using comments
 
-* The `;;` form is for one line comments, whole line or rest of line.
+* The `;;` form is for one line comments, either whole line or rest of
+  line.
 
 * The `#_` reader macro helps you let the reader skip the following expression, very
   useful inside expressions.
@@ -129,9 +131,9 @@ There are some notable facts about this way of using brackets:
 
 * _Numbers_ map to Java and JS number types
 
-** Automatic coercion
+  * Automatic coercion
 
-** Rational numbers
+  * Rational numbers
 
 * _Strings_ are Java or JS strings
 
@@ -141,7 +143,17 @@ There are some notable facts about this way of using brackets:
 
 * _Symbols_ are used for identifiers in code
 
-* _Keywords_ are similar to Strings or Symbols, but can be namespaced.
+* _Keywords_ are similar to Strings or Symbols, but can be used with namespace scoping.
+
+
+Exercise: Calculate the average of the numbers 32, 23 and 1 with the
+functions `+` and `/`.
+
+Exercise: Concatenated 2 strings using function `str`
+
+Exercise: Convert a string to a keyword and vice versa, using
+functions `keyword` and `str`.
+
 
 
 ### Collection types
@@ -149,10 +161,35 @@ There are some notable facts about this way of using brackets:
 As part of the core, Clojure offers a small variety of _immutable_
 datastructure types:
 
-* Vector `[1 "foo" :bar]`
+* Vector: `[1 "foo" :bar]`
 
-* Map {:one 1, :two "Two"}
+* Map: `{:one 1, :two "Two"}`
 
-* Set `#{1 'Two 3.0}`
+* Set: `#{1 'Two 3.0}`
 
-* List `'(1 "Two" :three)`
+* List: `'(1 "Two" :three)`
+
+
+There are quite some common functions that work on all datastructures
+in a sensible way.
+
+
+Excercise: Define an example datastructure in namespace
+`practising.core` for each of the types shown above using an
+expression like `(def myvector ...)`. Evaluate the whole namespace,
+inspect the contents of your definitions in the REPL, change one the
+definitions and re-evaluate it.
+
+Exercise: Try to apply the following functions to each of your data structures:
+
+* first
+
+* rest
+
+* last
+
+* conj
+
+* count
+
+* get
