@@ -40,7 +40,7 @@ join local [user group for Cologne/Bonn area on Meetup](https://www.meetup.com/C
 ## Prerequisites for participation
 
 Each participant should have an own notebook with at least 8 GB RAM,
-ready to run a [Java](http://docs.oracle.com/javase/8/) (version >=
+ready to run [Java](http://docs.oracle.com/javase/8/) (version >=
 8).
 
 Prior amateur knowledge of at least one programming language (for
@@ -56,7 +56,7 @@ example C++, Python, Ruby, Java, any Lisp, Scala) is required.
 
 # Curriculum
 
-Create a new project called practising: `lein new practising`. Change
+**Exercise**: Create a new project called practising: `lein new practising`. Change
 directory into the new folder. Then start a REPL using `lein repl` and
 connect to it with your editor.
 
@@ -76,7 +76,9 @@ are also _special forms_ and _macros_.
 
 Every `arg` is itself either an expression or a symbol.
 
-Now, open file  write your first hello world example: `(println "Hello World")`
+**Exercise**: In the file `src/practising/core.clj` enter your first
+hello world expression: `(println "Hello World")`. Evaluate it, you
+should see the text "Hello World" printed in the REPL.
 
 
 There are some notable facts about this way of using brackets:
@@ -146,12 +148,12 @@ There are some notable facts about this way of using brackets:
 * _Keywords_ are similar to Strings or Symbols, but can be used with namespace scoping.
 
 
-Exercise: Calculate the average of the numbers 32, 23 and 1 with the
+**Exercise**: Calculate the average of the numbers 32, 23 and 1 with the
 functions `+` and `/`.
 
-Exercise: Concatenated 2 strings using function `str`
+**Exercise**: Concatenated 2 strings using function `str`
 
-Exercise: Convert a string to a keyword and vice versa, using
+**Exercise**: Convert a string to a keyword and vice versa, using
 functions `keyword` and `str`.
 
 
@@ -174,13 +176,13 @@ There are quite some common functions that work on all datastructures
 in a sensible way.
 
 
-Excercise: Define an example datastructure in namespace
+**Excercise**: Define an example datastructure in namespace
 `practising.core` for each of the types shown above using an
 expression like `(def myvector ...)`. Evaluate the whole namespace,
 inspect the contents of your definitions in the REPL, change one the
 definitions and re-evaluate it.
 
-Exercise: Try to apply the following functions to each of your data structures:
+**Exercise**: Try to apply the following functions to each of your data structures:
 
 * first
 
@@ -193,3 +195,54 @@ Exercise: Try to apply the following functions to each of your data structures:
 * count
 
 * get
+
+* seq
+
+**Exercise**: Visit the official
+[cheatsheet](https://clojure.org/api/cheatsheet), read in the section
+for "Collections" about the datastructure type-specific functions for
+maps, vectors and sets. Try out functions like `conj`, `assoc`,
+`dissoc`, `disj` etc. on your example data. To use typical functions
+for sets (like `union` or `difference`) you'll need to learn a bit
+about namespaces, see the upcoming section.
+
+
+
+### Namespaces
+
+Clojure data and function definitions are organized in
+_namespaces_. Imagine a namespace as a dynamic map of symbols to
+_Vars_, and think of a _Var_ as a box holding a piece of data or a
+function.  (It is tempting to think of a Var as the same as a variable
+in imperative languages, and there are indeed similarities. However,
+the concept "variable" has no real meaning in functional languages. Be
+patient.)
+
+Your file `src/practising/core.clj` has a namespace declaration at the top.
+
+Each `def` or `defn` inside it is effectively a mutation to this map,
+executed when the Clojure runtime loads and compiles your namespace.
+
+You can always inspect a namespace at runtime, and the symbol `*ns*`
+always refers to your current namespace. The expression `(ns-interns
+*ns*)` results in a map of all these definitions. In our example, this
+would return the same as `(ns-interns 'practising.core)`.
+
+To use public definitions located in other namespaces a namespace must
+require them first. The typical way is like this:
+
+```(ns my.beautiful.ns
+     "Contains my best code ever"
+	 (require [clojure.string :as str]))```
+
+(defn first-funny-function
+  [s]
+  (str/split s #","))
+```
+
+The `str` here is used as an alias for anything reachable in
+`clojure.string` namespace. By the way: this alias does not clash with
+the `clojure.core` function `str`.
+
+**Exercise**: Require namespace `clojure.set` with alias `set` and try
+out functions like `set/difference` or `set/intersection`.
