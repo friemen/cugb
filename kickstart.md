@@ -165,7 +165,7 @@ datastructure types:
 
 * Vector: `[1 "foo" :bar]`
 
-* Map: `{:one 1, :two "Two"}`
+* Map: `{:one 1, "Two" 3.0}`
 
 * Set: `#{1 'Two 3.0}`
 
@@ -176,11 +176,16 @@ There are quite some common functions that work on all datastructures
 in a sensible way.
 
 
-**Excercise**: Define an example datastructure in namespace
+**Exercise**: Define an example datastructure in namespace
 `practising.core` for each of the types shown above using an
 expression like `(def myvector ...)`. Evaluate the whole namespace,
 inspect the contents of your definitions in the REPL, change one the
 definitions and re-evaluate it.
+
+**Exercise**: Value lookup in maps can be done in three ways. You can
+use `get`, or a map as function on keywords or a keyword as a function
+on maps. Define a map whose keys are keywords. Try out
+each of these ways to lookup a value.
 
 **Exercise**: Try to apply the following functions to each of your data structures:
 
@@ -198,6 +203,8 @@ definitions and re-evaluate it.
 
 * seq
 
+* empty
+
 **Exercise**: Visit the official
 [cheatsheet](https://clojure.org/api/cheatsheet), read in the section
 for "Collections" about the datastructure type-specific functions for
@@ -206,7 +213,10 @@ maps, vectors and sets. Try out functions like `conj`, `assoc`,
 for sets (like `union` or `difference`) you'll need to learn a bit
 about namespaces, see the upcoming section.
 
-
+**Exercise**: Be aware that vectors are associative, with an index
+being the lookup key. This allows us to apply certain map-like
+operations to them. Use this idea to replace an existing value in a
+vector.
 
 ## Namespaces
 
@@ -337,7 +347,6 @@ surrounding scope, making them *closures* that carry values:
 5
 ```
 
-
 ### Function arguments
 
 Formal arguments are defined in a vector of symbols after the
@@ -367,7 +376,7 @@ as a pair `[key value]` in one of your functions. Instead of writing
 ```clj
 (defn uppercase-value
   [map-entry]
-  [(first map-entry) (str/to-uppercase (second map-entry)))])
+  [(first map-entry) (str/upper-case (second map-entry)))])
 ```
 
 you can write
@@ -375,7 +384,7 @@ you can write
 ```clj
 (defn uppercase-value
   [[key value]]
-  [key (str/to-uppercase value)])
+  [key (str/upper-case value)])
 ```
 
 This is called *positional destructuring*.
@@ -386,17 +395,19 @@ common case of processing a map like this:
 ```clj
 (def track {:title "Be True"
             :artist "Commix"
-			:genre "Drum & Bass"})
+            :genre "Drum & Bass"})
 
 (defn track->str
   [{:keys [artist title]}]
   (str artist " - " title))
 ```
 
-Destructuring very much leads to more readable code, therefore it is
-used quite often. For more detail, you can visit the [Clojure docs on
+These examples provide only a first idea. Destructuring in Clojure is
+much more powerful, and can be extended further by libraries like
+[plumbing](https://github.com/plumatic/plumbing). It very much leads
+to more readable code, therefore it is used quite often. For more
+detail, you should visit the [Clojure docs on
 destructuring](http://clojure-doc.org/articles/language/functions.html#destructuring-of-function-arguments)
-
 
 
 ### Visibility
@@ -425,6 +436,96 @@ reduce visual clutter:
 (defn- some-intermediate-calculations
   [...]
   ...)
+```
+
+
+### Functions on functions
+
+This section is not really necessary to follow the workshop. It shows
+to the curious a little of the power that Clojure offers when working
+with functions.
+
+* `(partial f a b ...)` allows you to apply a function `f` to a subset
+  of the required arguments resulting in a new function that has those
+  arguments fixed:
+
+```clj
+(defn add
+  [x y z]
+  (+ x y z))
+
+(def add-12 (partial add 5 7))
+
+=> (add-12 3)
+15
+```
+
+* `(apply f coll)` helps when we have an n-arity function `f` and an n-element
+  collection `coll`, and want to invoke `f` with the elements of
+  `coll` as arguments:
+
+```clj
+(defn add
+  [x y z]
+  (+ x y z))
+
+(def numbers [1 2 3])
+
+=> (add numbers)
+;; will throw an ArityException
+
+=> (apply add numbers)
+6
+```
+
+* `(comp f g)` composes two functions `f` und `g` (or more) so
+  that the resulting function behaves on `x` like `(f (g x))`:
+
+```clj
+(def str->id
+  (comp str/trim str/lower-case))
+
+=> (str->id "  ABC ")
+"abc"
+```
+
+* `(memoize f)` produces a function that caches results of a function `f`:
+
+```clj
+(defn- my-really-costly-calculation-impl
+  [a b]
+  ...)
+
+(def my-really-costly-calculation
+  (memoize my-really-costly-calculation-impl))
+
+```
+
+* `(juxt k1 k2 ...)` returns a function that looks up values for the
+  provided keys `k1`, `k2` etc. and delivers them in one vector:
+
+```clj
+(def persons [{:firstname "Peter" :lastname "Pan"}
+              {:firstname "Daisy" :lastname "Duck}])
+
+=> (map (juxt :firstname :lastname) persons)
+(["Peter" "Pan"]
+ ["Daisy" "Duck"])
+```
+
+* `(fnil f initial-value)` returns a function that replaces its first
+  argument with `initial-value` in case it is nil. The benefit becomes
+  clearer when recognizing that most "modification" functions like
+  `conj` or `assoc` expect a collection as their first argument. When
+  building up new datastructures `fnil` is an elegant tool to handle
+  initialization cases.
+
+```clj
+(def db {})
+
+=> (update db :persons (fnil conj []) {:firstname "Donald" :lastname "Duck"})
+{:persons [{:firstname "Donald" :lastname "Duck"}]}
+
 ```
 
 
