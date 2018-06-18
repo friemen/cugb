@@ -119,10 +119,10 @@ There are some notable facts about this way of using brackets:
 * The `;;` form is for one line comments, either whole line or rest of
   line.
 
-* The `#_` reader macro helps you let the reader skip the following expression, very
-  useful inside expressions.
+* The `#_` reader macro helps you let the reader skip the immediate
+  following expression, which is very useful inside expressions.
 
-* The `(comment ...)` must still be a well-formed S-expression and is
+* A `(comment ...)` must still be a well-formed S-expression and is
   used to encapsulate blocks of code that is used only for
   experimentation in development time.
 
@@ -231,7 +231,7 @@ would return the same as `(ns-interns 'practising.core)`.
 To use public definitions located in other namespaces a namespace must
 require them first. The typical way is like this:
 
-```
+```clj
 (ns my.beautiful.ns
   "Contains my best code ever."
   (require [clojure.string :as str]))```
@@ -266,10 +266,13 @@ Functions are values. This means
 * we can return them as values.
 
 
+### Forms to create functions
 
 There are two ways to define a function:
 
-* Toplevel definition in a namespace, making it available for any other function:
+* The first is a combination of `def` and `fn` and results in a
+  **top-level function definition** in a namespace, making it available for any
+  other function:
 
 ```clj
 (defn average-age
@@ -277,29 +280,151 @@ There are two ways to define a function:
   ...)
 ```
 
-* Anonymous within a surrounding function, possibly returning it as a result:
+This is the equivalent of writing:
 
-```clojure
+```clj
+(def average-age
+  (fn [persons]
+    ...))
+```
+
+
+* The other is the **anonymous form** (a.k.a *lambda expression*),
+  occurring often within a surrounding function:
+
+```clj
 (defn wrap-logging
   [handler]
-  (fn [request]
+  (fn [request]                        ;; <-- creates an anonymous function
     (log/debug "REQUEST:" request)
     (let [response (handler request)]
-	  (log/debug "RESPONSE" response)
+	  (log/debug "RESPONSE:" response)
 	  response)))
 ```
 
 
 For the anonymous form there is an even more compact notation. For example, instead of
 
-```
+```clj
 (map (fn [x] (/ x 2)) numbers)
 ```
 
 you're allowed to write
 
-```
+```clj
 (map #(/ % 2) numbers)
+```
+
+Please note that the latter form can make your code much harder to
+understand if the anonymous function becomes more complex.
+
+### Closures
+
+Anonymous functions can close over symbols visible in their
+surrounding scope, making them *closures* that carry values:
+
+```clj
+(defn make-adder
+  "Returns a 1-arg function adding x to its argument."
+  [x]
+  (fn [y]
+    (+ x y)))
+
+=> (def add-3 (make-adder 3))
+#'add-3
+
+=> (add-3 2)
+5
+```
+
+
+### Function arguments
+
+Formal arguments are defined in a vector of symbols after the
+docstring of a function:
+
+```clj
+(defn round
+  "Round down a double to the given precision (number of significant digits)"
+  [d precision]
+  ...)
+```
+
+A single function can support *multiple arities*. In addition, you can
+define a *variadic* function that accepts any number of arguments.
+For our workshop goals, we don't need to go into the details here. If
+you are curious there is guidance in the [Clojure docs on
+functions](http://clojure-doc.org/articles/language/functions.html).
+
+
+Clojure functions support a nifty way to bind data pieces in complex
+datastructures to local symbols, widely known as *destructuring*. The
+exact same tool is also available in `let` and `for` expressions.
+
+Just as a glance, suppose you need to process a map entry, represented
+as a pair `[key value]` in one of your functions. Instead of writing
+
+```clj
+(defn uppercase-value
+  [map-entry]
+  [(first map-entry) (str/to-uppercase (second map-entry)))])
+```
+
+you can write
+
+```clj
+(defn uppercase-value
+  [[key value]]
+  [key (str/to-uppercase value)])
+```
+
+This is called *positional destructuring*.
+
+There is also support for *map destructuring*, useful for the very
+common case of processing a map like this:
+
+```clj
+(def track {:title "Be True"
+            :artist "Commix"
+			:genre "Drum & Bass"})
+
+(defn track->str
+  [{:keys [artist title]}]
+  (str artist " - " title))
+```
+
+Destructuring very much leads to more readable code, therefore it is
+used quite often. For more detail, you can visit the [Clojure docs on
+destructuring](http://clojure-doc.org/articles/language/functions.html#destructuring-of-function-arguments)
+
+
+
+### Visibility
+
+Functions defined with `defn` are *public*, which means any code
+outside the namespace can depend on it. It is good style to have per
+namespace a sharp distinction between the set of functions comprising
+the API and internal implementation details.
+
+In order to limit what a namespace offers to the rest of the world
+Clojure allows us to attach metadata to any Var in a namespace:
+
+```clj
+
+(def ^:private a-constant 42)
+
+(defn ^:private some-intermediate-calculations
+  [...]
+  ...)
+```
+
+Since private functions are very common there is a macro `defn-` to
+reduce visual clutter:
+
+```clj
+(defn- some-intermediate-calculations
+  [...]
+  ...)
 ```
 
 
