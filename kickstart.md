@@ -74,11 +74,15 @@ the form:
 The `operator` is something we can invoke, usually a _function_. There
 are also _special forms_ and _macros_.
 
-Every `arg` is itself either an expression or a symbol.
+Every `arg` is itself either an expression or a symbol. Before it is
+passed to a function invocation it is evaluated, unless it is quoted.
 
 **Exercise**: In the file `src/practising/core.clj` enter your first
 hello world expression: `(println "Hello World")`. Evaluate it, you
 should see the text "Hello World" printed in the REPL.
+
+**Exercise**: Quoting prevents the evaluation. In the REPL try to
+evaluate an expression like `(+ x y)` and then try `'(+ x y)`.
 
 
 There are some notable facts about this way of using brackets:
@@ -151,7 +155,7 @@ There are some notable facts about this way of using brackets:
 **Exercise**: Calculate the average of the numbers 32, 23 and 1 with the
 functions `+` and `/`.
 
-**Exercise**: Concatenated 2 strings using function `str`
+**Exercise**: Concatenate 2 strings using function `str`
 
 **Exercise**: Convert a string to a keyword and vice versa, using
 functions `keyword` and `str`.
@@ -233,10 +237,10 @@ Your file `src/practising/core.clj` has a namespace declaration at the top.
 Each `def` or `defn` inside it is effectively a mutation to this map,
 executed when the Clojure runtime loads and compiles your namespace.
 
-You can always inspect a namespace at runtime, and the symbol `*ns*`
-always refers to your current namespace. The expression `(ns-interns
-*ns*)` results in a map of all these definitions. In our example, this
-would return the same as `(ns-interns 'practising.core)`.
+You can inspect a namespace at runtime, and the symbol `*ns*` always
+refers to your current namespace. The expression `(ns-interns *ns*)`
+results in a map of all these definitions. In our example, this would
+return the same as `(ns-interns 'practising.core)`.
 
 To use public definitions located in other namespaces a namespace must
 require them first. The typical way is like this:
@@ -543,10 +547,12 @@ side-effects). Pure functions are pleasant because they are
 
 * Thread safe.
 
+* candidates for memoization.
+
 As a result, we want to have as many of them around us as possible.
 However, a system created of 100% pure functions is useless: no access
 to any input, no place to write any output to. We need to have some of
-our code to do "the dirty job".
+our code do the "dirty job".
 
 So the fundamental principle of program design in FP is:
 
@@ -566,10 +572,75 @@ TODO
 
 TODO
 
-## Sequence processing
-
-TODO
 
 ## Threading macros
 
-TODO
+Excessive nesting of expressions makes it much harder to read and
+understand what is going on within a function. One mitigation is the
+use of `let` to introduce descriptive symbols, the other is
+*threading*.
+
+Compare these examples, where the result is always the same:
+
+```clj
+(assoc-in
+  (assoc-in person [:employer :name] "doctronic")
+  [:address :street]
+  "Frankenstrasse 6")
+```
+
+
+```clj
+(let [person-1
+      (assoc-in person [:employer :name] "doctronic")
+
+	  person-2
+	  (assoc-in person-1 [:address :street] "Frankenstrasse 6")
+  person-2)
+```
+
+
+```clj
+(-> person
+    (assoc-in [:employer :name] "doctronic")
+    (assoc-in [:address :street] "Frankenstrasse 6"))
+```
+
+Threading macros reorganize your code at compile time. The operator
+`->` (called *thread-first*) takes the initial expression and inserts
+it as the *first* argument into the second expression, continuing
+until everything is nested.
+
+It has a sibling `->>` called *thread-last* doing the analogue with
+the *last* argument, which is often needed for sequence processing
+chains.
+
+And both have cousins like `cond->`, `cond->>`, `some->` and `some->>`
+that help with conditional processing steps.
+
+**Exercise**: Use `macroexpand` and apply it to the thread-first
+example show above. (Don't forget to quote the expression to prevent
+the evaluation.)
+
+
+## Sequence processing
+
+Clojure excels in data processing tasks. One of the reasons is the
+sequence abstraction that can be applied to all datastructures and a
+well-designed set of core functions that transform seqs into other
+seqs.
+
+A consequence is that idiomatic Clojure code contains almost no
+looping. Another consequence is that programmers accustomed to `for`
+and `while` need to re-learn how to process data on a significantly
+higher level. On this level, the brain is no more bothered with
+irrelevant details, however it is sometimes confronted with unfamiliar
+solutions.
+
+**Exercise**: Most sequence processing functions like `map`, `filter`
+etc. expect a sequence and ensure this by using `seq` on their
+argument. Apply `seq` to datastructures like a map, a set or a vector.
+
+**Exercise**: Define a vector of persons, each with a name and an
+age. Write a `filter` expression that selects all persons in the age
+between 20 and 29.
