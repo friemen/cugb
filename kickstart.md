@@ -580,7 +580,7 @@ understand what is going on within a function. One mitigation is the
 use of `let` to introduce descriptive symbols, the other is
 *threading*.
 
-Compare these examples, where the result is always the same:
+Compare these examples, whose result is the same:
 
 ```clj
 (assoc-in
@@ -594,8 +594,8 @@ Compare these examples, where the result is always the same:
 (let [person-1
       (assoc-in person [:employer :name] "doctronic")
 
-	  person-2
-	  (assoc-in person-1 [:address :street] "Frankenstrasse 6")
+      person-2
+      (assoc-in person-1 [:address :street] "Frankenstrasse 6")
   person-2)
 ```
 
@@ -611,7 +611,7 @@ Threading macros reorganize your code at compile time. The operator
 it as the *first* argument into the second expression, continuing
 until everything is nested.
 
-It has a sibling `->>` called *thread-last* doing the analogue with
+It has a sibling `->>` (called *thread-last*) doing the analogue with
 the *last* argument, which is often needed for sequence processing
 chains.
 
@@ -631,11 +631,11 @@ well-designed set of core functions that transform seqs into other
 seqs.
 
 A consequence is that idiomatic Clojure code contains almost no
-looping. Another consequence is that programmers accustomed to `for`
-and `while` need to re-learn how to process data on a significantly
-higher level. On this level, the brain is no more bothered with
-irrelevant details, however it is sometimes confronted with unfamiliar
-solutions.
+looping. Another consequence is that programmers accustomed to
+imperative `for` and `while` loops need to re-learn how to process
+data on a significantly higher level. On this level, the brain is no
+more bothered with irrelevant details, however it is confronted with
+unfamiliar tools and solution strategies.
 
 **Exercise**: Most sequence processing functions like `map`, `filter`
 etc. expect a sequence and ensure this by using `seq` on their
@@ -644,3 +644,60 @@ argument. Apply `seq` to datastructures like a map, a set or a vector.
 **Exercise**: Define a vector of persons, each with a name and an
 age. Write a `filter` expression that selects all persons in the age
 between 20 and 29.
+
+Clojure offers the following different approaches for processing
+sequences:
+
+* `map`, `mapcat`, `filter`, `reverse`, `sort` and friends are usually
+  good when you target a sequence as result. Building up a chain of
+  these operations in combination with the thread-last macro `->>`
+  often yields the most elegant and maintainable solution. By far the
+  biggest portion of sequence processing in idiomatic Clojure code is
+  done on this basis.
+
+* `for` is Clojure's list comprehension operator. Be careful to not
+  confuse it with the C-style for loop. It is great for traversing
+  nested datastructures, when your goal is a one-dimensional result
+  sequence. It is well suited for templating code, for example when
+  rendering HTML or XML elements. It includes destructuring, local
+  symbols and conditions.
+
+* `reduce` is a swiss army knife that can produce almost anything,
+  sometimes leading to convoluted solutions. A reduction is often the
+  terminal step of a sequence processing chain (for example `into` is
+  only a special purpose reduction).
+
+* `doseq` is the imperative variant of a list comprehension. It
+  provides the same traversal power as `for` and should be used
+  exclusively for side-effects, for example writing out a bunch of
+  files to disk.
+
+* Old school function recursion is still a valid approach, and may
+  yield the cleanest code in some situations, but be aware that your
+  call-stack may limit your problem size. The raw mechanics of full
+  tree traversion is already provided in
+  [clojure.walk](https://clojure.github.io/clojure/clojure.walk-api.html).
+
+* `loop-recur` is a manual tail call optimization for recursive
+  operations, and effectively the most low-level construct. It's
+  sometimes unavoidable, for example if you build a parser, or need to
+  consume or produce several distinct results. While learning Clojure
+  you might often find yourself longing for a quick loop-recur sin,
+  but you should then ask yourself twice if there is no better tool
+  for the job at hand.
+
+
+Coming to a decision on how to approach a data transformation problem
+boils down to looking at the list above from top to bottom and picking
+the tool that yields the nicest code.
+
+Rules of thumb
+
+* If you need to traverse a more-dimensional data structure then give
+`for` a try, otherwise see if a combination of `map`, `filter` and
+others, perhaps terminated with a `reduce`, does the job.
+
+* If you need side-effects then `doseq` is probably the best bet.
+
+* To aggregate data into a single value (which can be a map) a
+  reduction is typically ideal.
