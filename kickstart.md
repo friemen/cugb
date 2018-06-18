@@ -51,7 +51,7 @@ example C++, Python, Ruby, Java, any Lisp, Scala) is required.
 * Max. number of participants: 20
 * A room with decent power supply
 * Internet access
-* Beamer (we can bring our own)
+* Projector (we can bring our own)
 
 
 # Curriculum
@@ -233,7 +233,7 @@ require them first. The typical way is like this:
 
 ```
 (ns my.beautiful.ns
-  "Contains my best code ever"
+  "Contains my best code ever."
   (require [clojure.string :as str]))```
 
 (defn first-funny-function
@@ -242,8 +242,108 @@ require them first. The typical way is like this:
 ```
 
 The `str` here is used as an alias for anything reachable in
-`clojure.string` namespace. By the way: this alias does not clash with
-the `clojure.core` function `str`.
+`clojure.string` namespace. Please note, that this alias does not
+clash with the `clojure.core` function `str`.
 
 **Exercise**: Require namespace `clojure.set` with alias `set` and try
 out functions like `set/difference` or `set/intersection`.
+
+
+## Functions
+
+Clojure is a functional programming (FP) language. While
+object-oriented programming uses the _object_ (together with its
+blueprint _class_) as the smallest building block, FP languages are
+based on _functions_ operating on a small spectrum of datastructures.
+
+
+Functions are values. This means
+
+* we can create them anywhere with an expression `(fn [x] ...)`.
+
+* we can pass them to other functions (promoting these other functions to *higher-order*).
+
+* we can return them as values.
+
+
+
+There are two ways to define a function:
+
+* Toplevel definition in a namespace, making it available for any other function:
+
+```clj
+(defn average-age
+  [persons]
+  ...)
+```
+
+* Anonymous within a surrounding function, possibly returning it as a result:
+
+```clojure
+(defn wrap-logging
+  [handler]
+  (fn [request]
+    (log/debug "REQUEST:" request)
+    (let [response (handler request)]
+	  (log/debug "RESPONSE" response)
+	  response)))
+```
+
+
+For the anonymous form there is an even more compact notation. For example, instead of
+
+```
+(map (fn [x] (/ x 2)) numbers)
+```
+
+you're allowed to write
+
+```
+(map #(/ % 2) numbers)
+```
+
+
+## System design in functional programming
+
+
+An important property of a function is *purity*. A function is called
+*pure* if its result depends only on its arguments and if it does not
+change anything in its environment (in other words: it has no
+side-effects). Pure functions are pleasant because they are
+
+* Easy to reuse.
+
+* Easy to test.
+
+* Thread safe.
+
+As a result, we want to have as many of them around us as possible.
+However, a system created of 100% pure functions is useless: no access
+to any input, no place to write any output to. We need to have some of
+our code to do "the dirty job".
+
+So the fundamental principle of program design in FP is:
+
+1. Build as much of the system as possible as a pure transformation
+   of data into other data.
+
+2. Allow only very few pieces of code to interact with the world
+   outside (that is: read and write data).
+
+
+
+## Local symbols with let
+
+TODO
+
+## Conditional expressions
+
+TODO
+
+## Sequence processing
+
+TODO
+
+## Threading macros
+
+TODO
