@@ -548,7 +548,7 @@ side-effects). Pure functions are pleasant because they are
 
 * candidates for memoization.
 
-As a result, we want to have as many of them around us as possible.
+Not surprisingly, we want to have as many of them around us as possible.
 However, a system created of 100% pure functions is useless: no access
 to any input, no place to write any output to. We need to have some of
 our code do the "dirty job".
@@ -566,25 +566,25 @@ So the fundamental principle of program design in FP is:
 
 Clojure offers many ways to express conditional evaluation: `if`,
 `if-let`, `when`, `when-let`, `cond`, `case`, `condp`, and on top of
-this there are conditional threading operators (introduced in the
-upcoming section). But don't be daunted, most of the time `if` or
-`cond` will do, all others offer more or less syntactic sugar.
+these there are conditional threading operators (introduced in a
+section below). But don't be daunted, most of the time `if` or `cond`
+will do, and all others offer more or less syntactic sugar to those.
 
 Here's the grammar of `if`, which does not offer any surprises:
 
-```
+```clj
 (if <test-expr>
   <then-expr>
   <else-expr>?)
 ```
 
-As the else-expr is optional the if will return nil if the test-expr
-fails to return a truthy value.
+Since the `else-expr` is optional the `if` expression will return nil if
+the `test-expr` fails to return a truthy value.
 
 
 If you need more than two branches then `cond` will help:
 
-```
+```clj
 (cond
   <test-expr1>  <then-expr1>
   <test-expr2>  <then-expr2>
@@ -592,15 +592,15 @@ If you need more than two branches then `cond` will help:
   :else <else-expr>)
 ```
 
-The first then-expr whose preceding test-expr returns a truthy value
-will be the evaluation result of the cond, otherwise the else-expr
-when present, otherwise nil.
+The first `then-expr` whose preceding `test-expr` returns a truthy
+value will be the evaluation result of the `cond`, otherwise the
+`else-expr` when present, otherwise nil.
 
 
 The `case` expression is more akin to the `switch` in C-style
 languages:
 
-```
+```clj
 (case <expr>
   <value1>  <then-expr1>
   <value2>  <then-expr2>
@@ -609,7 +609,7 @@ languages:
 ```
 
 The values can be any literals, even vectors or maps. If there is no
-else-expr and none of the values matches the result of expr then an
+`else-expr` and none of the values matches the result of `expr` then an
 exception is thrown.
 
 To learn about `condp`, a nifty macro that reduces clutter in a
@@ -620,7 +620,7 @@ condp](https://clojuredocs.org/clojure.core/condp). Replace `cond`
 with `condp`.
 
 
-```
+```clj
 (defn score->grade
   [score]
   (cond
@@ -638,17 +638,17 @@ Suprisingly many functions work well as just one pipeline of function
 invocations. (The section about threading explains how we can limit
 the nesting of expressions.)
 
-Of course, there are numerous situations where we wish to bind an
-intermediate result within a function to a local symbol. In imperative
-languages we use local variables for this job, and it may look and
-feel as we can do the same in Clojure, but conceptually symbols just
-refer to evaluation results, `let` does not give us "boxes with
-varying content".
+Of course, there are still numerous situations where we wish to bind
+an intermediate result within a function to a local symbol. In
+imperative languages we use local variables for this job, and it may
+look and feel as if we do the same in Clojure, but conceptually
+symbols just refer to evaluation results, `let` does not give us
+"boxes with varying content".
 
 
 To introduce local symbols we use `let`, as in this example:
 
-```
+```clj
 (defn path->filename
   [path]
   (let [parts (remove str/blank? (str/split path #"\/"))]
@@ -663,7 +663,7 @@ symbols.
 There is also `if-let`, which is helpful when your let body should be
 evaluated only if a test yields a truthy (non-nil, non-false) value:
 
-```
+```clj
 (defn path->filename
   [path]
   (if-let [parts (seq (remove str/blank? (str/split path #"\/")))]
