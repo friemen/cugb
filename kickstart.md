@@ -693,12 +693,12 @@ Compare these examples, whose result is the same:
 
 
 ```clj
-(let [person-1
+(let [person
       (assoc-in person [:employer :name] "doctronic")
 
-      person-2
-      (assoc-in person-1 [:address :street] "Frankenstrasse 6")
-  person-2)
+      person
+      (assoc-in person [:address :street] "Frankenstrasse 6")
+  person)
 ```
 
 
@@ -738,12 +738,13 @@ A consequence is that idiomatic Clojure code contains almost no
 looping. Another consequence is that programmers accustomed to
 imperative `for` and `while` loops need to re-learn how to process
 data on a significantly higher level. On this level, the brain is no
-more bothered with irrelevant details, however it is confronted with
+more bothered with irrelevant details, however it is challenged to
 unfamiliar tools and solution strategies.
 
 **Exercise**: Most sequence processing functions like `map`, `filter`
 etc. expect a sequence and ensure this by using `seq` on their
-argument. Apply `seq` to datastructures like a map, a set or a vector.
+argument. Apply `seq` to datastructures like a map, a set or a vector
+and see what is returned.
 
 **Exercise**: Define a vector of persons, each with a name and an
 age. Write a `filter` expression that selects all persons in the age
@@ -785,17 +786,19 @@ sequences:
 * `loop-recur` is a manual tail call optimization for recursive
   operations, and effectively the most low-level construct. It's
   sometimes unavoidable, for example if you build a parser, or need to
-  consume or produce several distinct results. While learning Clojure
-  you might often find yourself longing for a quick loop-recur sin,
-  but you should then ask yourself twice if there is no better tool
-  for the job at hand.
+  consume or produce several distinct pieces of data. While learning
+  Clojure you might sometimes find yourself longing for a quick
+  loop-recur sin. Resist. Step back. Ask yourself twice if there is no
+  better tool for the job at hand.
 
 
-Coming to a decision on how to approach a data transformation problem
-boils down to looking at the list above from top to bottom and picking
-the tool that yields the nicest code.
+Coming to a decision on how to approach a collection transformation
+problem boils down to looking at the list above from top to bottom and
+picking the tool that yields the simplest code. ["Simple" in the Rich
+Hickey sense](https://www.infoq.com/presentations/Simple-Made-Easy).
 
-Rules of thumb
+
+Rules of thumb:
 
 * If you need to traverse a more-dimensional data structure then give
 `for` a try, otherwise see if a combination of `map`, `filter` and
@@ -803,5 +806,5 @@ others, perhaps terminated with a `reduce`, does the job.
 
 * If you need side-effects then `doseq` is probably the best bet.
 
-* To aggregate data into a single value (which can be a map) a
-  reduction is typically ideal.
+* To aggregate data into a non-sequential value (which can also be a
+  map) a single `reduce` is usally all you need.
