@@ -545,7 +545,7 @@ side-effects). Pure functions are pleasant because they are
 
 * easy to test.
 
-* thread safe.
+* thread-safe.
 
 * candidates for memoization.
 
@@ -809,3 +809,84 @@ others, perhaps terminated with a `reduce`, does the job.
 
 * To aggregate data into a non-sequential value (which can also be a
   map) a single `reduce` is usally all you need.
+
+TODO Exercises
+
+## Managing mutable state
+
+The data that Clojure functions process is almost exclusively
+immutable. "Mutations" like `assoc` or `conj` efficiently create new
+versions of existing data. However, in almost every meaningful program
+there has to be a small amount of mutable state, which more often than
+not must be managed in a thread-safe manner.
+
+For this, Clojure offers four types of "boxes", each with its
+own rules regarding concurrency.
+
+* The *Var* is the thing that keeps functions and values in
+  namespaces. A Var is usually initialised when a namespace is loaded,
+  and the values usually don't change. Clojure offers an advanced
+  feature called *dynamic scoping* where we can rebind Vars "down the
+  call-stack" to different values.
+
+* The *Atom* is the box that is most often used in practical tasks. It
+  holds a single value, and changes to it happen atomically,
+  synchronously and uncoordinated.
+
+* The *Ref* is part of the in-memory transaction system that Clojure
+  offers. Changes happen atomically, synchronously and coordinated
+  together with all other Refs touched in the same transaction.
+
+* Finally there is an *Agent* where changes happen atomically,
+  asynchronously, generally uncoordinated, but can be triggered by a
+  commit of a related transaction.
+
+ Let's define an *Atom*:
+
+ ```clj
+ (def !counter (atom 0))
+ ```
+
+ The leading "!" in `!counter` is just a convention to give readers of
+ the code a clear sign that the code deals with something mutable.
+
+The expression `@counter` yields the currently set value.
+
+To update an atom we need `swap!` and a side-effect free function,
+because in multithreaded environments updates could be retried.
+
+```clj
+(swap! !counter inc)
+```
+
+or
+
+```clj
+(swap! !counter + 1)
+```
+
+The function we provide to `swap!` (`inc` or `+`) receives the current
+value of the atom as first argument and any additional arguments that
+we provided to `!swap`. If everything is fine the result of our
+function is set as new value.
+
+You can create atoms also in functions, for example like this:
+
+```clj
+(defn make-id-gen
+  [initial-value]
+  (let [!count (atom initial-value)]
+    (fn []
+      (swap! !count inc))))
+
+(def gen-id! (make-id-gen 0))
+
+=> (gen-id!)
+1
+
+=> (gen-id!)
+2
+```
+
+Again the trailing "!" in `gen-id!` is a mere convention to remind us
+that `gen-id!` has a side-effect.
