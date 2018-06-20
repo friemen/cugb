@@ -535,17 +535,16 @@ with functions.
 
 ## System design in functional programming
 
-
 An important property of a function is *purity*. A function is called
 *pure* if its result depends only on its arguments and if it does not
 change anything in its environment (in other words: it has no
 side-effects). Pure functions are pleasant because they are
 
-* Easy to reuse.
+* easy to reuse.
 
-* Easy to test.
+* easy to test.
 
-* Thread safe.
+* thread safe.
 
 * candidates for memoization.
 
@@ -563,14 +562,117 @@ So the fundamental principle of program design in FP is:
    outside (that is: read and write data).
 
 
+## Conditional evaluation
+
+Clojure offers many ways to express conditional evaluation: `if`,
+`if-let`, `when`, `when-let`, `cond`, `case`, `condp`, and on top of
+this there are conditional threading operators (introduced in the
+upcoming section). But don't be daunted, most of the time `if` or
+`cond` will do, all others offer more or less syntactic sugar.
+
+Here's the grammar of `if`, which does not offer any surprises:
+
+```
+(if <test-expr>
+  <then-expr>
+  <else-expr>?)
+```
+
+As the else-expr is optional the if will return nil if the test-expr
+fails to return a truthy value.
+
+
+If you need more than two branches then `cond` will help:
+
+```
+(cond
+  <test-expr1>  <then-expr1>
+  <test-expr2>  <then-expr2>
+  ...
+  :else <else-expr>)
+```
+
+The first then-expr whose preceding test-expr returns a truthy value
+will be the evaluation result of the cond, otherwise the else-expr
+when present, otherwise nil.
+
+
+The `case` expression is more akin to the `switch` in C-style
+languages:
+
+```
+(case <expr>
+  <value1>  <then-expr1>
+  <value2>  <then-expr2>
+  ...
+  <else-expr>)
+```
+
+The values can be any literals, even vectors or maps. If there is no
+else-expr and none of the values matches the result of expr then an
+exception is thrown.
+
+To learn about `condp`, a nifty macro that reduces clutter in a
+special case of branching, you should try the next exercise.
+
+**Exercise**: Look at the following function and consult the [docs on
+condp](https://clojuredocs.org/clojure.core/condp). Replace `cond`
+with `condp`.
+
+
+```
+(defn score->grade
+  [score]
+  (cond
+    (<= 90 score) "A"
+    (<= 80 score) "B"
+    (<= 70 score) "C"
+    (<= 60 score) "D"
+    :else "F")))
+```
+
 
 ## Local symbols with let
 
-TODO
+Suprisingly many functions work well as just one pipeline of function
+invocations. (The section about threading explains how we can limit
+the nesting of expressions.)
 
-## Conditional expressions
+Of course, there are numerous situations where we wish to bind an
+intermediate result within a function to a local symbol. In imperative
+languages we use local variables for this job, and it may look and
+feel as we can do the same in Clojure, but conceptually symbols just
+refer to evaluation results, `let` does not give us "boxes with
+varying content".
 
-TODO
+
+To introduce local symbols we use `let`, as in this example:
+
+```
+(defn path->filename
+  [path]
+  (let [parts (remove str/blank? (str/split path #"\/"))]
+    (if (not (empty? parts))
+      (last parts))))
+```
+
+In one `let` you can have as many symbol-expression pairs as you like,
+and you can use destructuring where you would normally place the
+symbols.
+
+There is also `if-let`, which is helpful when your let body should be
+evaluated only if a test yields a truthy (non-nil, non-false) value:
+
+```
+(defn path->filename
+  [path]
+  (if-let [parts (seq (remove str/blank? (str/split path #"\/")))]
+    (last parts)))
+```
+
+The `seq` here is like a test, because it returns either a sequence
+(truthy) or nil if the resulting sequence would be empty. It's the
+idiomatic way of writing `(not (empty? ...))`.
 
 
 ## Threading macros
@@ -621,6 +723,8 @@ that help with conditional processing steps.
 **Exercise**: Use `macroexpand` and apply it to the thread-first
 example show above. (Don't forget to quote the expression to prevent
 the evaluation.)
+
+**Exercise**: Use `some->>` to rewrite the `path->filename` function
 
 
 ## Sequence processing
