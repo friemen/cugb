@@ -95,21 +95,22 @@ There are some notable facts about this way of using brackets:
   tools.
 
 * Code organization is very uniform: It's always prefix
-  notation. There is no need for operator precedence rules. Arithemtic
-  operators can be handled just if they were functions. On the other
-  hand, arithmetic expressions in prefix notation look unusual and this
-  takes some practise.
+  notation. There is no need for [operator precedence
+  rules](http://en.cppreference.com/w/c/language/operator_precedence).
+  Arithmetic operators are functions and can be used anywhere where
+  functions are applicable. On the other hand, arithmetic expressions
+  in prefix notation look unusual and this takes some practise.
 
 * The syntactic basis of expressions are in effect lists, in other
   words: the code of Clojure is expressed in terms of Clojure's data
   representation. This idea is called "code-is-data", or
   "homoiconicity" for those who want to sound very smart. Since a Lisp
-  is best at manipulating lists it can easily be used to create
+  is very good at manipulating data it can easily be used to create
   code. _Macros_ look just like functions but are in effect embedded
   code generators, written in plain Clojure, executed at compile
   time. All of this means: You can morph your language in almost any
-  direction that helps you better describe solutions for your problem
-  domain.
+  direction that helps you to describe solutions for your problem
+  domain better.
 
 * Excessive nesting of expressions and overloading in meaning of
   parentheses are typical drawbacks of Lisps, but Clojure mitigates
@@ -120,7 +121,7 @@ There are some notable facts about this way of using brackets:
 
 ## Using comments
 
-* The `;;` form is for one line comments, either whole line or rest of
+* The `;;` form creates line comments, either whole line or rest of
   line.
 
 * The `#_` reader macro helps you let the reader skip the immediate
