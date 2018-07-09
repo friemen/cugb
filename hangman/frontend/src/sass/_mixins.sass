@@ -1,0 +1,55 @@
+// /////////////////////////////////////////////////////////////////////////////
+// Mixins
+
+=user-select-none
+  -webkit-user-select: none
+  -moz-user-select: none
+  -o-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+=roundness($roundness: 2px)
+  border-radius: $roundness
+
+=truncate
+  white-space: nowrap
+  overflow: hidden
+  text-overflow: ellipsis
+
+=size($size)
+  width: $size
+  height: $size
+
+=pointer
+  cursor: pointer
+
+=transition($prop, $duration, $motion)
+  -webkit-transition: $prop $duration $motion
+  -moz-transition: $prop $duration $motion
+  -ms-transition: $prop $duration $motion
+  -o-transition: $prop $duration $motion
+  transition: $prop $duration $motion
+
+=panel
+  @extend .mui-panel
+  @extend .mui--z2
+
+  +roundness(2px)
+
+  border: 1px solid #cdcdcd
+  margin-bottom: 0px
+  padding: 20px
+
+
+// /////////////////////////////////////////////////////////////////////////////
+// BEM
+
+=element($elements...)
+  @each $element in $elements
+    &__#{$element}
+      @content
+
+
+=modifier($modifier)
+  &--#{$modifier}
+    @content
