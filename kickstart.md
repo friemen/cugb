@@ -1,8 +1,8 @@
 # Clojure Kickstart
 
 Most people with a background in static imperative OO programming face
-initial difficulties in getting started with a dynamic Lisp-style
-functional language like [Clojure](http://clojure.org/). Which is sad
+initial difficulties when getting started with a dynamic Lisp-style
+functional language like [Clojure](http://clojure.org/). This is sad
 because programming in Clojure is a great experience!
 
 The first hurdle is setting up a decent development environment that
@@ -35,7 +35,7 @@ And this is how we get you started:
  * Jump right into a ready-made webapp based on Clojure and ClojureScript.
 
 And if you want to continue learning Clojure afterwards, you can also
-join local [user group for Cologne/Bonn area on Meetup](https://www.meetup.com/Clojure-User-Group-Bonn/).
+join the local [user group for Cologne/Bonn area](https://cugb.de).
 
 ## Prerequisites for participation
 
