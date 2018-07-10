@@ -541,15 +541,15 @@ An important property of a function is *purity*. A function is called
 change anything in its environment (in other words: it has no
 side-effects). Pure functions are pleasant because they are
 
-* easy to reuse.
+* easy to reuse,
 
-* easy to test.
+* easy to test,
 
-* thread-safe.
+* thread-safe,
 
 * candidates for memoization.
 
-Not surprisingly, we want to have as many of them around us as possible.
+Not surprisingly we want to have as many of them around us as possible.
 However, a system created of 100% pure functions is useless: no access
 to any input, no place to write any output to. We need to have some of
 our code do the "dirty job".
@@ -642,7 +642,7 @@ the nesting of expressions.)
 Of course, there are still numerous situations where we wish to bind
 an intermediate result within a function to a local symbol. In
 imperative languages we use local variables for this job, and it may
-look and feel as if we do the same in Clojure, but conceptually
+look and feel as if we did the same in Clojure, but conceptually
 symbols just refer to evaluation results, `let` does not give us
 "boxes with varying content".
 
@@ -810,7 +810,10 @@ others, perhaps terminated with a `reduce`, does the job.
 * To aggregate data into a non-sequential value (which can also be a
   map) a single `reduce` is usally all you need.
 
+TODO Write about laziness in sequence evaluation
+
 TODO Exercises
+
 
 ## Managing mutable state
 
@@ -850,7 +853,7 @@ own rules regarding concurrency.
  The leading "!" in `!counter` is just a convention to give readers of
  the code a clear sign that the code deals with something mutable.
 
-The expression `@counter` yields the currently set value.
+The expression `@!counter` yields the currently set value.
 
 To update an atom we need `swap!` and a side-effect free function,
 because in multithreaded environments updates could be retried.
@@ -867,7 +870,7 @@ or
 
 The function we provide to `swap!` (`inc` or `+`) receives the current
 value of the atom as first argument and any additional arguments that
-we provided to `!swap`. If everything is fine the result of our
+we pass to `!swap`. If everything is fine the result of our
 function is set as new value.
 
 You can create atoms also in functions, for example like this:
