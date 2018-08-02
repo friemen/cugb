@@ -21,7 +21,7 @@ to continue learning on their own.
 The three things listed above are exactly what we try to accomplish in
 a 3-hour workshop. Don't expect having mastered the language
 afterwards, but you can expect to be well-prepared for learning
-Clojure and deep-dive into it's ecosystem.
+Clojure and deep-dive into its ecosystem.
 
 And this is how we get you started:
  * Setup a development environment. We decided to
@@ -61,11 +61,12 @@ shortcut overview](kickstart-vscode.md) for Clojure programming.
 
 # Curriculum
 
-**Exercise**: Create a new project called practising: `lein new practising`. Change
-directory into the new folder. Then start a REPL using `lein repl` and
-connect to it with your editor.
+**Exercise**: On the command line create a new project called
+"practising" using `lein new practising`. Open the folder `practising`
+in VSC and then open the file `src/practising/core.clj`. Wait a few
+seconds until the REPL is started. Connect to the REPL in the embedded
+Terminal via `lein repl :connect`.
 
-Open the file `src/practising/core.clj`.
 
 ## The S-expression
 
