@@ -20,11 +20,13 @@ To create a new Clojure project use `lein new practising`.
 Start VSC, press <bbd>Ctrl+k Ctrl+o</kbd>, select folder `practising`
 and open the file `practising/core.clj`.
 
+The Clojure extension automatically starts a fresh REPL and connects
+to it.
 
 
 ## General shortcuts
 
-The following shortcuts are the most important to master most
+The following shortcuts are the most important to master very
 basic tasks in VSC:
 
 Shortcut                  | Description
