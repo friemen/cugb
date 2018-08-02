@@ -8,7 +8,7 @@ because programming in Clojure is a great experience!
 The first hurdle is setting up a decent development environment that
 lets you enjoy the interactive nature of Clojure.
 
-The next step would be to have a toy project. It should do
+The next step would be to have a [toy project](hangman). It should do
 significantly more than print `Hello World`, and it must have a direct
 connection to everyday programming tasks.
 
@@ -25,14 +25,14 @@ Clojure and deep-dive into it's ecosystem.
 
 And this is how we get you started:
  * Setup a development environment. We decided to
-   offer [VS Code with a Clojure extension](https://marketplace.visualstudio.com/items?itemName=avli.clojure)
+   offer [VS Code with a Clojure extension](kickstart-vscode.md)
    as out-of-the-box-copy-deployment-package.
  * Create your own Clojure project with [Leiningen](http://leiningen.org/).
  * Learn to work with a
    [REPL](http://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop)
    and structural editing (a.k.a Paredit)
  * Introduction to the syntax and some important functions.
- * Jump right into a ready-made webapp based on Clojure and ClojureScript.
+ * Jump right into a ready-made [webapp based on Clojure and ClojureScript](hangman).
 
 And if you want to continue learning Clojure afterwards, you can also
 join the local [user group for Cologne/Bonn area](https://cugb.de).

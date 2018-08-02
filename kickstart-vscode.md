@@ -9,8 +9,8 @@ Studio Code (VSC) and Clojure development.
 We provided a bundle of Java 8 and VSC with the following extensions
 already installed:
 
-- Clojure 0.10.1
-- Paredit 0.1.1
+- [Clojure 0.10.1](https://marketplace.visualstudio.com/items?itemName=avli.clojure)
+- [Paredit 0.1.1](https://marketplace.visualstudio.com/items?itemName=clptn.code-paredit)
 
 
 ## Getting started
