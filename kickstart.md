@@ -46,6 +46,11 @@ ready to run [Java](http://docs.oracle.com/javase/8/) (version >=
 Prior amateur knowledge of at least one programming language (for
 example C++, Python, Ruby, Java, any Lisp, Scala) is required.
 
+We provide bundles with Java and a customized Visual Studio Code (VSC)
+environment for Linux, Windows and OSX. There is a [brief keyboard
+shortcut overview](kickstart-vscode.md) for Clojure programming.
+
+
 ## Organizational requirements
 
 * Max. number of participants: 20
@@ -82,7 +87,7 @@ hello world expression: `(println "Hello World")`. Evaluate it, you
 should see the text "Hello World" printed in the REPL.
 
 **Exercise**: Quoting prevents the evaluation. In the REPL try to
-evaluate an expression like `(+ x y)` and then try `'(+ x y)`.
+evaluate an expression like `(+ x y z)` and then try `'(+ x y z)`.
 
 
 There are some notable facts about this way of using brackets:
@@ -249,7 +254,7 @@ require them first. The typical way is like this:
 ```clj
 (ns my.beautiful.ns
   "Contains my best code ever."
-  (require [clojure.string :as str]))```
+  (:require [clojure.string :as str]))
 
 (defn first-funny-function
   [s]
