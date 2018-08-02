@@ -112,3 +112,6 @@
   []
   (fig-start)
   (fig-repl))
+
+;; autostart figwheel when REPL is started
+(reload)
