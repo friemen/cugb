@@ -18,6 +18,12 @@
   :main
   froscon-18.hangman.backend.main
 
+  :repl-options
+  {:init-ns user}
+
+  :plugins
+  [[venantius/ultra "0.5.2"]]
+
   :profiles
   {:uberjar
    {:aot :all}

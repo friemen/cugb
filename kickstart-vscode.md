@@ -1,7 +1,7 @@
 # Setup for Clojure Development with Visual Studio Code
 
-The following sections give you a quick start if you're new to Visual
-Studio Code (VSC) and Clojure development.
+The following sections give you a quick start if you're new to [Visual
+Studio Code (VSC)](https://code.visualstudio.com/) and Clojure development.
 
 
 ## Installed Extensions
@@ -15,13 +15,16 @@ already installed:
 
 ## Getting started
 
-To create a new Clojure project use `lein new practising`.
+To create a new Clojure project use for example `lein new practising`.
 
 Start VSC, press <bbd>Ctrl+k Ctrl+o</kbd>, select folder `practising`
 and open the file `practising/core.clj`.
 
 The Clojure extension automatically starts a fresh REPL and connects
 to it.
+
+To connect to this REPL go to the Terminal and type
+`lein repl :connect`.
 
 
 ## General shortcuts
@@ -55,6 +58,7 @@ Shortcut                  | Description
 <kbd>Alt+x c</kbd>        | Eval and show result of file or selection
 <kbd>Alt+x t</kbd>        | Run all tests for current namespace
 <kbd>Alt+x f</kbd>        | Format file or selection
+<kbd>Alt+x z</kbd>        | Jump to terminal
 <kbd>Ctrl+Alt+.</kbd>     | Slurp forward
 <kbd>Ctrl+Alt+,</kbd>     | Barf forward
 <kbd>Ctrl+Left</kbd>      | Go to next Sexp on same level
