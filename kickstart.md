@@ -824,7 +824,7 @@ for the following data structure:
 (def friends
   [{:name   "Fred"
     :emails ["fred@acme.com" "fred@web.de" "fred@ms.com"]}
-	{:name   "Ann"
+   {:name   "Ann"
     :emails ["ann@gmail.com" "ann@t-online.de"]}])
 ```
 
