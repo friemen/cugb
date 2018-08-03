@@ -130,7 +130,7 @@ There are some notable facts about this way of using brackets:
 * The `;;` form creates line comments, either whole line or rest of
   line.
 
-* The `#_` reader macro helps you let the reader skip the immediate
+* The `#_` reader macro lets the reader skip the immediate
   following expression, which is very useful inside expressions.
 
 * A `(comment ...)` must still be a well-formed S-expression and is
@@ -829,7 +829,7 @@ for the following data structure:
 ```
 
 Hint: You can approach this both with `mapcat` as well as `for`. Solve
-the problem with both and compare them.
+the problem with both and compare the solutions.
 
 
 **Excercise**: Take the `friends` data structure from above and produce
@@ -847,7 +847,7 @@ optimization strategy. Here's a snippet to illustrate the effect:
 ```clj
 (->> (range 1e6)
      (take-while #(< % 100))
-	 (filter odd?))
+     (filter odd?))
 ```
 
 `range` returns a sequence of potentially 1 million integers, but it
