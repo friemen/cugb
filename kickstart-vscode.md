@@ -12,9 +12,9 @@ following extensions pre-installed:
 - [Clojure 0.10.1](https://marketplace.visualstudio.com/items?itemName=avli.clojure)
 - [Paredit 0.1.1](https://marketplace.visualstudio.com/items?itemName=clptn.code-paredit)
 
+You can do your work within the toplevel folder
+`Clojure_Kickstart_Workshop_<OS>` that was created by unzip.
 
-You can work within the toplevel folder
-`Clojure_Kickstart_Workshop_<OS>` that was created bei unzip.
 
 Leiningen includes a library dependency management system (based on
 Maven 2) and will download all missing libraries into a local cache
