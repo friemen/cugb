@@ -35,7 +35,7 @@ And this is how we get you started:
  * Jump right into a ready-made [webapp based on Clojure and ClojureScript](hangman).
 
 And if you want to continue learning Clojure afterwards, you can also
-join the local [user group for Cologne/Bonn area](https://cugb.de).
+join the local [user group for Cologne/Bonn area](http://cugb.de).
 
 ## Prerequisites for participation
 
@@ -115,8 +115,8 @@ There are some notable facts about this way of using brackets:
   code. _Macros_ look just like functions but are in effect embedded
   code generators, written in plain Clojure, executed at compile
   time. All of this means: You can morph your language in almost any
-  direction that helps you to describe solutions for your problem
-  domain better.
+  direction helping you to better describe solutions for your problem
+  domain.
 
 * Excessive nesting of expressions and overloading in meaning of
   parentheses are typical drawbacks of Lisps, but Clojure mitigates
@@ -745,7 +745,7 @@ A consequence is that idiomatic Clojure code contains almost no
 looping. Another consequence is that programmers accustomed to
 imperative `for` and `while` loops need to re-learn how to process
 data on a significantly higher level. On this level, the brain is no
-more bothered with irrelevant details, however it is challenged to
+more bothered with irrelevant details, however it is challenged with
 unfamiliar tools and solution strategies.
 
 **Exercise**: Most sequence processing functions like `map`, `filter`
@@ -771,7 +771,7 @@ sequences:
   confuse it with the C-style for loop. It is great for traversing
   nested datastructures, when your goal is a one-dimensional result
   sequence. It is well suited for templating code, for example when
-  rendering HTML or XML elements. It includes destructuring, local
+  rendering HTML or XML elements. It offers destructuring, local
   symbols and conditions.
 
 * `reduce` is a swiss army knife that can produce almost anything,
@@ -816,9 +816,72 @@ others, perhaps terminated with a `reduce`, does the job.
 * To aggregate data into a non-sequential value (which can also be a
   map) a single `reduce` is usally all you need.
 
-TODO Write about laziness in sequence evaluation
 
-TODO Exercises
+**Exercise**: Return a sequence of e-mail addresses that end with `".de"`
+for the following data structure:
+
+```clj
+(def friends
+  [{:name   "Fred"
+    :emails ["fred@acme.com" "fred@web.de" "fred@ms.com"]}
+	{:name   "Ann"
+    :emails ["ann@gmail.com" "ann@t-online.de"]}])
+```
+
+Hint: You can approach this both with `mapcat` as well as `for`. Solve
+the problem with both and compare them.
+
+
+**Excercise**: Take the `friends` data structure from above and produce
+a map `{email -> name}`.
+
+Hint: Again, `mapcat` and `for` are both sensible choices but if you
+compare the solutions you'll see where `for` starts to shine.
+
+
+## Lazy sequences
+
+Clojure features so-called _lazy sequences_. Laziness is an
+optimization strategy. Here's a snippet to illustrate the effect:
+
+```clj
+(->> (range 1e6)
+     (take-while #(< % 100))
+	 (filter odd?))
+```
+
+`range` returns a sequence of potentially 1 million integers, but it
+is not _realised_, so you pay almost nothing for this huge number of
+numbers. `take-while` cuts this sequence off after `99`, so `filter`
+actually processes only 100 values.
+
+Most sequence processing functions as well as `for` return unrealised
+lazy sequences, where actual processing is done as soon as someone
+explicity accesses the values. Most of the time this is exactly what
+we prefer. But there are a few exceptions to that rule, for example:
+
+* Processing a sequence of records in a database transaction must be
+  finished before the transaction is committed.
+
+* When you work on closable resources (like streams or files) you'll
+  wrap the processing in a `with-open` expression. You certainly need
+  a guarantee that any execution is finished before the resource is
+  closed.
+
+* If side-effects are involved they could be delayed or not executed
+  at all if no one asks for a result value.
+
+You have basically two explicit ways to control laziness:
+
+* If you're interested in side-effects use `doseq`.
+
+* If you work with a transaction or a resource you can append a
+  `(doall)` to your processing chain or wrap your `for` list
+  comprehension in a `(doall ...)` expression.
+
+
+Forgetting to turn off laziness is a very common cause of bugs, so
+watch out for this.
 
 
 ## Managing mutable state

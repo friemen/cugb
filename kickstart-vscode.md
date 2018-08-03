@@ -24,7 +24,7 @@ Ctrl+o</kbd>, select folder `practising` and open the file
 The Clojure extension automatically starts a fresh REPL and connects
 to it.
 
-To connect to this REPL go to the Terminal and type
+To connect to this REPL via an additional console go to the Terminal and type
 `lein repl :connect`.
 
 
