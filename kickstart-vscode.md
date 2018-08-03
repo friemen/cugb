@@ -3,11 +3,11 @@
 The following sections give you a quick start if you're new to [Visual
 Studio Code (VSC)](https://code.visualstudio.com/) and Clojure development.
 
+## Installation
 
-## Installed Extensions
-
-We provided a bundle of Java 8 and VSC with the following extensions
-already installed:
+Copy und unzip the provided archive. It contains a JDK 8, the Clojure
+build tool [Leiningen](https://leiningen.org/) and VSC with the
+following extensions pre-installed.
 
 - [Clojure 0.10.1](https://marketplace.visualstudio.com/items?itemName=avli.clojure)
 - [Paredit 0.1.1](https://marketplace.visualstudio.com/items?itemName=clptn.code-paredit)
@@ -15,10 +15,11 @@ already installed:
 
 ## Getting started
 
-To create a new Clojure project use for example `lein new practising`.
+To create a new Clojure project execute for example `lein new practising`.
 
-Start VSC, press <bbd>Ctrl+k Ctrl+o</kbd>, select folder `practising`
-and open the file `practising/core.clj`.
+Start VSC with the script `./visual_studio_code`, press <bbd>Ctrl+k
+Ctrl+o</kbd>, select folder `practising` and open the file
+`practising/core.clj`.
 
 The Clojure extension automatically starts a fresh REPL and connects
 to it.
