@@ -2,7 +2,7 @@
   "Fetch html from wordaxis.com"
   (:require
    [clojure.string :as str]
-   [org.httpkit.client :as http]
+   [froscon-18.contrib.hangman.backend.wordaxis.http :as contrib]
    [cemerick.url :as url]))
 
 
@@ -26,17 +26,8 @@
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Public
 
-(def fetch!
+(defn fetch!
   "Given a `pattern` return the corresponding html from wordaxis.com.
    The pattern string consists of alphabetic characters and question-marks."
-  (memoize
-   (fn [pattern]
-     (:body @(http/get (pattern->url pattern))))))
-
-
-
-
-
-(comment
-  (fetch! (pattern->url "h?t??g"))
-  ,,,)
+  [pattern]
+  (contrib/fetch! (pattern->url pattern)))

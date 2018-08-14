@@ -21,7 +21,8 @@
 
    :dev
    {:dependencies
-    [[org.clojure/tools.namespace "0.2.11"]]
+    [[org.clojure/tools.namespace "0.2.11"]
+     [stubadub "2.0.0"]]
 
     :source-paths
     ["dev"]}}
