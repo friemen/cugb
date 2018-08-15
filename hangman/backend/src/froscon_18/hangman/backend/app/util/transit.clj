@@ -1,4 +1,4 @@
-(ns froscon-18.hangman.backend.components.app.handler.util.transit
+(ns froscon-18.hangman.backend.app.util.transit
   (:require
    [cognitect.transit :as t])
 

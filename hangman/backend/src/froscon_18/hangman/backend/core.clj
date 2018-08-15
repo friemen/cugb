@@ -1,17 +1,16 @@
 (ns froscon-18.hangman.backend.core
-  "System definition"
+  "Main namespace"
   (:require
-   [com.stuartsierra.component :as c]
-   [froscon-18.hangman.backend.components.app :as app]))
+   [froscon-18.hangman.backend.server :as server]
+   [froscon-18.hangman.backend.app :as app]))
 
 
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; System
+(comment
 
-(defn new-system
-  [config]
-  (c/system-map
-    :app
-    (c/using
-     (app/new {})
-     [])))
+  ;; Start server
+  (server/start! {:port 1337} app/handler)
+
+  ;; Stop server
+  (server/stop!)
+
+  ,,,)
