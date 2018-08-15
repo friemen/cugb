@@ -1,18 +1,16 @@
 (ns froscon-18.hangman.backend.wordaxis.parser
   "Parse html from wordaxis.com"
   (:require
-   [hickory.core :as h]
-   [hickory.select :as hs]))
+   [froscon-18.contrib.hangman.backend.wordaxis.parser :as contrib]))
 
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Private
 
-(def ^:private html->tree
-  (comp h/as-hickory h/parse))
-
-(def ^:private selector-fn
-  (hs/child (hs/id "result") (hs/tag "a")))
+(defn- anchor?
+  [element]
+  (and (vector? element)
+       (= :a (first element))))
 
 
 ;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -22,7 +20,6 @@
   "Extract word results from wordaxis html"
   [html]
   (->> html
-       (html->tree)
-       (hs/select selector-fn)
-       (mapv (comp first :content))
-       (filterv string?)))
+       (contrib/element-by-id "result")
+       (filter anchor?)
+       (mapv (comp last flatten))))
