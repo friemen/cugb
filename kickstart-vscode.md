@@ -5,7 +5,7 @@ Studio Code (VSC)](https://code.visualstudio.com/) and Clojure development.
 
 ## Installation
 
-Copy und unzip the provided archive. It contains a JDK 8, the Clojure
+Copy and unzip/untar the provided archive. It contains a JDK 8, the Clojure
 build tool [Leiningen](https://leiningen.org/) and VSC with the
 following extensions pre-installed:
 
@@ -13,8 +13,13 @@ following extensions pre-installed:
 - [Paredit 0.1.1](https://marketplace.visualstudio.com/items?itemName=clptn.code-paredit)
 
 You can do your work within the toplevel folder
-`Clojure_Kickstart_Workshop_<OS>` that was created by unzip.
+`Clojure_Kickstart_Workshop_<OS>` that was created by unzip (Windows)
+oder tar (Linux, MacOSX).
 
+
+When started for the very first time Leiningen needs to download a JAR
+and places it under `$HOME/.lein/self-installs`. Alternatively, you can
+copy the `.lein` folder to your user directory.
 
 Leiningen includes a library dependency management system (based on
 Maven 2) and will download all missing libraries into a local cache
@@ -22,10 +27,18 @@ located in `$HOME/.m2/repository`.  Our archive contains a
 `.m2/repository` directory that you should copy into your user
 directory to reduce the amount of data to be downloaded.
 
+Open a terminal window.
+
+To make commands like `lein`, `visual_studio_code` oder `java`
+available everywhere in the terminal you should execute the provided
+`setenv.bat` (on Windows) or source the `setenv` file (on Linux,
+MacOSX).
+
 
 ## Getting started
 
-To create a new Clojure project execute for example `lein new practising`.
+To create a new Clojure project execute for example `lein new
+practising` in your terminal window.
 
 Start VSC with the script `./visual_studio_code`, press <bbd>Ctrl+k
 Ctrl+o</kbd>, select folder `practising` and open the file
@@ -34,8 +47,25 @@ Ctrl+o</kbd>, select folder `practising` and open the file
 The Clojure extension automatically starts a fresh REPL and connects
 to it.
 
-To connect to this REPL via an additional console go to the Terminal and type
-`lein repl :connect`.
+(To optionally connect to this REPL via an additional console go to
+the Terminal and type `lein repl :connect <port>`. The port is the one
+that VSC prints in the bottom-left corner of the screen as
+`nrep://127.0.0.1:<port>`.)
+
+In `core.clj` you'll find a single function `foo`. Type <kbd>Alt+x
+c</kbd> to compile the whole namespace.
+
+To execute just this function you can simply add an expression like
+`(foo "Fred")` to the bottom of core.clj. Type <kbd>Alt+x d</kbd> and
+then <kbd>Alt+x c</kbd> to evaluate the selected expression.
+
+Change the string in `foo`, again use the key sequence <kbd>Alt+x
+d</kbd> followed by <kbd>Alt+x c</kbd> to compile it, go to your
+invocation `(foo "Fred")` and evaluate that again. The output should
+reflect your change.
+
+Congrats, you have just mastered the basic workflow of Clojure
+programming. You altered a live system while it is running.
 
 
 ## General shortcuts
