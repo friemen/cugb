@@ -13,6 +13,12 @@ Start a Clojure REPL
 ```
 $ lein repl
 
-;; Start the system (including a Server listening on port 1337)
-user=> (user/system-restart!)
+;; Switch to server namespace
+user=> (ns froscon-18.hangman.backend.server)
+
+;; Start the server
+froscon-18.hangman.backend.server=> (start! {:port 1337} app/handler))
+
+;; Stop the server
+froscon-18.hangman.backend.server=> (stop!))
 ```

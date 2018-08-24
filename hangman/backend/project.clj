@@ -4,7 +4,6 @@
 
   :dependencies
   [[org.clojure/clojure "1.8.0"]
-   [com.stuartsierra/component "0.3.2"]
    [com.cognitect/transit-clj "0.8.281"]
    [compojure "1.5.2"]
    [ring "1.4.0"]
@@ -31,8 +30,5 @@
    :dev
    {:dependencies
     [[org.clojure/tools.namespace "0.2.11"]
-     [stubadub "2.0.0"]]
-
-    :source-paths
-    ["dev"]}}
+     [stubadub "2.0.0"]]}}
   ,,,)
