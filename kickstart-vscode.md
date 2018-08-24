@@ -17,10 +17,6 @@ You can do your work within the toplevel folder
 oder tar (Linux, MacOSX).
 
 
-When started for the very first time Leiningen needs to download a JAR
-and places it under `$HOME/.lein/self-installs`. Alternatively, you can
-copy the `.lein` folder to your user directory.
-
 Leiningen includes a library dependency management system (based on
 Maven 2) and will download all missing libraries into a local cache
 located in `$HOME/.m2/repository`.  Our archive contains a
@@ -29,10 +25,10 @@ directory to reduce the amount of data to be downloaded.
 
 Open a terminal window.
 
-To make commands like `lein`, `visual_studio_code` oder `java`
-available everywhere in the terminal you should execute the provided
-`setenv.bat` (on Windows) or source the `setenv` file (on Linux,
-MacOSX).
+To make commands like `lein`, `visual_studio_code` oder `java` and the
+necessary environment variables available everywhere in the terminal
+you should execute the provided `setenv.bat` (on Windows) or source
+the `setenv` file (on Linux, MacOSX).
 
 
 ## Getting started
@@ -40,15 +36,15 @@ MacOSX).
 To create a new Clojure project execute for example `lein new
 practising` in your terminal window.
 
-Start VSC with the script `./visual_studio_code`, press <bbd>Ctrl+k
+Start VSC with the script `visual_studio_code`, press <bbd>Ctrl+k
 Ctrl+o</kbd>, select folder `practising` and open the file
-`practising/core.clj`.
+`src/practising/core.clj`.
 
 The Clojure extension automatically starts a fresh REPL and connects
 to it.
 
 (To optionally connect to this REPL via an additional console go to
-the Terminal and type `lein repl :connect <port>`. The port is the one
+the VSC Terminal and type `lein repl :connect <port>`. The port is the one
 that VSC prints in the bottom-left corner of the screen as
 `nrep://127.0.0.1:<port>`.)
 
