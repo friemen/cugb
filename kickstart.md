@@ -832,7 +832,7 @@ Hint: You can approach this both with `mapcat` as well as `for`. Solve
 the problem with both and compare the solutions.
 
 
-**Excercise**: Take the `friends` data structure from above and produce
+**Exercise**: Take the `friends` data structure from above and produce
 a map `{email -> name}`.
 
 Hint: Again, `mapcat` and `for` are both sensible choices but if you
