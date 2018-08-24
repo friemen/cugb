@@ -10,7 +10,9 @@ ecosystem.pdf), thanks to Gerrit Hentschel.
 
 ## Development Environment
 
-* [Emacs Live](https://overtone.github.io/emacs-live/) with [CIDER](https://cider.readthedocs.io)
+* [Emacs](https://www.gnu.org/software/emacs/download.html)
+(or a distro like [Prelude](https://github.com/bbatsov/prelude) or [Spacemacs](http://spacemacs.org/))
+with [CIDER](https://cider.readthedocs.io)
 * [Vim](https://github.com/tpope/vim-fireplace)
 * [IntelliJ / Cursive](https://cursiveclojure.com/)
 * [Eclipse / Counterclockwise](https://ccw-ide.org)
