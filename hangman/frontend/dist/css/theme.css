@@ -1,0 +1,84 @@
+.dbg {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 128, 0, 0.1);
+  padding: 5px;
+  font-size: 8px;
+  font-family: monospace; }
+  .dbg__entry {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    padding: 5px; }
+    .dbg__entry:not(:last-child) {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2); }
+
+.slots {
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 10px; }
+
+.slot {
+  display: inline-block;
+  margin: 5px; }
+  .slot input {
+    width: 40px;
+    text-align: center;
+    padding: 5px;
+    transition: box-shadow ease-in-out 150ms;
+    transition: color ease-in-out 100ms; }
+    .slot input::placeholder {
+      color: rgba(0, 0, 0, 0.3); }
+    .slot input:focus::placeholder {
+      opacity: 0; }
+    .slot input::selection {
+      background: none; }
+    .slot input, .slot input:focus {
+      outline: none;
+      border: none; }
+    .slot input {
+      color: rgba(0, 0, 0, 0.55);
+      box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2); }
+    .slot input:focus {
+      color: rgba(0, 0, 255, 0.3);
+      box-shadow: 0 4px 2px -2px rgba(0, 0, 255, 0.2); }
+
+.words {
+  padding: 10px;
+  text-align: center;
+  margin: 0px 30%;
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.12); }
+  .words__spinner {
+    color: rgba(0, 0, 0, 0.2);
+    font-size: 30px; }
+
+.word {
+  font-family: monospace;
+  font-size: 12px;
+  margin-bottom: 5px; }
+  .word:last-child {
+    margin-bottom: 0px; }
+  .word a {
+    color: inherit;
+    text-decoration: none;
+    padding: 0 6px;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 255, 0);
+    -webkit-transition: box-shadow 250ms ease-in-out;
+    -moz-transition: box-shadow 250ms ease-in-out;
+    -ms-transition: box-shadow 250ms ease-in-out;
+    -o-transition: box-shadow 250ms ease-in-out;
+    transition: box-shadow 250ms ease-in-out; }
+    .word a:hover {
+      box-shadow: 0 3px 1px -2px rgba(0, 0, 255, 0.3); }
+
+body {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.55);
+  font-family: sans-serif; }
+
+/*# sourceMappingURL=theme.css.map */

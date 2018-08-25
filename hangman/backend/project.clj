@@ -14,15 +14,6 @@
    [com.cemerick/url "0.1.1" :exclusions [org.clojure/clojure]]
    [hickory "0.7.1"]]
 
-  :main
-  froscon-18.hangman.backend.main
-
-  :repl-options
-  {:init-ns user}
-
-  :plugins
-  [[venantius/ultra "0.5.2"]]
-
   :profiles
   {:uberjar
    {:aot :all}
