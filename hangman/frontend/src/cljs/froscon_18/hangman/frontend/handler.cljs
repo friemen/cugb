@@ -30,7 +30,7 @@
 
         params
         {:pattern (pure/slots->pattern slots)
-         :mock? true}
+         :mock? (aget js/window "mock")}
 
         callback
         (fnk [[:body {data []}]]
