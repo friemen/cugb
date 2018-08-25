@@ -165,7 +165,7 @@ functions `+` and `/`.
 **Exercise**: Concatenate 2 strings using function `str`
 
 **Exercise**: Convert a string to a keyword and vice versa, using
-functions `keyword` and `str`.
+functions `keyword` and `name`.
 
 
 
