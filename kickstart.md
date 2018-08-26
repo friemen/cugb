@@ -387,7 +387,7 @@ as a pair `[key value]` in one of your functions. Instead of writing
 ```clj
 (defn uppercase-value
   [map-entry]
-  [(first map-entry) (str/upper-case (second map-entry)))])
+  [(first map-entry) (str/upper-case (second map-entry))])
 ```
 
 you can write
@@ -489,7 +489,7 @@ with functions.
 6
 ```
 
-* `(comp f g)` composes two functions `f` und `g` (or more) so
+* `(comp f g)` composes two functions `f` and `g` (or more) so
   that the resulting function behaves on `x` like `(f (g x))`:
 
 ```clj
